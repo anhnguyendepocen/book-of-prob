@@ -132,7 +132,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Initial Concepts of Probability</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#set-operations"><i class="fa fa-check"></i><b>2.1</b> Set Operations</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#axioms-of-probability"><i class="fa fa-check"></i><b>2.2</b> Axioms of Probability</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#other-set-and-probability-rules"><i class="fa fa-check"></i><b>2.3</b> Other Set and Probability Rules</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#counting"><i class="fa fa-check"></i><b>2.4</b> Counting</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="intro.html"><a href="intro.html#multiplication-rule"><i class="fa fa-check"></i><b>2.4.1</b> Multiplication Rule</a></li>
+<li class="chapter" data-level="2.4.2" data-path="intro.html"><a href="intro.html#permutation-rule"><i class="fa fa-check"></i><b>2.4.2</b> Permutation Rule</a></li>
+<li class="chapter" data-level="2.4.3" data-path="intro.html"><a href="intro.html#combination-rule"><i class="fa fa-check"></i><b>2.4.3</b> Combination Rule</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
 <li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a><ul>
@@ -162,186 +171,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Introduction</h1>
-<p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="intro.html#intro">2</a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="methods.html#methods">4</a>.</p>
-<p>Figures and tables with captions will be placed in <code>figure</code> and <code>table</code> environments, respectively.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">.1</span>, <span class="fl">.1</span>))</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">plot</span>(pressure, <span class="dt">type =</span> <span class="st">&#39;b&#39;</span>, <span class="dt">pch =</span> <span class="dv">19</span>)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:nice-fig"></span>
-<img src="book-of-prob_files/figure-html/nice-fig-1.png" alt="Here is a nice figure!" width="80%" />
-<p class="caption">
-Figure 2.1: Here is a nice figure!
-</p>
+<h1><span class="header-section-number">Chapter 2</span> Initial Concepts of Probability</h1>
+<ul>
+<li><p><strong>Probability</strong> is the quantification of event uncertainty. For instance, probability of getting (H)eads in a coin toss is <span class="math inline">\(1/2\)</span>. Deterministic models will give the same results given the same inputs (e.g. 2 times 2 is 4), but probabilistic models might yield different outcomes.</p></li>
+<li><p>An <strong>experiment</strong> is a process that generates data. For instance, tossing a coin is an experiment. <strong>Outcome</strong> is the realization of an experiment. Possible outcomes for a coin toss is Heads and Tails.</p></li>
+<li><p><strong>Sample space</strong> (<span class="math inline">\(\mathbb{S}\)</span>) is the collection of all the possible outcomes of an experiment. Sample space of the coin toss is <span class="math inline">\(\mathbb{S} = \{H,T\}\)</span>. Sample space of two coin tosses experiment is <span class="math inline">\(\mathbb{S} = \{HH,HT,TH,TT\}\)</span>. Sample space can be discrete (i.e. coin tosses) as well as continuous (i.e. All real numbers between 1 and 3. <span class="math inline">\(\mathbb{S} = \{x | 1 \le x \le 3, x \in \mathbb{R}\}\)</span>) <em>(Side note: Sample space is not always well defined.)</em></p></li>
+<li><p>An <strong>event</strong> is a subset of sample space. While outcome represents a realization, event is an information. Probability of an event <span class="math inline">\(P(A)\)</span>, say getting two Heads in two coin tosses is <span class="math inline">\(P(A) = 1/4\)</span>.</p></li>
+<li><p>A <strong>random variable</strong> represents an event is dependent on a probabilistic process. On the other hand, a <strong>deterministic variable</strong> is either a constant or a decision variable. For instance, value of the dollar tomorrow can be considered a random variable but the amount I will invest is a decision variable (subject to no probabilistic process) and spot (current) price of the dollar is a constant.</p></li>
+</ul>
+<div id="set-operations" class="section level2">
+<h2><span class="header-section-number">2.1</span> Set Operations</h2>
+<ul>
+<li><p><strong>Complement</strong> of an event (<span class="math inline">\(A^\prime\)</span>) with respect to the sample space represents all elements of the sample space that are not included by the event (A). For instance, complement of event <span class="math inline">\(A=\{HH\}\)</span> is <span class="math inline">\(A^\prime=\{HT,TH,TT\}\)</span></p></li>
+<li><p><strong>Union</strong> of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> (<span class="math inline">\(A \cup B\)</span>) is a set of events which contains all elements of the respective events. For example, say <span class="math inline">\(A\)</span> is the set that contains events which double Heads occur (<span class="math inline">\(A = \{HH,HT,TH\}\)</span>) and <span class="math inline">\(B\)</span> is the set which Tails occur at least once (<span class="math inline">\(B = \{TT,HT,TH\}\)</span>). The union is <span class="math inline">\(A \cup B = \{HH,TH,HT,TT\}\)</span>.</p></li>
+<li><p><strong>Intersection</strong> of two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> (<span class="math inline">\(A \cap B\)</span>) contains the common elements of the events. For example, say <span class="math inline">\(A\)</span> is the set that contains events which Heads occur at least once (<span class="math inline">\(A = \{HH,HT,TH\}\)</span>) and <span class="math inline">\(B\)</span> is the set which Tails occur at least once (<span class="math inline">\(B = \{TT,HT,TH\}\)</span>). The intersection is <span class="math inline">\(A \cap B = \{TH,HT\}\)</span>.</p></li>
+<li><p><strong>Mutually exclusive</strong> or disjoint events mean that two events have empty intersection (<span class="math inline">\(A \cap B = \emptyset\)</span>) and their union (<span class="math inline">\(A \cup B\)</span>) contains the same amount of elements as the sum of their respective number of elements. Also <span class="math inline">\(P(A \cap B) = 0\)</span> and <span class="math inline">\(P(A \cup B) = P(A) + P(B)\)</span>. For example getting double Heads (<span class="math inline">\(HH\)</span>) and double Tails (<span class="math inline">\(TT\)</span>) are mutually exclusive events.</p></li>
+</ul>
 </div>
-<p>Reference a figure by its code chunk label with the <code>fig:</code> prefix, e.g., see Figure <a href="intro.html#fig:nice-fig">2.1</a>. Similarly, you can reference tables generated from <code>knitr::kable()</code>, e.g., see Table <a href="intro.html#tab:nice-tab">2.1</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">kable</span>(</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">head</span>(iris, <span class="dv">20</span>), <span class="dt">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">booktabs =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">)</a></code></pre></div>
-<table>
-<caption><span id="tab:nice-tab">Table 2.1: </span>Here is a nice table!</caption>
-<thead>
-<tr class="header">
-<th align="right">Sepal.Length</th>
-<th align="right">Sepal.Width</th>
-<th align="right">Petal.Length</th>
-<th align="right">Petal.Width</th>
-<th align="left">Species</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.7</td>
-<td align="right">3.2</td>
-<td align="right">1.3</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.6</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">3.6</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.7</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.6</td>
-<td align="right">3.4</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">3.4</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.4</td>
-<td align="right">2.9</td>
-<td align="right">1.4</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.9</td>
-<td align="right">3.1</td>
-<td align="right">1.5</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.7</td>
-<td align="right">1.5</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.8</td>
-<td align="right">3.4</td>
-<td align="right">1.6</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">4.8</td>
-<td align="right">3.0</td>
-<td align="right">1.4</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">4.3</td>
-<td align="right">3.0</td>
-<td align="right">1.1</td>
-<td align="right">0.1</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.8</td>
-<td align="right">4.0</td>
-<td align="right">1.2</td>
-<td align="right">0.2</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.7</td>
-<td align="right">4.4</td>
-<td align="right">1.5</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.4</td>
-<td align="right">3.9</td>
-<td align="right">1.3</td>
-<td align="right">0.4</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.5</td>
-<td align="right">1.4</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="odd">
-<td align="right">5.7</td>
-<td align="right">3.8</td>
-<td align="right">1.7</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-<tr class="even">
-<td align="right">5.1</td>
-<td align="right">3.8</td>
-<td align="right">1.5</td>
-<td align="right">0.3</td>
-<td align="left">setosa</td>
-</tr>
-</tbody>
-</table>
-<p>You can write citations, too. For example, we are using the <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown">2017</a>)</span> in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span>.</p>
+<div id="axioms-of-probability" class="section level2">
+<h2><span class="header-section-number">2.2</span> Axioms of Probability</h2>
+<ol style="list-style-type: decimal">
+<li>Any event <span class="math inline">\(A\)</span> belonging to the sample space <span class="math inline">\(A \in \mathbb{S}\)</span> should have nonnegative probability (<span class="math inline">\(P(A) \ge 0\)</span>).</li>
+<li>Probability of the sample space is one (<span class="math inline">\(P(\mathbb{S}) = 1\)</span>).</li>
+<li>Any disjoint events (<span class="math inline">\(A_i \cap A_j = \emptyset \ \forall_{i,j \in 1 \dots n}\)</span>) satisfies <span class="math inline">\(P(A_1 \cup A_2 \cup \dots \cup A_n) = P(A_1) + P(A_2) + \dots + P(A_n)\)</span>.</li>
+</ol>
+</div>
+<div id="other-set-and-probability-rules" class="section level2">
+<h2><span class="header-section-number">2.3</span> Other Set and Probability Rules</h2>
+<ul>
+<li><span class="math inline">\((A^\prime)^\prime = A\)</span></li>
+<li><span class="math inline">\(S^\prime = \emptyset\)</span></li>
+<li><span class="math inline">\(\emptyset^\prime = S\)</span></li>
+<li><span class="math inline">\((A \cap B)^\prime = A^\prime \cup B^\prime\)</span></li>
+<li><span class="math inline">\((A \cup B)^\prime = A^\prime \cap B^\prime\)</span></li>
+<li><span class="math inline">\((A \cup B) \cap C = (A \cap C) \cup (B \cap C)\)</span></li>
+<li><span class="math inline">\((A \cap B) \cup C = (A \cup C) \cap (B \cup C)\)</span></li>
+<li><span class="math inline">\((A \cup B) \cup C = A \cup (C \cup B)\)</span></li>
+<li><span class="math inline">\((A \cap B) \cap C = A \cap (C \cap B)\)</span></li>
+<li><p><span class="math inline">\(A \cup A^\prime = \mathbb{S}\)</span> and <span class="math inline">\(A \cap A^\prime = \emptyset\)</span> so <span class="math inline">\(P(A) = 1 - P(A^\prime)\)</span>. This is especially useful for many problems. For example the probability of getting at least one Heads in a three coin tosses in a row is <span class="math inline">\(1 - P(\{TTT\}) = 7/8\)</span>, the complement of no Heads in a three coin tosses in a row. Otherwise, you should calculate the following expression.</p>
+<p><span class="math display">\[P(\{HTT\}) + P(\{THT\}) + P(\{TTH\}) + P(\{HHT\}) + P(\{HTH\}) + P(\{THH\}) + P(\{HHH\}) = 7/8 \]</span></p></li>
+<li>If <span class="math inline">\(A \subseteq B\)</span> then <span class="math inline">\(P(A) \le P(B)\)</span>.</li>
+<li><span class="math inline">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span>.</li>
+<li><p><span class="math inline">\(P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(B \cap C) - P(A \cap C) + P(A \cap B \cap C)\)</span></p></li>
+</ul>
+</div>
+<div id="counting" class="section level2">
+<h2><span class="header-section-number">2.4</span> Counting</h2>
+<p>Counting rules will help us enumerate the sample space. It will include multiplication rule, permutation and combination.</p>
+<div id="multiplication-rule" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Multiplication Rule</h3>
+<p>If I have a series of independent events, say <span class="math inline">\(1\)</span> to <span class="math inline">\(k\)</span>, and number of possible outcomes are denoted with <span class="math inline">\(n_1\)</span> to <span class="math inline">\(n_k\)</span>; total number of outcomes in the sample space would be <span class="math inline">\(n_1n_2\dots n_k\)</span>.</p>
+<p>Take a series of coin tosses in a row. If I toss a coin its sample space consists of 2 elements such as <span class="math inline">\(\{H,T\}\)</span>. If I toss 2 coins the sample space would be 2*2 <span class="math inline">\(\{HH,HT,TH,TT\}\)</span>. If I toss 3 coins, the sample space would be 2*2*2 <span class="math inline">\(\{HHH,HTH,THH,TTH,HHT,HTT,THT,TTT\}\)</span>.</p>
+<p>A poker card consists of a type and a rank. There are four types of playing cards (clubs, diamonds, hearts and spades) and 13 ranks (A - 2 to 10 - J - Q - K). Number of cards in a deck is 4*13 = 52.</p>
+</div>
+<div id="permutation-rule" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Permutation Rule</h3>
+<p>Permutation is the arrangement of all or a subset of items.</p>
+<ul>
+<li><p>Given a set of items, say <span class="math inline">\(A = {a,b,c}\)</span> in how many different ways I can order the elements? Answer is n!. In our case it is, <span class="math inline">\(3! = 3.2.1 = 6\)</span>.</p>
+<p><span class="math display">\[A = \{a,b,c\},\{b,a,c\},\{b,c,a\},\{c,a,b\},\{c,b,a\},\{a,c,b\}\]</span></p></li>
+<li><p>Suppose there are 10 (n) participants in a competition and 3 (r) medals (gold, silver and bronze). How many possible outcomes are there? Answer is <span class="math inline">\(n(n-1)(n-2)\dots (n-r+1) = \dfrac{n!}{(n-r)!} = \dfrac{10!}{(10-3)!} = 720\)</span>.</p></li>
+<li><p>If there are more than one same type items in a sample, then the permutation becomes <span class="math inline">\(\dfrac{n!}{n_1!n_2!\dots n_k!}\)</span> where <span class="math inline">\(\sum n_i = n\)</span>.</p>
+<p>For example enumerate the different outcomes of four coin tosses which result in 2 heads and 2 tails. Answer is <span class="math inline">\(\dfrac{4!}{2!2!} = 6\)</span></p>
+<p><span class="math display">\[A = \{HHTT,HTTH,HTHT,THTH,THHT,TTHH\}\]</span></p></li>
+</ul>
+</div>
+<div id="combination-rule" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> Combination Rule</h3>
+<p>Suppose we want to select <span class="math inline">\(r\)</span> items from <span class="math inline">\(n\)</span> items and the order does not matter. So the number of different outcomes can be found using <span class="math inline">\(\binom{n}{r} = \dfrac{n!}{(n-r)!r!}\)</span>.</p>
+<p>Out of 10 students how many different groups of 2 students can we generate? Answer <span class="math inline">\(\dfrac{10!}{8!2!} = 45\)</span></p>
+<!--
+You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015]. -->
 
 </div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-R-bookdown">
-<p>Xie, Yihui. 2017. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a>.</p>
-</div>
-<div id="ref-xie2015">
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
 </div>
 </div>
             </section>
