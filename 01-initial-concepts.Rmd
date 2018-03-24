@@ -1,0 +1,301 @@
+# Initial Concepts of Probability {#intro}
+
++ **Probability** is the quantification of event uncertainty. For instance, probability of getting (H)eads in a coin toss is $1/2$. Deterministic models will give the same results given the same inputs (e.g. 2 times 2 is 4), but probabilistic models might yield different outcomes.
+
++ An **experiment** is a process that generates data. For instance, tossing a coin is an experiment. **Outcome** is the realization of an experiment. Possible outcomes for a coin toss is Heads and Tails.
+
++ **Sample space** ($\mathbb{S}$) is the collection of all the possible outcomes of an experiment. Sample space of the coin toss is $\mathbb{S} = \{H,T\}$. Sample space of two coin tosses experiment is $\mathbb{S} = \{HH,HT,TH,TT\}$. Sample space can be discrete (i.e. coin tosses) as well as continuous (i.e. All real numbers between 1 and 3. $\mathbb{S} = \{x | 1 \le x \le 3, x \in \mathbb{R}\}$) _(Side note: Sample space is not always well defined.)_
+
++ An **event** is a subset of sample space. While outcome represents a realization, event is an information. Probability of an event $P(A)$, say getting two Heads in two coin tosses is $P(A) = 1/4$.
+
++ A **random variable** represents an event is dependent on a probabilistic process. On the other hand, a **deterministic variable** is either a constant or a decision variable. For instance, value of the dollar tomorrow can be considered a random variable but the amount I will invest is a decision variable (subject to no probabilistic process) and spot (current) price of the dollar is a constant.
+
+## Set Operations
+
++ **Complement** of an event ($A^\prime$) with respect to the sample space represents all elements of the sample space that are not included by the event (A). For instance, complement of event $A=\{HH\}$ is $A^\prime=\{HT,TH,TT\}$
+
++ **Union** of two events $A$ and $B$ ($A \cup B$) is a set of events which contains all elements of the respective events. For example, say $A$ is the set that contains events which double Heads occur ($A = \{HH,HT,TH\}$) and $B$ is the set which Tails occur at least once ($B = \{TT,HT,TH\}$). The union is $A \cup B = \{HH,TH,HT,TT\}$.
+
++ **Intersection** of two events $A$ and $B$ ($A \cap B$) contains the common elements of the events. For example, say $A$ is the set that contains events which Heads occur at least once ($A = \{HH,HT,TH\}$) and $B$ is the set which Tails occur at least once ($B = \{TT,HT,TH\}$). The intersection is $A \cap B = \{TH,HT\}$.
+
++ **Mutually exclusive** or disjoint events mean that two events have empty intersection ($A \cap B = \emptyset$) and their union ($A \cup B$) contains the same amount of elements as the sum of their respective number of elements. Also $P(A \cap B) = 0$ and $P(A \cup B) = P(A) + P(B)$. For example getting double Heads ($HH$) and double Tails ($TT$) are mutually exclusive events.
+
+## Axioms of Probability
+
+1. Any event $A$ belonging to the sample space $A \in \mathbb{S}$ should have nonnegative probability ($P(A) \ge 0$).
+2. Probability of the sample space is one ($P(\mathbb{S}) = 1$).
+3. Any disjoint events ($A_i \cap A_j = \emptyset \ \forall_{i,j \in 1 \dots n}$) satisfies $P(A_1 \cup A_2 \cup \dots \cup A_n) = P(A_1) + P(A_2) + \dots  + P(A_n)$.
+
+## Other Set and Probability Rules
+
++ $(A^\prime)^\prime = A$
++ $S^\prime = \emptyset$
++ $\emptyset^\prime = S$
++ $(A \cap B)^\prime = A^\prime \cup B^\prime$
++ $(A \cup B)^\prime = A^\prime \cap B^\prime$
++ $(A \cup B) \cap C = (A \cap C) \cup (B \cap C)$
++ $(A \cap B) \cup C = (A \cup C) \cap (B \cup C)$
++ $(A \cup B) \cup C = A \cup (C \cup B)$
++ $(A \cap B) \cap C =  A \cap (C \cap B)$
++ $A \cup A^\prime = \mathbb{S}$ and $A \cap A^\prime = \emptyset$ so $P(A) = 1 - P(A^\prime)$. This is especially useful for many problems. For example the probability of getting at least one Heads in a three coin tosses in a row is $1 - P(\{TTT\}) = 7/8$, the complement of no Heads in a three coin tosses in a row. Otherwise, you should calculate the following expression.
+
+    $$P(\{HTT\}) + P(\{THT\}) + P(\{TTH\}) + P(\{HHT\}) + P(\{HTH\}) + P(\{THH\}) + P(\{HHH\}) = 7/8 $$
+
++ If $A \subseteq B$\ then $P(A) \le P(B)$.
++ $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.
++ $P(A \cup B \cup C) =  P(A) + P(B) + P(C) - P(A \cap B) - P(B \cap C) - P(A \cap C) + P(A \cap B \cap C)$
+
+
+## Counting
+
+Counting rules will help us enumerate the sample space. It will include multiplication rule, permutation and combination.
+
+### Multiplication Rule
+
+If I have a series of independent events, say $1$ to $k$, and number of possible outcomes are denoted with $n_1$ to $n_k$; total number of outcomes in the sample space would be $n_1n_2\dots n_k$.
+
+Take a series of coin tosses in a row. If I toss a coin its sample space consists of 2 elements such as $\{H,T\}$. If I toss 2 coins the sample space would be 2\*2 $\{HH,HT,TH,TT\}$. If I toss 3 coins, the sample space would be 2\*2\*2 $\{HHH,HTH,THH,TTH,HHT,HTT,THT,TTT\}$.
+
+A poker card consists of a type and a rank. There are four types of playing cards (clubs, diamonds, hearts and spades) and 13 ranks (A - 2 to 10 - J - Q - K). Number of cards in a deck is 4\*13 = 52.
+
+### Permutation Rule
+
+Permutation is the arrangement of all or a subset of items.
+
++ Given a set of items, say $A = {a,b,c}$ in how many different ways I can order the elements? Answer is n!. In our case it is, $3! = 3.2.1 = 6$.
+
+    $$A = \{a,b,c\},\{b,a,c\},\{b,c,a\},\{c,a,b\},\{c,b,a\},\{a,c,b\}$$
+
++ Suppose there are 10 (n) participants in a competition and 3 (r) medals (gold, silver and bronze). How many possible outcomes are there? Answer is $n(n-1)(n-2)\dots (n-r+1) = \dfrac{n!}{(n-r)!} = \dfrac{10!}{(10-3)!} = 720$.
+
++ If there are more than one same type items in a sample, then the permutation becomes $\dfrac{n!}{n_1!n_2!\dots n_k!}$ where $\sum n_i = n$.
+
+    For example enumerate the different outcomes of four coin tosses which result in 2 heads and 2 tails. Answer is $\dfrac{4!}{2!2!} = 6$
+
+    $$A = \{HHTT,HTTH,HTHT,THTH,THHT,TTHH\}$$
+
+### Combination Rule
+
+Suppose we want to select $r$ items from $n$ items and the order does not matter. So the number of different outcomes can be found using $\binom{n}{r} = \dfrac{n!}{(n-r)!r!}$.
+
+Out of 10 students how many different groups of 2 students can we generate? Answer $\dfrac{10!}{8!2!} = 45$
+
+## Chapter Problems
+
+1. Suppose I toss a coin, roll a die and draw a card from the deck. How many different number of outcomes are there for this experiment?
+
+    Solution: Multiplication rule. $n_1n_2n_3 = 2.6.52 = 624$.
+
+    ```{r}
+    n1 <- 2 #A coin toss has two potential outcomes.
+    n2 <- 6 #A die roll has six potential outcomes.
+    n3 <- 52 #A card draw has 52 potential outcomes.
+    ```
+
+2. In how many ways can I order the Teletubbies? (Tinky-Winky, Dipsy, Laa Laa and Po) For instance, (TW - Dipsy - Po - Laa Laa) is an ordering and (Dipsy - Po - TW - Laa Laa) is another.
+
+    Solution: Permutation rule. $n! = 4! = 24$
+
+    ```{r}
+    n_tubbies <- 4 #Number of teletubbies
+    factorial(n_tubbies) #By permtuation it is 4!
+    ```
+
+3. I want to reorder the letters of the phrase "GOODGRADES". In how many ways can I do it?.
+
+    Solution: Remember the permutation rule with identical items. There are two "G"s, two "D"s and two "O"s. Remember the formula $\dfrac{n!}{n_1!n_2!\dots n_k!}$. So the result should be $\dfrac{10!}{2!2!2!1!1!1!1!} = 453600$.
+
+    ```{r, tidy=TRUE}
+    the_phrase <- "GOODGRADES"
+    freq_table <- table(strsplit(the_phrase,split="")[[1]]) #Let's create a frequency table first
+    print(freq_table) #Let's show it
+    the_dividend <- factorial(nchar(the_phrase)) #Dividend part is 10 characters so 10!
+    the_divisor <- prod(factorial(freq_table)) #Get multiplication of factorials for the divisor
+    the_dividend/the_divisor
+    ```
+
+4. I want to make two letter words from "GRADES" such as "GA", "ED" or "DE" (it doesn't have to make sense). Find the number of permutations.
+
+    Solution: Permutation of $r$ items from $n$ items is $\dfrac{n!}{(n-r)!}$. So the result is $\dfrac{6!}{4!} = 30$.
+
+    ```{r}
+    the_phrase<-"GRADES"
+    letter_length <- 2 #We want two letter words
+    #Since all letters are different no need for special permutation.
+    factorial(nchar(the_phrase))/factorial(nchar(the_phrase)-letter_length)
+    ```
+
+5. Suppose I am drawing a hand of 5 cards from a playing deck of 52 cards. How many different hands there can be? (Each card is different. See the bottom of this document for details.)
+
+    Solution: Since in a hand you do not care for the order, it is the combination $\binom{52}{5} = \dfrac{52!}{(52-5)!5!} = 2598960$.
+
+    ```{r}
+    #Combination (a.k.a binomial coefficient) function is choose
+    choose(52,5)
+    ```
+
+## Extra Problems
+
++ Question 1
+Suppose we draw three cards from a deck and roll two dice. Answer the following questions.
+
+    a) What is the experiment?
+
+        The experiment is "drawing three cards from a deck and rolling two dice".
+
+    b) What is "getting two-sixes and three-kings or five-one (in any order) one queen one king one ace"? Pick one (Event / Outcome / Sample Space)
+
+        Event.
+
+    c) Give an example of two mutually exclusive events. (6 pts)
+
+        Event A: Queen of Hearts / Queen of Spades / Queen of Diamonds / 6 / 5
+        Event B: Ace of Clubs / King of Clubs / Queen of Clubs / 4 / 4
+
+    d) What is the probability of getting four-three (in any order) in dice roll and three queens in card draw?
+
+        ```{r}
+        #First roll can either be 3 or 4 and second roll should be the other
+        # 2/6 * 1/6
+        #Getting the first Queen has probability of 4/52
+        #Getting the second Queen has probability of 3/51
+        #Getting the third Queen has probability of 2/50
+        2/6*1/6*4/52*3/51*2/50
+        ```
+
+    e) How many different outcomes can there be? This time assume ordering is important (e.g. 6-1 and 1-6 are different outcomes).
+
+        ```{r}
+        #Six outcomes per die
+        #52 outcomes for the first card draw
+        #51 outcomes for the second card draw
+        #50 outcomes for the second card draw
+        #Multiplication rule
+        #You can also use permutation rule for cards
+        6*6*52*51*50
+        ```
+
++ Question 2
+    In how many ways can you arrange the letters of "HOUSEPARTY"?
+
+    a) Any order.
+
+        ```{r}
+        the_phrase<-"HOUSEPARTY"
+        #No repetitive letters
+        #Permutation rule
+        factorial(nchar(the_phrase))
+        ```
+
+    b) Vowels together?
+
+        ```{r}
+        #4 vowels, 6 consonants
+        #Assume all vowels are a single "letter". So 8 characters.
+        #But vowels permutate within the single "letter".
+        #Multiplication rule
+        factorial(6+1)*factorial(4)
+        ```
+
+    c) Vowels in alphabetical order?
+
+        ```{r}
+        #We start with all the permutations 10!
+        #For any permutation there can be only one ordering of vowels.
+        #For instance HOUSEPARTY is not valid but HAESOPURTY is valid
+        #So remove invalid permutations with division
+        factorial(10)/factorial(4)
+        ```
+
+    d) There should be no consecutive vowels?
+
+        ```{r}
+        #There are 6 consonants, 4 vowels.
+        # Assume Xs are consonants and .s are potent vowel places.
+        # .X.X.X.X.X.X.
+        #Consonants can permutate in any order so 6! there
+        #7 places for vowels but only 4 vowels.
+        # So it is a permutation of 4 out of 8 places.
+        factorial(6)*(factorial(7)/factorial(7-4))
+        ```
+
++ Question 3
+    In how many ways can you arrange the letters of "CAMARADERIE"?
+
+    ```{r}
+    # 11 characters.
+    # 6 vowels, 5 consonants
+    # 3 As, 2 Es, 2 Rs
+    ```
+
+    a) Any order.
+
+        ```{r}
+        #By the formula of permutation with repetitive letters
+        #Assign the value to all_perms object
+        all_perms<-factorial(11)/(factorial(3)*factorial(2)*factorial(2))
+        all_perms
+        ```
+
+    b) Vowels together?
+
+        ```{r}
+        #Assume all vowels are single "character" again. So 6 characters
+        (factorial(5+1)/(factorial(2)))*(factorial(6)/(factorial(3)*factorial(2)))
+        ```
+
+    c) Vowels in alphabetical order?
+
+        ```{r}
+        #Same as the last question. But be careful about identical vowels.
+        all_perms/(factorial(6)/(factorial(3)*factorial(2)))
+        ```
+
+
+    d) There should be no consecutive vowels?
+
+        ```{r}
+        #Same as the last question. But be careful about identical vowels.
+        (factorial(5)/factorial(2))*(factorial(6)/factorial(6-6))/(factorial(3)*factorial(2))
+        ```
+
++ Question 4
+
+    Suppose you are putting the top 12 basketball teams in 4 groups evenly (each group should consist of 3 teams). In how many different ways can you arrange the teams?
+
+    ```{r}
+    #It is either a chain of combinations or just grouping combination
+    choose(12,3)*choose(9,3)*choose(6,3)
+    ```
+
++ Question 5 (20 pts - all equal)
+
+    There are 18 people; 10 from Izmir, 8 from Mugla.
+
+    a) Suppose you want to form a group of 5 people with at least 1 person from Izmir and Mugla. In how many ways can you form such a group?
+
+        ```{r}
+        #Calculate as if no rules. It is the combination of 18 to 5.
+        #Then remove the combinations of all Izmir or all Mugla people
+        choose(18,5) - choose(10,5) - choose(8,5)
+        ```
+
+    b) In how many ways can you form a group of 3 people from Izmir and 4 people from Mugla?
+
+        ```{r}
+        #Simply separate combinations with multiplication rule.
+        choose(10,3)*choose(8,4)
+        ```
+
+## Coins, Dice and Cards
+
+When questions mention about coins, dice and cards they are commonly referred items. Nevertheless, you can refer to .
+
++ Coin tosses: Two possible outcomes. Heads or Tails.
++ Dice rolling: Six possible outcomes. 1-2-3-4-5-6.
++ Card drawing: 52 possible outcomes. There are 4 types (clubs, diamonds, spades and hearts) and 13 ranks for each type. (A)ce - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 - (J)ack - (Q)ueen - (K)ing.
+
+
+
+<!--
+You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015]. -->

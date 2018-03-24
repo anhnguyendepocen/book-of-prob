@@ -1,7 +1,5 @@
 ---
 title: "Book of Prob"
-author: "Berk Orbay"
-date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -14,9 +12,10 @@ description: "Starting Introduction to Probability"
 
 # Introduction {-}
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+This book is the combined lecture notes of my course IE-231 Introduction to Probability at Istanbul Bilgi University, Turkey. As the name suggests, these notes consist of an abbreviated version of the course as the objective is to give the essence of very significant parts of Probability. The course mainly follows [@myers2012].
+
+This book is periodically updated. Latest update is on `r Sys.Date()`.
+
+## About the Author {-}
+
+The author of this book is [Berk Orbay](http://berkorbay.me).
