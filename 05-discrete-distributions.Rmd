@@ -1,0 +1,226 @@
+# Some Discrete Distributions
+
+## Bernoulli Distribution
+
+It can also be called "single coin toss distribution". For a single event with probability of success $p$ and failure $q = 1 - p$, the distribution is called Bernoulli.
+
++ pmf: $f(x = 0;p) = q$, $f(x = 1) = p$
+
++ $E[X] = 0*(1-p) + 1*p = p$
+
++ $V[X] = pq$
+
+Example: Coin Toss
+
++ $p = 0.5$, $q = 1 - p = 0.5$
+
++ pmf: $f(x = 0) = 0.5$, $f(x = 1) = 0.5$
+
++ $E[X] = 0*(1-0.5) + 1*0.5 = 0.5$
+
++ $V(X) = 0.5*0.5 = 0.25$
+
+## Binomial Distribution
+
+Think of multiple Bernoulli trials (e.g. several coin tosses).
+
++ pmf: $f(x;p,n) = \binom{n}{x} p^xq^{(n-x)}$
+
++ $E[X] = np$
+
++ $V(X) = npq$
+
++ cdf: $F(X \le x) = \sum_{i=0}^n f(i)$
+
+Example: Multiple Coin Tosses (x5 coins, p = 0.5)
+
++ pmf: $f(x=3;n=5) = \binom{5}{3} (0.5)^3(1-0.5)^{(5-3)} = 0.3125$
+
+```{r}
+#R way
+#(d)ensity(binom)ial
+dbinom(x=3,size=5,prob=0.5)
+```
+
++ $E[X] = 5*0.5 = 2.5$
+
++ $V(X) = 5*0.5*0.5 = 1.25$
+
++ cdf: $F(X \le 3;n=5) = \sum_{i=0}^5 f(i) = 0.8125$
+
+```{r}
+#R way
+pbinom(q=3,size=5,prob=0.5)
+```
+
+## Multinomial Distribution
+
+Now suppose there is not one probability ($p$) but there are many probabilities ($p_1, p_2, \dots, p_k$).
+
++ pmf: $f(x_1, \dots , x_k;p_1, \dots, p_k;n) = \binom{n}{x_1, \dots , x_k} p_1^{x_1}*\dots *p_k^{x_k}$
+
+    where $\binom{n}{x_1, \dots , x_k} = \dfrac{n!}{x_1! \dots x_k!}$, $\sum_i^k x_i = n$ and $\sum_i^k p_i = 1$.
+
+Example: Customers of a coffee shop prefer Turkish coffee with probability 0.4, espresso 0.25 and filter coffee 0.35. What is the probability that out of the first 10 customers, 3 will prefer Turkish coffee, 5 will prefer espresso and 2 will prefer filter coffee?
+
+$f(3,5,2;0.4,0.25,0.35;10) = \binom{10}{3,5,2} * 0.4^3 * 0.25^5 * 0.35^10 = 4.3 * 10^{-6} = 0.0193$
+
+```{r}
+#Explicit form
+factorial(10)/(factorial(3)*factorial(5)*factorial(2))*0.4^3 * 0.25^5 * 0.35^2
+#Density multinomial
+dmultinom(x=c(3,5,2),prob=c(0.4,0.25,0.35))
+```
+
+Binomial distribution is a special case of multinomial distribution.
+
+## Hypergeometric Distribution
+
+Hypergeometric distribution can be used in case the sample is divided in two such as defective/nondefective, white/black, Ankara/Istanbul. Suppose there are a total of $N$ items, $k$ of them are from group 1 and $N-k$ of them are from group 2. We want to know the probability of getting $x$ items from group 1 and $n-k$ items from group 2.
+
++ pmf: $f(x,n;k,N) = \dfrac{\binom{k}{x}\binom{N-k}{n-x}}{\binom{N}{n}}$
+
++ $E[X] = \dfrac{nk}{N}$
+
++ $V[X] = \dfrac{N-n}{N-1}*n*\dfrac{k}{N}*(1-\dfrac{k}{N})$
+
+Example: Suppose we have a group of 20 people, 12 from Istanbul and 8 from Ankara. If we randomly select 5 people from it what is the probability that 1 of them is from Ankara and 4 of them from Istanbul.
+
+$f(1,5;8,20) = \dfrac{\binom{8}{1}\binom{20-8}{5-1}}{\binom{20}{5}} = 0.256$
+
+```{r}
+#Explicit form
+x=1
+n=5
+k=8
+N=20
+(choose(k,x)*choose(N-k,n-x))/choose(N,n)
+#Density hypergeometric, see ?dhyper for explanations
+dhyper(x=1,m=8,n=12,k=5)
+```
+
+## Negative Binomial Distribution
+
+Negative Binomial distribution answers the question "What is the probability that k-th success occurs in n trials?". Differently from the binomial case, we fix the last attempt as success.
+
++ pmf: $f(x;p,n) = \binom{n-1}{x-1} p^xq^{(n-x)}$
+
+Example: Suppose I'm repeatedly tossing coins. What is the probability that 3rd Heads come in the 5th toss?
+
+$f(3;0.5,5) = \binom{5-1}{3-1} 0.5^30.5^{(5-3)} = 0.1875$
+
+```{r}
+#Explicit form
+choose(5-1,3-1)*0.5^3*0.5^(5-3)
+#Binomial way
+dbinom(3-1,5-1,0.5)*0.5
+#Negative binomial way
+dnbinom(x=5-3,size=3,prob=0.5)
+```
+
+## Geometric Distribution
+
+Geometric distribution answers "What is the probability that first success comes in the n-th trial?"
+
++ pmf: $f(x;p,n) = q^{(n-1)}p$
+
++ $E[X] = 1/p$
+
++ $V[X] = \dfrac{1-p}{p^2}$
+
+
+## Chapter Questions
+
+1. A boutique shop offers three types of breads; olive, rye and white. 15% of its customers buy olive bread, 55% rye bread and the rest white bread. What is the probability that the first 10 customers of the shop buys 2 olive, 5 rye and 3 white bread?
+
+    _Solution:_ Multinomial distribution.
+
+    $$\binom{10}{2,5,3} 0.15^2 * 0.55^5 * 0.3^3 = 0.0770478$$
+
+    ```{r}
+    n_total = 10
+    # Olive bread
+    p_1 = 0.15
+    n_1 = 2
+    # Rye bread
+    p_2 = 0.55
+    n_2 = 5
+    # White bread
+    p_3 = 1 - p_2 - p_1
+    n_3 = 3
+
+    factorial(n_total)/(factorial(n_1)*factorial(n_2)*factorial(n_3)) * p_1^n_1 * p_2^n_2 * p_3^n_3
+    ```
+
+2. An urn contains 32 balls; 18 red, 14 white. If I take 8 balls randomly from the urn, what is the probability of getting 4 red balls?
+
+    _Solution:_ Hypergeometric distribution.
+
+    $$\dfrac{\binom{18}{4}\binom{14}{4}}{\binom{32}{8}} = 0.2912125$$
+
+    ```{r}
+    n_total = 32 #N
+    k_total = 8
+    n_1 = 18
+    n_2 = 14
+    k_1 = 4
+    k_2 = 4
+
+    (choose(n_1,k_1)*choose(n_2,k_2))/choose(n_total,k_total)
+    ```
+
+3. A UNICEF activist asks bypassers to contribute to their efforts. Each of her attempts has a 10% chance of success. What is the probability that she got the first contribution at the 10th attempt?
+
+    _Solution:_ Geometric distribution.
+
+    $$ (0.9)^9 * (0.1) = 0.03874205$$
+
+    ```{r}
+    (0.9)^9 * (0.1)
+    ```
+
+4. Suppose there are 10 cards in a deck numbered from 1 to 10. If I draw four cards out of the deck without putting them back, what is the probability that they are in increasing order (e.g. 3-4-5-8)?
+
+    _Solution_: Increasing order is a special order. There is only one decreasing order in every permutation set. For instance
+
+    \[8-5-4-3\]
+    \[8-5-3-4\]
+    \[8-4-5-3\]
+    \[4-5-3-8\]
+    \[\dots\]
+    \[**3-4-5-8**\]
+
+    So, the answer is $1/(4!) = 1/24$.
+
+5. A tennis player has the probability of 0.15 to ace a serve (i.e. he serves and gets the point without the opponent touching the ball) at each shot. His trainer challenged him that he will pay the square of the aces he makes out of 10 serves (e.g. if he serves 8 aces out of 10, the trainer pays him $8^2 = 64TL$). But, if he serves less than or equal to 6 aces, the player should pay the trainer 5 TL for each ace he missed (e.g. 4 aces 6 misses, player pays up 6*5 = 30TL).
+
+    a) What is the maximum amount of money he can get?
+    b) What is the expected earnings of the player?
+    c) What is the variance of his earnings?
+
+
+    _Solution:_
+
+    a) 10 out of 10 means 10^2 = 100.
+    b) $g(X = x) = x^2$ if $x \geq 7$, $f(g(X) = x^2) = f(X = x) = \binom{10}{x} 0.15^x * 0.85^(10-k)$, so $E[g(x)] = \sum_{i=0}^10 g(x)f(x)$.
+
+        $g(X = x) = -5*x$ if $x \leq 6$.
+
+        So $49 * \binom{10}{7} 0.15^7 * 0.85^3 + 64 * \binom{10}{8} 0.15^8 * 0.85^2 + 81 * \binom{10}{9} 0.15^9 * 0.85 + 100 * (0.15)^10$ $-20 * \binom{10}{6} 0.15^6 * 0.85^4 -25 * \binom{10}{5} 0.15^5 * 0.85^5 - 30 * \binom{10}{4} 0.15^4 * 0.85^6 - 35 * \binom{10}{3} 0.15^3 * 0.85^7 - 40 * \binom{10}{2} 0.15^2 * 0.85^8 - 45 * \binom{10}{1} 0.15^1 * 0.85^9 - 50 * 0.85^10 = -42.5TL$.
+
+    ```{r}
+    rewards <- (7:10)^2
+    probs_rewards <- dbinom(7:10,10,0.15)
+    losses <- -5*(10-(6:0))
+    probs_losses <- dbinom(6:0,10,0.15)
+
+    expectation <- sum(rewards*probs_rewards) + sum(losses*probs_losses)
+    expectation
+    ```
+
+    c) $V(X) = E[X^2] - (E[X])^2$. We know that $E[X] = -42.5$, then $(E[X])^2 = 1805.51$. Also $E[X^2] = 1838.434$ and $V(X) = 32.92$.
+
+    ```{r}
+    ex2<-sum(rewards^2*probs_rewards) + sum(losses^2*probs_losses)
+    ex2 - expectation^2
+    ```

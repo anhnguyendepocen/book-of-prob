@@ -1,12 +1,13 @@
 bookdown::gitbook:
   css: style.css
   config:
-    self_contained: false
     toc:
+      scroll_highlight: yes
       before: |
-        <li><a href="./">Book of Prob</a></li>
+        <li><b><a href="./">Book of Prob</a></b></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown.</a></li>
+        <li><a href="http://berkorbay.me" target="blank">Author: Berk Orbay</a></li>
     download: ["pdf", "epub"]
 bookdown::pdf_book:
   includes:

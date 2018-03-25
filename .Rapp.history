@@ -1,0 +1,163 @@
+##Auto betting#
+options(stringsAsFactors=FALSE)#
+library(tidyverse)#
+#
+setwd("~/Dropbox/Algopoly/bahis_isi/")#
+# setwd("~/Downloads/")#
+raw_files<-dir("Results_Cumulative",full.names=T)#
+#
+# i<-1 #Temporary for#
+results<-NULL#
+#
+is_backtest <- FALSE#
+backtest_past <- 3
+the_folder <- "Results_Cumulative"#
+#
+full_df <-#
+data_frame(league = gsub("_results.*","",dir(the_folder))) %>% # create a data frame#
+                                       # holding the file names#
+mutate(file_contents = map(dir(the_folder),          # read files into#
+         ~ read_csv(file.path(the_folder, .))) # a new data column#
+      )  %>% unnest(file_contents) %>%#
+#
+# full_df %>% ungroup() %>%#
+mutate(MR_odd1=ifelse(is.na(MR_odd1),Odd_Close.mean_MR_odd1,MR_odd1),#
+MR_oddX=if_else(is.na(MR_oddX),Odd_Close.mean_MR_oddX,MR_oddX),#
+MR_odd2=if_else(is.na(MR_odd2),Odd_Close.mean_MR_odd2,MR_odd2)) %>%#
+select(-starts_with("Odd_Close"))
+full_df_wip <-#
+full_df %>%#
+    gather(key=odd_type_models,value=model_prob,Home,Away,Tie) %>%#
+    rename(Home = MR_odd1, Away= MR_odd2, Tie=MR_oddX) %>%#
+    # rename(Home = Odd_Close.mean_MR_odd1, Away= Odd_Close.mean_MR_odd2, Tie=Odd_Close.mean_MR_oddX) %>%#
+    mutate(odd_prob_1 = (1/Home)/(1/Home + 1/Away + 1/Tie),odd_prob_2 = (1/Away)/(1/Home + 1/Away + 1/Tie),odd_prob_X = (1/Tie)/(1/Home + 1/Away + 1/Tie)) %>%#
+    gather(key=odd_type_odds,value=given_odds,Home,Away,Tie) %>%#
+    rename(Home = odd_prob_1, Away= odd_prob_2, Tie=odd_prob_X) %>%#
+    gather(key=odd_type_odd_probs,value=odd_prob,Home,Away,Tie) %>%#
+    filter((odd_type_models == odd_type_odds) & (odd_type_odds == odd_type_odd_probs)) %>%#
+    arrange(matchid)
+full_df_wip
+the_forecasts <-#
+#
+full_df_wip %>% filter(!is.na(Actual) & Prediction == Actual) %>% group_by(league,Algorithm) %>% filter(given_odds < 5) %>% summarise(log_density=sum(log(model_prob)),log_density_odd_makers=sum(log(odd_prob))) %>% mutate(diff=log_density-log_density_odd_makers) %>% ungroup() %>% filter(diff>0) %>% arrange(desc(log_density))
+the_forecasts
+the_forecasts <-#
+#
+full_df_wip %>% filter(!is.na(Actual) & Prediction == Actual) %>% group_by(league,Algorithm) %>% filter(given_odds < 3) %>% summarise(log_density=sum(log(model_prob)),log_density_odd_makers=sum(log(odd_prob))) %>% mutate(diff=log_density-log_density_odd_makers) %>% ungroup() %>% filter(diff>0) %>% arrange(desc(log_density))
+the_forecasts
+the_forecasts <-#
+#
+full_df_wip %>% filter(!is.na(Actual) & Prediction == Actual) %>% group_by(league,Algorithm) %>% filter(given_odds < 5 & given_odds > 3) %>% summarise(log_density=sum(log(model_prob)),log_density_odd_makers=sum(log(odd_prob))) %>% mutate(diff=log_density-log_density_odd_makers) %>% ungroup() %>% filter(diff>0) %>% arrange(desc(log_density))
+the_forecasts
+full_df_wip %>%#
+    filter(is.na(Actual) & Match_Date >= "2018-03-24" & Match_Date <= "2018-03-31") %>%#
+    # select(league:Prediction,given_odds) %>%#
+    filter((#
+        (league %in% c("romania_liga-1") & Algorithm == "XGboost" & given_odds < 3) |#
+        # (league %in% c("italy_serie-b") & Algorithm == "XGboostMissing" & given_odds < 3) |#
+        (league %in% c("switzerland_super-league") & Algorithm == "XGboostMissing" & given_odds < 3) |#
+#
+        # (league=="poland_ekstraklasa" & Algorithm == "glmnet") |#
+        (league %in% c("romania_liga-1","france_ligue-1") & Algorithm == "RF" & given_odds > 3 & given_odds < 5)#
+        ) # & (given_odds > 1.5 & given_odds < 3)#
+    ) %>%#
+#
+    group_by(league,Match_Date,matchid,Home_Team,Away_Team,odd_type_models) %>%#
+    summarise(count=n(),median_prob=median(model_prob),given_odds=mean(given_odds),odd_prob=mean(odd_prob)) %>%#
+    arrange(desc(median_prob)) %>%#
+    ungroup()
+full_df_wip %>%#
+    filter(is.na(Actual) & Match_Date >= "2018-03-24" & Match_Date <= "2018-03-31") %>%#
+    # select(league:Prediction,given_odds) %>%#
+    filter((#
+        (league %in% c("romania_liga-1")
+)))
+full_df_wip %>%#
+    filter(is.na(Actual) & Match_Date >= "2018-03-24" & Match_Date <= "2018-03-31") %>%#
+    # select(league:Prediction,given_odds) %>%#
+    filter((#
+        (league %in% c("romania_liga-1") & Algorithm == "XGboost"
+))
+)
+full_df_wip %>% distinct(Algorithm)
+full_df_wip %>% filter(Match_Date >= "2018-03-24")  %>% distinct(Algorithm)
+full_df_wip %>% filter(Match_Date >= "2018-03-24")  %>% filter(Algorithm == "XGboost")
+full_df_wip %>% filter(Match_Date >= "2018-03-24")  %>% filter(Algorithm == "XGboost") %>% distinct(league)
+full_df_wip %>% filter(Match_Date >= "2018-03-24")  %>% filter(league=="romania_liga-1") %>% distinct(Algorithm)
+full_df_wip %>% filter(Match_Date >= "2018-03-24")  %>% filter(league=="romania_liga-1")
+full_df_wip %>% filter(!is.na(Actual) & Prediction == Actual) %>% group_by(league,Algorithm) %>% filter(given_odds > 1 & given_odds < 3) %>% summarise(log_density=sum(log(model_prob)),log_density_odd_makers=sum(log(odd_prob))) %>% mutate(diff=log_density-log_density_odd_makers) %>% ungroup() %>% filter(diff>0) %>% arrange(desc(log_density))
+full_df_wip %>% filter(!is.na(Actual) & Prediction == Actual) %>% group_by(league,Algorithm) %>% filter(given_odds > 3 & given_odds < 5) %>% summarise(log_density=sum(log(model_prob)),log_density_odd_makers=sum(log(odd_prob))) %>% mutate(diff=log_density-log_density_odd_makers) %>% ungroup() %>% filter(diff>0) %>% arrange(desc(log_density))
+full_df_wip %>%#
+    filter(is.na(Actual) & Match_Date >= "2018-03-24" & Match_Date <= "2018-03-31") %>%#
+    # select(league:Prediction,given_odds) %>%#
+    filter((#
+        (league %in% c("romania_liga-1") & Algorithm == "XGboostMissing" & given_odds < 3) |#
+        # (league %in% c("italy_serie-b") & Algorithm == "XGboostMissing" & given_odds < 3) |#
+        (league %in% c("switzerland_super-league") & Algorithm == "XGboostMissing" & given_odds < 3) |#
+#
+        # (league=="poland_ekstraklasa" & Algorithm == "glmnet") |#
+        (league %in% c("romania_liga-1","france_ligue-1") & Algorithm == "RF" & given_odds > 3 & given_odds < 5)#
+        ) # & (given_odds > 1.5 & given_odds < 3)#
+    ) %>%#
+#
+    group_by(league,Match_Date,matchid,Home_Team,Away_Team,odd_type_models) %>%#
+    summarise(count=n(),median_prob=median(model_prob),given_odds=mean(given_odds),odd_prob=mean(odd_prob)) %>%#
+    arrange(desc(median_prob)) %>%#
+    ungroup()
+full_df_wip %>% filter(Algorithm=="XGboost")
+full_df_wip %>% filter(Algorithm=="XGboost" & is.na(Actual)) %>% distinct(Match_Date)
+full_df_wip %>% filter(Algorithm=="XGboost" & is.na(Actual)) %>% distinct(Match_Date) %>% arrange(desc(Match_Date))
+full_df_wip %>% filter(league=="romania_liga-1" & Algorithm=="XGboost" & is.na(Actual)) %>% distinct(Match_Date) %>% arrange(desc(Match_Date))
+library(bookdown)
+setwd("~/git_repositories/book-of-prob")
+dir()
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+system("pdflatex --version")
+system("pdflatex --version")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+install.packages("bookdown")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+bookdown::render_book("index.Rmd", "bookdown::epub_book")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+Sys.date()
+Sys.Date()
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::html_book")
+bookdown::render_book("index.Rmd", "bookdown::html_book")
+?html_book
+bookdown::render_book("index.Rmd", "bookdown::html_book")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+conn <- DBI::dbConnect(RMySQL::MySQL(),host ="database1.cwlfbxblx4lj.eu-west-1.rds.amazonaws.com",port = 3306,dbname="tarfin",user="algopolyrou",password="ATTKZRM7CI14", path = ":memory:")
+DBI::dbListTables(conn)
+devtools::install_github(c('yihui/tinytex'))
+tinytex::install_tinytex()
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+load("/Users/berkorbay/Dropbox/PhD_Workshop/Input Files/Asset Options/SPX_2013_options_filtered_D12.RData")
+ls()
+the_divisor
+processed_data

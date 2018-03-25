@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Book of Prob</title>
+  <meta name="description" content="A book for introduction to probability.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Book of Prob" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A book for introduction to probability." />
+  <meta name="github-repo" content="berkorbay/book-of-prob" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Book of Prob" />
+  
+  <meta name="twitter:description" content="A book for introduction to probability." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="cond.html">
+<link rel="next" href="applications.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><b><a href="./">Book of Prob</a></b></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the Author</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Initial Concepts of Probability</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#set-operations"><i class="fa fa-check"></i><b>1.1</b> Set Operations</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#axioms-of-probability"><i class="fa fa-check"></i><b>1.2</b> Axioms of Probability</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#other-set-and-probability-rules"><i class="fa fa-check"></i><b>1.3</b> Other Set and Probability Rules</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#counting"><i class="fa fa-check"></i><b>1.4</b> Counting</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="intro.html"><a href="intro.html#multiplication-rule"><i class="fa fa-check"></i><b>1.4.1</b> Multiplication Rule</a></li>
+<li class="chapter" data-level="1.4.2" data-path="intro.html"><a href="intro.html#permutation-rule"><i class="fa fa-check"></i><b>1.4.2</b> Permutation Rule</a></li>
+<li class="chapter" data-level="1.4.3" data-path="intro.html"><a href="intro.html#combination-rule"><i class="fa fa-check"></i><b>1.4.3</b> Combination Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#chapter-problems"><i class="fa fa-check"></i><b>1.5</b> Chapter Problems</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#extra-problems"><i class="fa fa-check"></i><b>1.6</b> Extra Problems</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#coins-dice-and-cards"><i class="fa fa-check"></i><b>1.7</b> Coins, Dice and Cards</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="cond.html"><a href="cond.html"><i class="fa fa-check"></i><b>2</b> Conditional Probability and Bayes’ Rule</a><ul>
+<li class="chapter" data-level="2.1" data-path="cond.html"><a href="cond.html#some-examples"><i class="fa fa-check"></i><b>2.1</b> Some Examples</a></li>
+<li class="chapter" data-level="2.2" data-path="cond.html"><a href="cond.html#conditional-probability"><i class="fa fa-check"></i><b>2.2</b> Conditional Probability</a></li>
+<li class="chapter" data-level="2.3" data-path="cond.html"><a href="cond.html#independence"><i class="fa fa-check"></i><b>2.3</b> Independence</a></li>
+<li class="chapter" data-level="2.4" data-path="cond.html"><a href="cond.html#product-rule"><i class="fa fa-check"></i><b>2.4</b> Product rule</a></li>
+<li class="chapter" data-level="2.5" data-path="cond.html"><a href="cond.html#bayes-rule"><i class="fa fa-check"></i><b>2.5</b> Bayes’ Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="distributions.html"><a href="distributions.html"><i class="fa fa-check"></i><b>3</b> Distributions</a><ul>
+<li class="chapter" data-level="3.1" data-path="distributions.html"><a href="distributions.html#scales-on-measurement"><i class="fa fa-check"></i><b>3.1</b> Scales on Measurement</a></li>
+<li class="chapter" data-level="3.2" data-path="distributions.html"><a href="distributions.html#infinity"><i class="fa fa-check"></i><b>3.2</b> Infinity</a></li>
+<li class="chapter" data-level="3.3" data-path="distributions.html"><a href="distributions.html#descriptive-statistics"><i class="fa fa-check"></i><b>3.3</b> Descriptive Statistics</a></li>
+<li class="chapter" data-level="3.4" data-path="distributions.html"><a href="distributions.html#random-variable"><i class="fa fa-check"></i><b>3.4</b> Random Variable</a></li>
+<li class="chapter" data-level="3.5" data-path="distributions.html"><a href="distributions.html#fundamental-concepts"><i class="fa fa-check"></i><b>3.5</b> Fundamental Concepts</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
+<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
+<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown.</a></li>
+<li><a href="http://berkorbay.me" target="blank">Author: Berk Orbay</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Book of Prob</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="distributions" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Distributions</h1>
+<div id="scales-on-measurement" class="section level2">
+<h2><span class="header-section-number">3.1</span> Scales on Measurement</h2>
+<ul>
+<li>Nominal scale: These are categorical values that has no relationship of order or rank among them. (e.g. colors, species)</li>
+<li>Ordinal scale: These are categorical values that has relationship of order or rank among them (e.g. military ranks, competiton results). Though the relative order has no defined magnitude (e.g. Champion can get 40 points, runner up 39 and third place 30).</li>
+<li>Interval scale: There is a numerical order but the difference can only be defined in intervals, <em>since there is no absolute minimum</em>. We cannot compare in relative values. For instance, we cannot say 10 degree celsius is twice as hot as 5 degree celsius; what about -5 vs +5?</li>
+<li>Ratio scale: Scale with an absolute minimum. (e.g. If I have 50TL and my friend has 100TL, I can say that she has twice the money that I have.) Height, weight, age are similar examples.</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Level_of_measurement">See more on https://en.wikipedia.org/wiki/Level_of_measurement</a>. (p.s. Wikipedia wasn’t banned when I prepared these notes)</p>
+</div>
+<div id="infinity" class="section level2">
+<h2><span class="header-section-number">3.2</span> Infinity</h2>
+<p>The concept of infinity is very broad. Currently, you just need to keep the distinction of countable and uncountable infinities in mind.</p>
+<ul>
+<li>Countably infinite: 1, 2, 3, 4, … (e.g. natural numbers, integers, <strong>rational numbers</strong>)</li>
+<li>Uncountably infinite: 1, 1.01, 1.001, 1.0001, 1.00001, … (e.g. real numbers)</li>
+</ul>
+<p>How many real numbers are there between 0 and 1?</p>
+</div>
+<div id="descriptive-statistics" class="section level2">
+<h2><span class="header-section-number">3.3</span> Descriptive Statistics</h2>
+<p>Here are brief descriptions of mean (expectation), median, mode, variance, standard deviation, quantile.</p>
+<ul>
+<li><p>Mean: <span class="math inline">\(\bar{X} = \sum_i^N X_i\)</span></p></li>
+<li><p>Median: Let’s say <span class="math inline">\(X_k\)</span> are ordered from smallest to largest and there are <span class="math inline">\(n\)</span> values in the sample. Median(<span class="math inline">\(X\)</span>)<span class="math inline">\(=X_{(n+1)/2}\)</span> if n is odd and (usually) Median(<span class="math inline">\(X\)</span>)<span class="math inline">\(=\dfrac{X_{(n/2)} + X_{(n/2+1)}}{2}\)</span>.</p></li>
+<li><p>Quantile: On an ordered list of values for quantile (<span class="math inline">\(\alpha\)</span>) provides the <span class="math inline">\((\alpha*n)^{th}\)</span> smallest value of the list. For instance, if <span class="math inline">\(\alpha = 70\% = 0.7\)</span> quantile value is the 7th smallest value in a list of 10 values. <span class="math inline">\(\alpha = 1\)</span> means the maximum. Quantile is an important parameter in especially statistics.</p></li>
+<li><p>Mode: <span class="math inline">\(X_k\)</span> with the highest frequency in the sample. In a sample of (<span class="math inline">\(1,2,2,3,4,5\)</span>), <span class="math inline">\(2\)</span> is the mode.</p></li>
+<li><p>Variance: <span class="math inline">\(V(X) = \dfrac{\sum_i^N (X_i - \bar{X})^2}{n-1}\)</span></p></li>
+<li><p>Standard Deviation: <span class="math inline">\(\sigma(X) = \sqrt{\dfrac{\sum_i^N (X_i - \bar{X})^2}{n-1}}\)</span></p></li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">231</span>)</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="co">#Let&#39;s pick 10 values from the numbers between 1 and 50.</span></a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">numbers &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">50</span>,<span class="dv">10</span>,<span class="dt">replace=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="co">#The sorted version of the numbers</span></a>
+<a class="sourceLine" id="cb48-5" data-line-number="5"><span class="kw">sort</span>(numbers)</a></code></pre></div>
+<pre><code>##  [1]  1  9 15 16 16 18 26 31 32 35</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="co">#The mean values of the numbers</span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">sum</span>(numbers)<span class="op">/</span><span class="dv">10</span></a></code></pre></div>
+<pre><code>## [1] 19.9</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co">#or in R</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="kw">mean</span>(numbers)</a></code></pre></div>
+<pre><code>## [1] 19.9</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="co">#Median of the numbers</span></a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw">median</span>(numbers)</a></code></pre></div>
+<pre><code>## [1] 17</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="co">#Quantile 7/9 of the numbers</span></a>
+<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="kw">quantile</span>(numbers,<span class="dv">7</span><span class="op">/</span><span class="dv">9</span>)</a></code></pre></div>
+<pre><code>## 77.77778% 
+##        31</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="co">#Quantile 0 of the numbers (also the min)</span></a>
+<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="kw">quantile</span>(numbers,<span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## 0% 
+##  1</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="co">#Quantile 1 of the numbers (also the max)</span></a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="kw">quantile</span>(numbers,<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## 100% 
+##   35</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co">#No simple solution for mode in R</span></a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">freq_table&lt;-<span class="kw">table</span>(numbers)</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">freq_table</a></code></pre></div>
+<pre><code>## numbers
+##  1  9 15 16 18 26 31 32 35 
+##  1  1  1  2  1  1  1  1  1</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">names</span>(freq_table[<span class="kw">which.max</span>(freq_table)])</a></code></pre></div>
+<pre><code>## [1] &quot;16&quot;</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co">#Sample variance of numbers</span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="kw">sum</span>((numbers <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(numbers))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">10-1</span>)</a></code></pre></div>
+<pre><code>## [1] 118.7667</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="co">#For large values you can take n ~ n-1</span></a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="co">#in R</span></a>
+<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="kw">var</span>(numbers)</a></code></pre></div>
+<pre><code>## [1] 118.7667</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="co">#Sample standard deviation of values</span></a>
+<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="kw">sqrt</span>(<span class="kw">sum</span>((numbers <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(numbers))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="dv">10-1</span>))</a></code></pre></div>
+<pre><code>## [1] 10.89801</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="co">#in R</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="kw">sd</span>(numbers)</a></code></pre></div>
+<pre><code>## [1] 10.89801</code></pre>
+</div>
+<div id="random-variable" class="section level2">
+<h2><span class="header-section-number">3.4</span> Random Variable</h2>
+<p>Random variables are the abstractions of uncertain events so that we can generalize events in formal functions instead of explicitly enumerating the outcomes. For instance, assume <span class="math inline">\(X\)</span> is the number of tails in 2 coin tosses.</p>
+<span class="math display">\[\begin{align}
+ P(X = 0) &amp;= P(\{H,H\}) = 1/4 \\
+ P(X = 1) &amp;= P(\{H,T\},\{T,H\}) = 2/4 \\
+ P(X = 2) &amp;= P(\{T,T\}) = 1/4 \\
+\end{align}\]</span>
+<p><span class="math inline">\(X\)</span> can take values 0, 1 and 2. <span class="math inline">\(X\)</span> is a discrete random variable.</p>
+<p>There are also the continuous random variables. Continuous random variables are usually defined in intervals instead of individual values. For instance, define <span class="math inline">\(Y\)</span> as any real number between 0 and 1 and and all values within the interval are equally probable (i.e. uniform distribution).</p>
+<span class="math display">\[\begin{align}
+ P(Y \le 0.25) &amp;= 1/4 \\
+ P(X \le 0.5) &amp;= 2/4 \\
+ P(X \le 0.75) &amp;= 3/4 \\
+\end{align}\]</span>
+</div>
+<div id="fundamental-concepts" class="section level2">
+<h2><span class="header-section-number">3.5</span> Fundamental Concepts</h2>
+<p>There are several fundamental concepts to keep in mind.</p>
+<p><strong>Probability Mass Function (pmf):</strong> pmf is the point probability for discrete distributions (i.e. <span class="math inline">\(f(x) = P(X = x)\)</span>). For instance <span class="math inline">\(P(X = H) = 1/2\)</span>, <span class="math inline">\(P(X = T) = 1/2\)</span>.</p>
+<p><span class="math display">\[\sum_i^n f(x_i) = 1\]</span></p>
+<p><img src="img/pmf.png" /></p>
+<ul>
+<li><strong>Probability Density Function (pdf):</strong> pdf is the interval probability for continuous distributions (i.e. <span class="math inline">\(f(x) = P(a &lt; X &lt; b) = \int_a^b f(x) dx\)</span>). Since almost all point probabilities in continuous distributions are 0 (due to infinity), intervals.</li>
+</ul>
+<p><span class="math display">\[\int_{-\infty}^{\infty} f(x) dx = 1\]</span></p>
+<p><img src="img/pdf.png" /></p>
+<ul>
+<li><strong>Cumulative Distribution Function (cdf):</strong> cdf is the cumulative probability for all values smaller than <span class="math inline">\(x\)</span> (i.e. <span class="math inline">\(F(x) = P(X \le x)\)</span>). For the coin toss an example cdf would be two or less tails (<span class="math inline">\(P(X \le 2)\)</span>).</li>
+</ul>
+<p>Main relationship between cdf and pdf is (<span class="math inline">\(F(X \le a) = \int_{-\infty}^a f(x) dx\)</span>).</p>
+<ul>
+<li><strong>Expected Value (<span class="math inline">\(E[X]\)</span>)</strong>: Expected value of a probability distribution is calculated as follows.</li>
+</ul>
+<p><span class="math display">\[\mu = E[X] = \sum_i^n x_i f(x_i)\]</span> for discrete distributions.</p>
+<p><span class="math display">\[\mu = E[X] = \int_{-\infty}^{\infty} xf(x)dx\]</span> for continuous distributions.</p>
+<p>Example: Calculate the expected value of number of tails in two coin tosses.</p>
+<span class="math display">\[\begin{align}
+E[X] &amp;= \sum_i^n x_i f(x_i) = 0 * P(X=0) + 1 * P(X = 1) + 2 * P(X = 2) \\
+     &amp;= 0 * 1/4 + 1 * 1/2 + 2 * 1/4 \\
+     &amp;= 1
+\end{align}\]</span>
+<ul>
+<li><strong>Variance (<span class="math inline">\(V(X)\)</span>)</strong>: Variance is calculated as follows</li>
+</ul>
+<p><span class="math display">\[V(X) = E[(X - \mu)^2] = \sum_i^n (x_i - \mu)^2 f(x_i)\]</span> for discrete distributions.</p>
+<p><span class="math display">\[V(X) = E[(X - \mu)^2] =  \int_{-\infty}^{\infty} (x - \mu)^2 f(x) dx\]</span> for discrete distributions.</p>
+<p>Variance can also be calculated as <span class="math inline">\(V(X) = E[X^2] - (E[X])^2\)</span>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cond.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["book-of-prob.pdf", "book-of-prob.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

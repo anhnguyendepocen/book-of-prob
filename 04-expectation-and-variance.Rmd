@@ -1,0 +1,12 @@
+# Expectation and Variance
+
+_This chapter will be improved_
+
+## Mathematical Expectation
+
+$$E[X] = \sum x f(x)$$
+$$E[X] = \int x f(x) dx$$
+
+## Variance
+
+$$V(X) = E[X^2] - E[X]^2 $$

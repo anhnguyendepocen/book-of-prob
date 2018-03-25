@@ -1,0 +1,1940 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Book of Prob},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Book of Prob}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \date{}
+  \predate{}\postdate{}
+
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{introduction}{%
+\chapter*{Introduction}\label{introduction}}
+\addcontentsline{toc}{chapter}{Introduction}
+
+This book is the combined lecture notes of my course IE-231 Introduction
+to Probability at \href{https://www.bilgi.edu.tr}{Istanbul Bilgi
+University}, Turkey. You can find the original lecture notes and
+archives \href{https://berkorbay.github.io/bilgi-ie231/}{here}. As the
+name suggests, these notes consist of an abbreviated version of the
+course as the objective is to give the essence of very significant parts
+of Probability. The course mainly follows \citep{myers2012}.
+
+This book is periodically updated. Latest update is on 2018-03-25.
+
+\hypertarget{about-the-author}{%
+\section*{About the Author}\label{about-the-author}}
+\addcontentsline{toc}{section}{About the Author}
+
+The author of this book is \href{http://berkorbay.me}{Berk Orbay}. I am
+the co-founder of \href{http://algopoly.com}{Algopoly}, a data science
+firm specialized on large scale forecasting problems, and a part-time
+academic (yes, still writing papers). My PhD was about pricing financial
+options with multiple models. I taught or am currently teaching
+Introduction to Probability, Computational Finance, Business Analytics
+and Essentials of Data Analysis courses.
+
+\hypertarget{acknowledgements}{%
+\subsection*{Acknowledgements}\label{acknowledgements}}
+\addcontentsline{toc}{subsection}{Acknowledgements}
+
+Special thanks section.
+
+\hypertarget{intro}{%
+\chapter{Initial Concepts of Probability}\label{intro}}
+
+\begin{itemize}
+\item
+  \textbf{Probability} is the quantification of event uncertainty. For
+  instance, probability of getting (H)eads in a coin toss is \(1/2\).
+  Deterministic models will give the same results given the same inputs
+  (e.g.~2 times 2 is 4), but probabilistic models might yield different
+  outcomes.
+\item
+  An \textbf{experiment} is a process that generates data. For instance,
+  tossing a coin is an experiment. \textbf{Outcome} is the realization
+  of an experiment. Possible outcomes for a coin toss is Heads and
+  Tails.
+\item
+  \textbf{Sample space} (\(\mathbb{S}\)) is the collection of all the
+  possible outcomes of an experiment. Sample space of the coin toss is
+  \(\mathbb{S} = \{H,T\}\). Sample space of two coin tosses experiment
+  is \(\mathbb{S} = \{HH,HT,TH,TT\}\). Sample space can be discrete
+  (i.e.~coin tosses) as well as continuous (i.e.~All real numbers
+  between 1 and 3.
+  \(\mathbb{S} = \{x | 1 \le x \le 3, x \in \mathbb{R}\}\)) \emph{(Side
+  note: Sample space is not always well defined.)}
+\item
+  An \textbf{event} is a subset of sample space. While outcome
+  represents a realization, event is an information. Probability of an
+  event \(P(A)\), say getting two Heads in two coin tosses is
+  \(P(A) = 1/4\).
+\item
+  A \textbf{random variable} represents an event is dependent on a
+  probabilistic process. On the other hand, a \textbf{deterministic
+  variable} is either a constant or a decision variable. For instance,
+  value of the dollar tomorrow can be considered a random variable but
+  the amount I will invest is a decision variable (subject to no
+  probabilistic process) and spot (current) price of the dollar is a
+  constant.
+\end{itemize}
+
+\hypertarget{set-operations}{%
+\section{Set Operations}\label{set-operations}}
+
+\begin{itemize}
+\item
+  \textbf{Complement} of an event (\(A^\prime\)) with respect to the
+  sample space represents all elements of the sample space that are not
+  included by the event (A). For instance, complement of event
+  \(A=\{HH\}\) is \(A^\prime=\{HT,TH,TT\}\)
+\item
+  \textbf{Union} of two events \(A\) and \(B\) (\(A \cup B\)) is a set
+  of events which contains all elements of the respective events. For
+  example, say \(A\) is the set that contains events which double Heads
+  occur (\(A = \{HH,HT,TH\}\)) and \(B\) is the set which Tails occur at
+  least once (\(B = \{TT,HT,TH\}\)). The union is
+  \(A \cup B = \{HH,TH,HT,TT\}\).
+\item
+  \textbf{Intersection} of two events \(A\) and \(B\) (\(A \cap B\))
+  contains the common elements of the events. For example, say \(A\) is
+  the set that contains events which Heads occur at least once
+  (\(A = \{HH,HT,TH\}\)) and \(B\) is the set which Tails occur at least
+  once (\(B = \{TT,HT,TH\}\)). The intersection is
+  \(A \cap B = \{TH,HT\}\).
+\item
+  \textbf{Mutually exclusive} or disjoint events mean that two events
+  have empty intersection (\(A \cap B = \emptyset\)) and their union
+  (\(A \cup B\)) contains the same amount of elements as the sum of
+  their respective number of elements. Also \(P(A \cap B) = 0\) and
+  \(P(A \cup B) = P(A) + P(B)\). For example getting double Heads
+  (\(HH\)) and double Tails (\(TT\)) are mutually exclusive events.
+\end{itemize}
+
+\hypertarget{axioms-of-probability}{%
+\section{Axioms of Probability}\label{axioms-of-probability}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Any event \(A\) belonging to the sample space \(A \in \mathbb{S}\)
+  should have nonnegative probability (\(P(A) \ge 0\)).
+\item
+  Probability of the sample space is one (\(P(\mathbb{S}) = 1\)).
+\item
+  Any disjoint events
+  (\(A_i \cap A_j = \emptyset \ \forall_{i,j \in 1 \dots n}\)) satisfies
+  \(P(A_1 \cup A_2 \cup \dots \cup A_n) = P(A_1) + P(A_2) + \dots + P(A_n)\).
+\end{enumerate}
+
+\hypertarget{other-set-and-probability-rules}{%
+\section{Other Set and Probability
+Rules}\label{other-set-and-probability-rules}}
+
+\begin{itemize}
+\item
+  \((A^\prime)^\prime = A\)
+\item
+  \(S^\prime = \emptyset\)
+\item
+  \(\emptyset^\prime = S\)
+\item
+  \((A \cap B)^\prime = A^\prime \cup B^\prime\)
+\item
+  \((A \cup B)^\prime = A^\prime \cap B^\prime\)
+\item
+  \((A \cup B) \cap C = (A \cap C) \cup (B \cap C)\)
+\item
+  \((A \cap B) \cup C = (A \cup C) \cap (B \cup C)\)
+\item
+  \((A \cup B) \cup C = A \cup (C \cup B)\)
+\item
+  \((A \cap B) \cap C = A \cap (C \cap B)\)
+\item
+  \(A \cup A^\prime = \mathbb{S}\) and \(A \cap A^\prime = \emptyset\)
+  so \(P(A) = 1 - P(A^\prime)\). This is especially useful for many
+  problems. For example the probability of getting at least one Heads in
+  a three coin tosses in a row is \(1 - P(\{TTT\}) = 7/8\), the
+  complement of no Heads in a three coin tosses in a row. Otherwise, you
+  should calculate the following expression.
+
+  \[P(\{HTT\}) + P(\{THT\}) + P(\{TTH\}) + P(\{HHT\}) + P(\{HTH\}) + P(\{THH\}) + P(\{HHH\}) = 7/8 \]
+\item
+  If \(A \subseteq B\)~then \(P(A) \le P(B)\).
+\item
+  \(P(A \cup B) = P(A) + P(B) - P(A \cap B)\).
+\item
+  \(P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(B \cap C) - P(A \cap C) + P(A \cap B \cap C)\)
+\end{itemize}
+
+\hypertarget{counting}{%
+\section{Counting}\label{counting}}
+
+Counting rules will help us enumerate the sample space. It will include
+multiplication rule, permutation and combination.
+
+\hypertarget{multiplication-rule}{%
+\subsection{Multiplication Rule}\label{multiplication-rule}}
+
+If I have a series of independent events, say \(1\) to \(k\), and number
+of possible outcomes are denoted with \(n_1\) to \(n_k\); total number
+of outcomes in the sample space would be \(n_1n_2\dots n_k\).
+
+Take a series of coin tosses in a row. If I toss a coin its sample space
+consists of 2 elements such as \(\{H,T\}\). If I toss 2 coins the sample
+space would be 2*2 \(\{HH,HT,TH,TT\}\). If I toss 3 coins, the sample
+space would be 2*2*2 \(\{HHH,HTH,THH,TTH,HHT,HTT,THT,TTT\}\).
+
+A poker card consists of a type and a rank. There are four types of
+playing cards (clubs, diamonds, hearts and spades) and 13 ranks (A - 2
+to 10 - J - Q - K). Number of cards in a deck is 4*13 = 52.
+
+\hypertarget{permutation-rule}{%
+\subsection{Permutation Rule}\label{permutation-rule}}
+
+Permutation is the arrangement of all or a subset of items.
+
+\begin{itemize}
+\item
+  Given a set of items, say \(A = {a,b,c}\) in how many different ways I
+  can order the elements? Answer is n!. In our case it is,
+  \(3! = 3.2.1 = 6\).
+
+  \[A = \{a,b,c\},\{b,a,c\},\{b,c,a\},\{c,a,b\},\{c,b,a\},\{a,c,b\}\]
+\item
+  Suppose there are 10 (n) participants in a competition and 3 (r)
+  medals (gold, silver and bronze). How many possible outcomes are
+  there? Answer is
+  \(n(n-1)(n-2)\dots (n-r+1) = \dfrac{n!}{(n-r)!} = \dfrac{10!}{(10-3)!} = 720\).
+\item
+  If there are more than one same type items in a sample, then the
+  permutation becomes \(\dfrac{n!}{n_1!n_2!\dots n_k!}\) where
+  \(\sum n_i = n\).
+
+  For example enumerate the different outcomes of four coin tosses which
+  result in 2 heads and 2 tails. Answer is \(\dfrac{4!}{2!2!} = 6\)
+
+  \[A = \{HHTT,HTTH,HTHT,THTH,THHT,TTHH\}\]
+\end{itemize}
+
+\hypertarget{combination-rule}{%
+\subsection{Combination Rule}\label{combination-rule}}
+
+Suppose we want to select \(r\) items from \(n\) items and the order
+does not matter. So the number of different outcomes can be found using
+\(\binom{n}{r} = \dfrac{n!}{(n-r)!r!}\).
+
+Out of 10 students how many different groups of 2 students can we
+generate? Answer \(\dfrac{10!}{8!2!} = 45\)
+
+\hypertarget{chapter-problems}{%
+\section{Chapter Problems}\label{chapter-problems}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Suppose I toss a coin, roll a die and draw a card from the deck. How
+  many different number of outcomes are there for this experiment?
+
+  Solution: Multiplication rule. \(n_1n_2n_3 = 2.6.52 = 624\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n1 <-}\StringTok{ }\DecValTok{2} \CommentTok{#A coin toss has two potential outcomes.}
+\NormalTok{n2 <-}\StringTok{ }\DecValTok{6} \CommentTok{#A die roll has six potential outcomes.}
+\NormalTok{n3 <-}\StringTok{ }\DecValTok{52} \CommentTok{#A card draw has 52 potential outcomes.}
+\end{Highlighting}
+\end{Shaded}
+\item
+  In how many ways can I order the Teletubbies? (Tinky-Winky, Dipsy, Laa
+  Laa and Po) For instance, (TW - Dipsy - Po - Laa Laa) is an ordering
+  and (Dipsy - Po - TW - Laa Laa) is another.
+
+  Solution: Permutation rule. \(n! = 4! = 24\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n_tubbies <-}\StringTok{ }\DecValTok{4} \CommentTok{#Number of teletubbies}
+\KeywordTok{factorial}\NormalTok{(n_tubbies) }\CommentTok{#By permtuation it is 4!}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 24
+\end{verbatim}
+\item
+  I want to reorder the letters of the phrase ``GOODGRADES''. In how
+  many ways can I do it?.
+
+  Solution: Remember the permutation rule with identical items. There
+  are two ``G''s, two ``D''s and two ``O''s. Remember the formula
+  \(\dfrac{n!}{n_1!n_2!\dots n_k!}\). So the result should be
+  \(\dfrac{10!}{2!2!2!1!1!1!1!} = 453600\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{the_phrase <-}\StringTok{ "GOODGRADES"}
+\NormalTok{freq_table <-}\StringTok{ }\KeywordTok{table}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(the_phrase, }\DataTypeTok{split =} \StringTok{""}\NormalTok{)[[}\DecValTok{1}\NormalTok{]])  }\CommentTok{#Let's create a frequency table first}
+\KeywordTok{print}\NormalTok{(freq_table)  }\CommentTok{#Let's show it}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## A D E G O R S 
+## 1 2 1 2 2 1 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{the_dividend <-}\StringTok{ }\KeywordTok{factorial}\NormalTok{(}\KeywordTok{nchar}\NormalTok{(the_phrase))  }\CommentTok{#Dividend part is 10 characters so 10!}
+\NormalTok{the_divisor <-}\StringTok{ }\KeywordTok{prod}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(freq_table))  }\CommentTok{#Get multiplication of factorials for the divisor}
+\NormalTok{the_dividend}\OperatorTok{/}\NormalTok{the_divisor}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 453600
+\end{verbatim}
+\item
+  I want to make two letter words from ``GRADES'' such as ``GA'', ``ED''
+  or ``DE'' (it doesn't have to make sense). Find the number of
+  permutations.
+
+  Solution: Permutation of \(r\) items from \(n\) items is
+  \(\dfrac{n!}{(n-r)!}\). So the result is \(\dfrac{6!}{4!} = 30\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{the_phrase<-}\StringTok{"GRADES"}
+\NormalTok{letter_length <-}\StringTok{ }\DecValTok{2} \CommentTok{#We want two letter words}
+\CommentTok{#Since all letters are different no need for special permutation.}
+\KeywordTok{factorial}\NormalTok{(}\KeywordTok{nchar}\NormalTok{(the_phrase))}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\KeywordTok{nchar}\NormalTok{(the_phrase)}\OperatorTok{-}\NormalTok{letter_length)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30
+\end{verbatim}
+\item
+  Suppose I am drawing a hand of 5 cards from a playing deck of 52
+  cards. How many different hands there can be? (Each card is different.
+  See the bottom of this document for details.)
+
+  Solution: Since in a hand you do not care for the order, it is the
+  combination \(\binom{52}{5} = \dfrac{52!}{(52-5)!5!} = 2598960\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Combination (a.k.a binomial coefficient) function is choose}
+\KeywordTok{choose}\NormalTok{(}\DecValTok{52}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2598960
+\end{verbatim}
+\end{enumerate}
+
+\hypertarget{extra-problems}{%
+\section{Extra Problems}\label{extra-problems}}
+
+\begin{itemize}
+\item
+  Question 1 Suppose we draw three cards from a deck and roll two dice.
+  Answer the following questions.
+
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi})}
+  \item
+    What is the experiment?
+
+    The experiment is ``drawing three cards from a deck and rolling two
+    dice''.
+  \item
+    What is ``getting two-sixes and three-kings or five-one (in any
+    order) one queen one king one ace''? Pick one (Event / Outcome /
+    Sample Space)
+
+    Event.
+  \item
+    Give an example of two mutually exclusive events. (6 pts)
+
+    Event A: Queen of Hearts / Queen of Spades / Queen of Diamonds / 6 /
+    5 Event B: Ace of Clubs / King of Clubs / Queen of Clubs / 4 / 4
+  \item
+    What is the probability of getting four-three (in any order) in dice
+    roll and three queens in card draw?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#First roll can either be 3 or 4 and second roll should be the other}
+\CommentTok{# 2/6 * 1/6}
+\CommentTok{#Getting the first Queen has probability of 4/52}
+\CommentTok{#Getting the second Queen has probability of 3/51}
+\CommentTok{#Getting the third Queen has probability of 2/50}
+\DecValTok{2}\OperatorTok{/}\DecValTok{6}\OperatorTok{*}\DecValTok{1}\OperatorTok{/}\DecValTok{6}\OperatorTok{*}\DecValTok{4}\OperatorTok{/}\DecValTok{52}\OperatorTok{*}\DecValTok{3}\OperatorTok{/}\DecValTok{51}\OperatorTok{*}\DecValTok{2}\OperatorTok{/}\DecValTok{50}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.00553e-05
+\end{verbatim}
+  \item
+    How many different outcomes can there be? This time assume ordering
+    is important (e.g.~6-1 and 1-6 are different outcomes).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Six outcomes per die}
+\CommentTok{#52 outcomes for the first card draw}
+\CommentTok{#51 outcomes for the second card draw}
+\CommentTok{#50 outcomes for the second card draw}
+\CommentTok{#Multiplication rule}
+\CommentTok{#You can also use permutation rule for cards}
+\DecValTok{6}\OperatorTok{*}\DecValTok{6}\OperatorTok{*}\DecValTok{52}\OperatorTok{*}\DecValTok{51}\OperatorTok{*}\DecValTok{50}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4773600
+\end{verbatim}
+  \end{enumerate}
+\item
+  Question 2 In how many ways can you arrange the letters of
+  ``HOUSEPARTY''?
+
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi})}
+  \item
+    Any order.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{the_phrase<-}\StringTok{"HOUSEPARTY"}
+\CommentTok{#No repetitive letters}
+\CommentTok{#Permutation rule}
+\KeywordTok{factorial}\NormalTok{(}\KeywordTok{nchar}\NormalTok{(the_phrase))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3628800
+\end{verbatim}
+  \item
+    Vowels together?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#4 vowels, 6 consonants}
+\CommentTok{#Assume all vowels are a single "letter". So 8 characters.}
+\CommentTok{#But vowels permutate within the single "letter".}
+\CommentTok{#Multiplication rule}
+\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 120960
+\end{verbatim}
+  \item
+    Vowels in alphabetical order?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#We start with all the permutations 10!}
+\CommentTok{#For any permutation there can be only one ordering of vowels.}
+\CommentTok{#For instance HOUSEPARTY is not valid but HAESOPURTY is valid}
+\CommentTok{#So remove invalid permutations with division}
+\KeywordTok{factorial}\NormalTok{(}\DecValTok{10}\NormalTok{)}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 151200
+\end{verbatim}
+  \item
+    There should be no consecutive vowels?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#There are 6 consonants, 4 vowels.}
+\CommentTok{# Assume Xs are consonants and .s are potent vowel places.}
+\CommentTok{# .X.X.X.X.X.X.}
+\CommentTok{#Consonants can permutate in any order so 6! there}
+\CommentTok{#7 places for vowels but only 4 vowels.}
+\CommentTok{# So it is a permutation of 4 out of 8 places.}
+\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{7}\NormalTok{)}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\DecValTok{7-4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 604800
+\end{verbatim}
+  \end{enumerate}
+\item
+  Question 3 In how many ways can you arrange the letters of
+  ``CAMARADERIE''?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# 11 characters.}
+\CommentTok{# 6 vowels, 5 consonants}
+\CommentTok{# 3 As, 2 Es, 2 Rs}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi})}
+  \item
+    Any order.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#By the formula of permutation with repetitive letters}
+\CommentTok{#Assign the value to all_perms object}
+\NormalTok{all_perms<-}\KeywordTok{factorial}\NormalTok{(}\DecValTok{11}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{))}
+\NormalTok{all_perms}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1663200
+\end{verbatim}
+  \item
+    Vowels together?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Assume all vowels are single "character" again. So 6 characters}
+\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{5}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{)))}\OperatorTok{*}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 21600
+\end{verbatim}
+  \item
+    Vowels in alphabetical order?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Same as the last question. But be careful about identical vowels.}
+\NormalTok{all_perms}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 27720
+\end{verbatim}
+  \item
+    There should be no consecutive vowels?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Same as the last question. But be careful about identical vowels.}
+\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{5}\NormalTok{)}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{))}\OperatorTok{*}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\NormalTok{)}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\DecValTok{6-6}\NormalTok{))}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3600
+\end{verbatim}
+  \end{enumerate}
+\item
+  Question 4
+
+  Suppose you are putting the top 12 basketball teams in 4 groups evenly
+  (each group should consist of 3 teams). In how many different ways can
+  you arrange the teams?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#It is either a chain of combinations or just grouping combination}
+\KeywordTok{choose}\NormalTok{(}\DecValTok{12}\NormalTok{,}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(}\DecValTok{9}\NormalTok{,}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 369600
+\end{verbatim}
+\item
+  Question 5 (20 pts - all equal)
+
+  There are 18 people; 10 from Izmir, 8 from Mugla.
+
+  \begin{enumerate}
+  \def\labelenumi{\alph{enumi})}
+  \item
+    Suppose you want to form a group of 5 people with at least 1 person
+    from Izmir and Mugla. In how many ways can you form such a group?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Calculate as if no rules. It is the combination of 18 to 5.}
+\CommentTok{#Then remove the combinations of all Izmir or all Mugla people}
+\KeywordTok{choose}\NormalTok{(}\DecValTok{18}\NormalTok{,}\DecValTok{5}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{choose}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{5}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{choose}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8260
+\end{verbatim}
+  \item
+    In how many ways can you form a group of 3 people from Izmir and 4
+    people from Mugla?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Simply separate combinations with multiplication rule.}
+\KeywordTok{choose}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8400
+\end{verbatim}
+  \end{enumerate}
+\end{itemize}
+
+\hypertarget{coins-dice-and-cards}{%
+\section{Coins, Dice and Cards}\label{coins-dice-and-cards}}
+
+When questions mention about coins, dice and cards they are commonly
+referred items. Nevertheless, you can refer to .
+
+\begin{itemize}
+\tightlist
+\item
+  Coin tosses: Two possible outcomes. Heads or Tails.
+\item
+  Dice rolling: Six possible outcomes. 1-2-3-4-5-6.
+\item
+  Card drawing: 52 possible outcomes. There are 4 types (clubs,
+  diamonds, spades and hearts) and 13 ranks for each type. (A)ce - 2 - 3
+  - 4 - 5 - 6 - 7 - 8 - 9 - 10 - (J)ack - (Q)ueen - (K)ing.
+\end{itemize}
+
+\hypertarget{cond}{%
+\chapter{Conditional Probability and Bayes' Rule}\label{cond}}
+
+Let's recall some probability concepts.
+
+\begin{itemize}
+\tightlist
+\item
+  Probability is the quantification of uncertainty. For instance in a
+  coin toss, \(P(H) = 1/2\).
+\item
+  Set of the union of all possible events is the sample space. For
+  instance single coin toss sample space is \(S = \{H,T\}\).
+\item
+  Probability of an event is actually the relative ``size'' of the event
+  to the sample space.
+\item
+  In an experiment, that has equally likely outcomes, number of
+  potential outcomes in an event relative to the total number of
+  outcomes in the sample space corresponds to the probability of that
+  event.
+\item
+  Some events are mutually exclusive and some events are dependent.
+\item
+  Sample space is not always easy to measure and is not always finite.
+  Counting is one way of estimating a sample space (especially discrete
+  ones).
+\item
+  Estimation of probability of events is not always easy. One way to
+  estimate is to repeat the experiment for a number of times. As we
+  increase the number of repetitions, the probability will become more
+  stable. For instance suppose we don't know the probability of getting
+  (H)eads in a coin toss and we repeat coin tossing for a number of
+  times.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{231}\NormalTok{)}
+\NormalTok{coin_toss_probability<-}\ControlFlowTok{function}\NormalTok{(repetitions)\{}
+\NormalTok{    experiment<-}\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"H"}\NormalTok{,}\StringTok{"T"}\NormalTok{),}\DataTypeTok{size=}\NormalTok{repetitions,}\DataTypeTok{replace=}\OtherTok{TRUE}\NormalTok{)}
+    \KeywordTok{return}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{(experiment}\OperatorTok{==}\StringTok{"H"}\NormalTok{)}\OperatorTok{/}\NormalTok{repetitions,}\DecValTok{4}\NormalTok{))}
+\NormalTok{\}}
+\CommentTok{#Do the experiment with increasing repetitions}
+\KeywordTok{coin_toss_probability}\NormalTok{(}\DataTypeTok{repetitions=}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{coin_toss_probability}\NormalTok{(}\DataTypeTok{repetitions=}\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.57
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{coin_toss_probability}\NormalTok{(}\DataTypeTok{repetitions=}\DecValTok{1000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.505
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{coin_toss_probability}\NormalTok{(}\DataTypeTok{repetitions=}\DecValTok{50000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4989
+\end{verbatim}
+
+\hypertarget{some-examples}{%
+\section{Some Examples}\label{some-examples}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  In a sports bar, there are 10 football fans, 15 basketball fans, 12
+  tennis fans and 6 curling fans. Suppose there is a single TV and there
+  are matches of football, basketball, tennis and curling at the same
+  time. If the TV remote is handed to one of them randomly, what is the
+  probability that curling will be the show on TV?
+
+  Answer: There are a total of 43 fans in the sports bar and 6 curling
+  fans. P(Curling) = 6/43.
+\item
+  Suppose there is a group of 20 people; 10 from Ankara, 10 from
+  Istanbul. Suppose we randomly choose 5 people from that group.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    What is the probability that all of this subgroup is from Ankara?
+
+    Answer: (\# of combinations including people only from Ankara) / (\#
+    of total combinations)
+
+    \[\dfrac{\binom{10}{5}}{\binom{20}{5}} = 0.01625387\]
+
+    Alternative answer is:
+    \((10/20)*(9/19)\dots * (6/16) = 0.01625387\).
+  \item
+    What is the probability that at least two from Ankara and at least
+    two from Istanbul?
+
+    Answer: P(Ankara = 2, Istanbul = 3 OR Ankara = 3, Istanbul = 2) =
+    (P(Ankara = 2, Istanbul = 3) + P(Ankara = 3, Istanbul = 2)) = ((\#
+    of comb. Ank 2, Ist 3) + (\# of comb. Ank 3, Ist 2))/(\# of total
+    combinations)
+
+    \[\dfrac{\binom{10}{2}*\binom{10}{3} + \binom{10}{3}*\binom{10}{2}}{\binom{20}{5}} = 0.6965944\]
+  \end{enumerate}
+\item
+  (``Blackjack'') Suppose you are drawing two cards from the deck.
+  Assume all number rank cards (2-10) are points, Ace (A) is 11 points
+  and (J)ack, (Q)ueen and (K)ing are 10 points. What is the probability
+  that total points of these two cards exceed 20.
+
+  Answer: Max score for two cards is 22 (two Aces). To exceed 20, one
+  needs Ace-9 pairs or any pair of 10-Ace-J-Q-K cards. We know that
+  there are 4 of each rank. So
+  \(P(Score \ge 20) = P(A and 9) + P(any\ two\ of\ 10-Ace-J-Q-K)\). We
+  know that total number of hands is \(\binom{52}{2} = 1326\). So \# of
+  combinations with either A-9 or 9-A is \(4*4 = 16\). \# of
+  combinations of getting two cards from 10-Ace-J-Q-K ranks is
+  \(\binom{20}{2} = 190\). So
+  \(P(Score \ge 20) = \dfrac{190 + 16}{1326} = 0.1553544\)
+
+  Alternative answer:
+  \(P(A-9 or 9-A) = 4/52*4/51 + 4/52*4/51 = 0.01206637\) and
+  \(P(any two of 10-Ace-J-Q-K) = 20/52 * 19/51 = 0.1432881\). Total
+  probability is
+  \(P(Score \ge 20) = 0.01206637 + 0.1432881 = 0.1553545\)
+\item
+  Suppose you are the gatekeeper of a playing ground for 10 year old
+  boys and try to assess their age by their height. Height of 90\% of
+  boys aged 10 falls between 130 and 150 cms. It is equally likely that
+  a boy aged 10 has the height lower than 130 cm or higher than 150 cm.
+  What is the probability of rejecting a child because he's too long?
+
+  Answer: \(P(130 \le X \le 150) = 0.9\) and
+  \(P(X \le 130) = P(X \ge 150)\). So
+  \(P(X \ge 150) = 1 - P(130 \le X \le 150) - P(X \le 130)\).
+  \(2.P(X \ge 150) = 0.1\) and \(P(X \ge 150) = 0.05\).
+\end{enumerate}
+
+\hypertarget{conditional-probability}{%
+\section{Conditional Probability}\label{conditional-probability}}
+
+Definition: \(P(A|B)\) means that probability of event A given that
+event B already occured or probability of A \textbf{conditional on} B.
+
+\includegraphics{img/cond1.png}
+
+Example: What is the probability of getting two heads (HH) if we know
+that the first coin is H? (1/2)
+
+Example: Suppose we are rolling two dice.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  What is the probability of getting the sum equal to 8?
+
+  \(P(Sum = 8) = P(D_1 = 2, D_2 = 6) + P({3,5}) + P({4,4})*2 + P({5,3}) + P({6,2}) = 6/36 = 1/6\)
+\item
+  What is the probability of getting the sum more than or equal to 8
+  given the first roll is 3?
+
+  \(P(Sum \ge 8 | D_1 = 3) = P({3,5}) + P({3,6}) = 2/6 = 1/3\)
+\end{enumerate}
+
+Conditional probability of event A given B, can be defined as
+\(P(A|B)=\dfrac{P(A \cap B)}{P(B)}\) if \(P(B) > 0\).
+
+Example: We asked 1000 people, 400 men and 600 women: `Where do you want
+to visit this summer? Amsterdam or London?'. The answers are as follows.
+
+\begin{verbatim}
+##       Amsterdam London
+## Men         150    250
+## Women       450    150
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  What is the probability of a randomly chosen person is a woman?
+
+  Answer: \(P(W) = (n(W|L) + n(W|P))/n(S) = (150 + 450)/1000 = 0.6\)
+\item
+  What is the probability of a randomly chosen person chooses to to
+  visit Amsterdam?
+
+  Answer: \(P(A) = (n(A|W) + n(A|M))/n(S) = (450 + 150)/1000 = 0.6\)
+\item
+  What is the probability of a London visitor is a man?
+
+  Answer:
+  \(P(M|L) = \dfrac{P(M\cap L)}{P(L)} = \dfrac{n(M\cap L)/n(S)}{n(L)/n(S)} = 250/400 = 0.625\)
+\end{enumerate}
+
+\hypertarget{independence}{%
+\section{Independence}\label{independence}}
+
+Two events can be independent. It means \(P(A|B) = P(A)\) or
+\(P(B|A) = P(B)\).
+
+If the events (\(A_i\)) are independent then
+\(P(A_1 \cap A_2 \dots A_k) = P(A_1)P(A_2)\dots P(A_k)\).
+
+Example: Suppose you rolled a die 5 times and they all ended up 4. What
+is the probability that, at the 6th time, the die will get 4 again?
+
+Solution: Die rolls are independent events. So outcome of a roll does
+not affect the outcome of the other rolls. It is 1/6.
+
+\hypertarget{product-rule}{%
+\section{Product rule}\label{product-rule}}
+
+If both \(P(A)>0\) and \(P(B)>0\), then \(P(A\cap B) = P(A)P(B|A)\). We
+can also say \(P(A\cap B) = P(B\cap A) = P(B)P(A|B)\)
+
+Example: You draw two cards from a deck. What is the probability that
+you get two (A)ces?
+
+Solution: \(P(A \cap B) = 4/52 * 3/52 = 0.00443787\)
+
+Example: You are at a tea shop. There are 10 (W)hite teas, 12 (B)lack
+teas and 8 (G)reen teas on the menu. According to the waiter all teas
+are equally tasty. You ask the waiter bring a tea but it should not be
+green tea. What is the probability that you will get a white tea?
+
+Solution:
+\(P(W|G^{\prime}) = P(W \cap G^{\prime})/P(G^{\prime}) = P(W) / P(G^{\prime}) = \dfrac{10/30}{22/30} = 10/22\)
+
+\hypertarget{bayes-rule}{%
+\section{Bayes' Rule}\label{bayes-rule}}
+
+\textbf{Theorem of total probability:} Given the events \(B_i\) are
+collective parts of the sample space and \(P(B_i) > 0\), then for any
+event \(A\), \(P(A) > 0\)
+
+\[P(A) = \sum_i^k P(B_i \cap A) = \sum_i^k P(B_i)P(A|B_i)\]
+
+\textbf{Bayes'rule:} Given the events \(B_i\) are collective parts of
+the sample space and \(P(B_i) > 0\), then for any event \(A\),
+\(P(A) > 0\)
+
+\[P(B_r|A) = \dfrac{P(B_r|A)}{\sum_i^k P(B_i \cap A)} = \dfrac{P(B_r)P(A|B_r)}{\sum_i^k P(B_i)P(A|B_i)}\]
+
+Example 2.41 from the book: In an assembly plant, there are three
+machines \(B_1\), \(B_2\) and \(B_3\). These machines make the 30\%,
+45\% and 25\% of the products. 2\%, 3\% and 2\% of their output is known
+to be defective. So, what is the probability of getting a defective
+product at a random time?
+
+Solution:
+
+Say, event of getting a defective item is A and we want to know
+\(P(A)\). \(P(B_i)\) is the probability of a product being manufactured
+by machine \(i\). \(P(B_1) = 0.3\), \(P(B_2) = 0.45\),
+\(P(B_3) = 0.25\). The defect probabilities given the machine are
+\(P(A|B_1) = 0.02\), \(P(A|B_1) = 0.03\), \(P(A|B_1) = 0.02\).
+
+So,
+\(P(A) = \sum_{i=1}^3 P(B_i)P(A|B_i) = 0.3*0.02 + 0.45*0.03 + 0.25*0.02 = 0.0245\).
+
+Example 2.42: If the product is defective, what is the probability that
+it came from machine 3?
+
+\[P(B_3|A) = \dfrac{P(B_3 \cap A)}{\sum_{i=1}^3 P(B_i)P(A|B_i)} = \dfrac{P(B_3)P(A|B_3)}{\sum_{i=1}^3 P(B_i)P(A|B_i)} = \dfrac{0.25 * 0.02}{0.0245} = 10/49\]
+
+\hypertarget{random-variables-and-distributions}{%
+\chapter{Random Variables and
+Distributions}\label{random-variables-and-distributions}}
+
+\hypertarget{scales-on-measurement}{%
+\section{Scales on Measurement}\label{scales-on-measurement}}
+
+\begin{itemize}
+\tightlist
+\item
+  Nominal scale: These are categorical values that has no relationship
+  of order or rank among them. (e.g.~colors, species)
+\item
+  Ordinal scale: These are categorical values that has relationship of
+  order or rank among them (e.g.~military ranks, competiton results).
+  Though the relative order has no defined magnitude (e.g.~Champion can
+  get 40 points, runner up 39 and third place 30).
+\item
+  Interval scale: There is a numerical order but the difference can only
+  be defined in intervals, \emph{since there is no absolute minimum}. We
+  cannot compare in relative values. For instance, we cannot say 10
+  degree celsius is twice as hot as 5 degree celsius; what about -5 vs
+  +5?
+\item
+  Ratio scale: Scale with an absolute minimum. (e.g.~If I have 50TL and
+  my friend has 100TL, I can say that she has twice the money that I
+  have.) Height, weight, age are similar examples.
+\end{itemize}
+
+\href{https://en.wikipedia.org/wiki/Level_of_measurement}{See more on
+https://en.wikipedia.org/wiki/Level\_of\_measurement}. (p.s. Wikipedia
+wasn't banned when I prepared these notes)
+
+\hypertarget{infinity}{%
+\section{Infinity}\label{infinity}}
+
+The concept of infinity is very broad. Currently, you just need to keep
+the distinction of countable and uncountable infinities in mind.
+
+\begin{itemize}
+\tightlist
+\item
+  Countably infinite: 1, 2, 3, 4, \ldots{} (e.g.~natural numbers,
+  integers, \textbf{rational numbers})
+\item
+  Uncountably infinite: 1, 1.01, 1.001, 1.0001, 1.00001, \ldots{}
+  (e.g.~real numbers)
+\end{itemize}
+
+How many real numbers are there between 0 and 1?
+
+\hypertarget{descriptive-statistics}{%
+\section{Descriptive Statistics}\label{descriptive-statistics}}
+
+Here are brief descriptions of mean (expectation), median, mode,
+variance, standard deviation, quantile.
+
+\begin{itemize}
+\item
+  Mean: \(\bar{X} = \sum_i^N X_i\)
+\item
+  Median: Let's say \(X_k\) are ordered from smallest to largest and
+  there are \(n\) values in the sample. Median(\(X\))\(=X_{(n+1)/2}\) if
+  n is odd and (usually)
+  Median(\(X\))\(=\dfrac{X_{(n/2)} + X_{(n/2+1)}}{2}\).
+\item
+  Quantile: On an ordered list of values for quantile (\(\alpha\))
+  provides the \((\alpha*n)^{th}\) smallest value of the list. For
+  instance, if \(\alpha = 70\% = 0.7\) quantile value is the 7th
+  smallest value in a list of 10 values. \(\alpha = 1\) means the
+  maximum. Quantile is an important parameter in especially statistics.
+\item
+  Mode: \(X_k\) with the highest frequency in the sample. In a sample of
+  (\(1,2,2,3,4,5\)), \(2\) is the mode.
+\item
+  Variance: \(V(X) = \dfrac{\sum_i^N (X_i - \bar{X})^2}{n-1}\)
+\item
+  Standard Deviation:
+  \(\sigma(X) = \sqrt{\dfrac{\sum_i^N (X_i - \bar{X})^2}{n-1}}\)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{231}\NormalTok{)}
+\CommentTok{#Let's pick 10 values from the numbers between 1 and 50.}
+\NormalTok{numbers <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DataTypeTok{replace=}\OtherTok{TRUE}\NormalTok{)}
+\CommentTok{#The sorted version of the numbers}
+\KeywordTok{sort}\NormalTok{(numbers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  9 15 16 16 18 26 31 32 35
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#The mean values of the numbers}
+\KeywordTok{sum}\NormalTok{(numbers)}\OperatorTok{/}\DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 19.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#or in R}
+\KeywordTok{mean}\NormalTok{(numbers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 19.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Median of the numbers}
+\KeywordTok{median}\NormalTok{(numbers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 17
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Quantile 7/9 of the numbers}
+\KeywordTok{quantile}\NormalTok{(numbers,}\DecValTok{7}\OperatorTok{/}\DecValTok{9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 77.77778% 
+##        31
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Quantile 0 of the numbers (also the min)}
+\KeywordTok{quantile}\NormalTok{(numbers,}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 0% 
+##  1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Quantile 1 of the numbers (also the max)}
+\KeywordTok{quantile}\NormalTok{(numbers,}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 100% 
+##   35
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#No simple solution for mode in R}
+\NormalTok{freq_table<-}\KeywordTok{table}\NormalTok{(numbers)}
+\NormalTok{freq_table}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## numbers
+##  1  9 15 16 18 26 31 32 35 
+##  1  1  1  2  1  1  1  1  1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(freq_table[}\KeywordTok{which.max}\NormalTok{(freq_table)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "16"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Sample variance of numbers}
+\KeywordTok{sum}\NormalTok{((numbers }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(numbers))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\DecValTok{10-1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 118.7667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#For large values you can take n ~ n-1}
+\CommentTok{#in R}
+\KeywordTok{var}\NormalTok{(numbers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 118.7667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Sample standard deviation of values}
+\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((numbers }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(numbers))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\DecValTok{10-1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10.89801
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#in R}
+\KeywordTok{sd}\NormalTok{(numbers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10.89801
+\end{verbatim}
+
+\hypertarget{random-variables}{%
+\section{Random Variables}\label{random-variables}}
+
+A random variable (usually defined with a capital letter or symbol i.e.
+\(X\)) is a quantity determined by the outcome of the experiment. Its
+realizations are usually symbolized with lowercase letter (\(x\)).
+
+Example: Suppose there are 10 balls in an urn, 5 black and 5 red. Two
+balls are randomly drawn from the urn without replacement. Define the
+random variable \(X\) as the number of black balls. Then, \(X = x\) can
+get the values of 0, 1 and 2. Let's enumerate \(P(X = x)\).
+
+\[P(X = 0) = P(RR) = 5/10 * 4/9 = 2/9\]
+\[P(X = 1) = P(BR) + P(RB) = 5/10 + 5/9 + 5/10 * 5/9 = 5/9\]
+\[P(X = 2) = P(BB) = 5/10 * 4/9 = 2/9\]
+
+\hypertarget{discrete-random-variables-and-distributions}{%
+\section{Discrete Random Variables and
+Distributions}\label{discrete-random-variables-and-distributions}}
+
+If a sample space has finite number of possibilities or countably
+infinite number of elements, it is called a discrete sample space.
+Discrete random variable probabilities are shown as point probabilities
+\(P(X = x)\). The probability distribution of discrete random variables
+is also called probability mass function (pmf).
+
+\[ P(X=x) = f(x)\] \[\sum_x f(x) = 1\] \[f(x) \ge 0\]
+
+Example: (Same as above) Enumerate the probability distribution.
+
+Solution: Random variable \(X\) can take values (\(x\)) 0, 1 and 2. So
+\(f(1) = 2/9\), \(f(2) = 5/9\) and \(f(3) = 2/9\).
+
+\hypertarget{cumulative-distribution-function-cdf}{%
+\subsection{Cumulative Distribution Function
+(CDF)}\label{cumulative-distribution-function-cdf}}
+
+Cumulative distribution function is a special defined function yielding
+the cumulative probability of random variables up to a value. It is
+usually symbolised as \(F(x)\)
+
+\[F(x) = P(X \le x) = \sum_{t \le x} f(t)\]
+\[F(x) = P(X \le x) = \sum_{\infty} f(t) = 1\]
+
+Example: (Same as above) Enumerate the cdf.
+
+\[F(0) = P(X \le 0) = P(X = 0) = 2/9\]
+\[F(1) = P(X \le 1) = P(X = 0) + P(X = 1) = 7/9\]
+\[F(2) = P(X \le 2) = P(X = 0) + P(X = 1) + P(X = 2) = 1\]
+
+\hypertarget{continuous-random-variables-and-distributions}{%
+\section{Continuous Random Variables and
+Distributions}\label{continuous-random-variables-and-distributions}}
+
+If a sample space has uncountably infinite number of possibilities, it
+is called a continuous sample space. Continuous random variables'
+probabilities are defined in intervals \(P(a < X < b)\). The probability
+distribution of continuous random variables is also called probability
+density function (pdf).
+
+\[f(x) \ge 0\] \[ P(a < X < b) = f(x) = \int_a^b f(x)dx\]
+\[\int_{- \infty}^\infty f(x) = 1\]
+
+Example (from the book): Suppose the probability function of a
+continuous distribution \(f(x) = x^2/3\) defined between \(-1 < x < 2\)
+and \(0\) everywhere else. Verify that it is a density function
+(i.e.~the integral in the defined interval is 1) and calculate
+\(P(0 < x < 1)\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  \(\int_{-1}^2 x^2/3 dx = x^3/9|_{-1}^2 = 8/9 - (-1/9) = 1\). Verified.
+\item
+  \(\int_{0}^1 x^2/3 dx = x^3/9|_{0}^1 = 1/9 - (0) = 1/9\). Verified.
+\end{enumerate}
+
+Cumulative distribution function (CDF) for continuous random variables
+is defined with the integral.
+
+\[F(x) = P(X < x) = \int_{- \infty}^a f(x)dx\]
+
+Example: (same as above) Calculate the cdf \(F(3/2)\)
+
+Solution:
+\(F(1.5) = \int_{- \infty}^{3/2} f(x) = x^3/9|_{-1}^{3/2} = 3/8 - (-1/9) = 35/72\)
+
+Example: Calculate \(P(X > 1)\).
+
+Solution:
+\(P(X > 1) = 1 - P(X < 1) = 1 - F(1) = 1 - \int_{- \infty}^{1} = 1 - ((1/9) - (-1/9)) = 7/9\).
+
+\hypertarget{joint-distribution}{%
+\section{Joint Distribution}\label{joint-distribution}}
+
+So far we had distributions with only one random variable. What if we
+had more than one random variable in a distribution? It is not that
+different from univariate distributions.
+
+\[f(x,y) \ge 0\] \[\sum_x\sum_y f(x,y) = 1\] \[P(X=x,Y=y) = f(x,y)\]
+
+Example (from the book): Two pens are selected at random from a box of 3
+blue, 2 red and 3 green pens. Define \(X\) as the number of blue pens
+and \(Y\) as the red pens selected. Find
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Joint probability function \(f(x,y)\)
+\item
+  \(P[(X,Y) \ in A]\) where \(A\) is the region \(\{(x,y)|x+y \le 1\}\).
+\end{enumerate}
+
+Solution:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  The possible cases for \((x,y)\) are
+  \((0,0),(0,1),(0,2),(1,0),(2,0),(1,1)\). For instance \((0,1)\) is one
+  green and one red pen selected. There are a total of 8 pens. Then
+  sample space size for two pens selected is \(\binom{8}{2} = 28\).
+  There are \(\binom{2}{1}\binom{3}{1} = 6\) ways of selecting 2 pens
+  from green and red pens. So the probability is
+  \(f(0,1) = P(X=0,Y=1) = 6/28 = 3/14\). It is possible to calculate
+  other possible outcomes in a similar way. A generalized formula would
+  be as follows.
+\end{enumerate}
+
+\[\dfrac{\binom{3}{x}\binom{2}{y}\binom{3}{2-x-y}}{\binom{8}{2}}\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Possible outcomes satisfying \(A = (x,y) \le 1\) are
+  \((0,0),(0,1),(1,0)\). So
+  \(P(X+Y \le 1) = P(0,0) + P(0,1) + P(1,0) = 9/14\).
+\end{enumerate}
+
+In the continuous case it is similar. It is now called joint probability
+density function.
+
+\[f(x,y) \ge 0\] \[\int_x\int_y f(x,y)dxdy = 1\]
+\[P(X=x,Y=y) \in A = \int\int_A f(x,y)dxdy\]
+
+Example: (from the book)
+
+A privately owned business operates both a drive in and a walk in
+facility. Define \(X\) and \(Y\) as the proportions of using the drive
+in and walk in facilities. Suppose the joint density function is
+\(f(x,y) = 2/5*(2x+3y)\) where \(0 \le x \le 1\) and \(0 \le y \le 1\)
+(0, otherwise).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Verify it is a distribution function.
+\item
+  Find \(P[(X,Y)] \in A\), where
+  \(A = \{(x,y)|0 < x < 1/2, 1/4 < y < 1/2\}\).
+\end{enumerate}
+
+Solution:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+  \(\int\int f(x,y)dxdy = \int 2/5*(x^2 + 3xy)dy|_0^1 = \int (2/5 + 6/5*y)dy = 2y/5 + 3/5*y^2 |^1_0 = 2/5 + 3/5 = 1\).
+\item
+  \(\int_{1/4}^{1/2}\int_0^{1/2} f(x,y)dxdy = \int 2/5*(x^2 + 3xy)dy|_0^{1/2} = \int_{1/4}^{1/2} (1/10 + 3/5*y) dy\),
+  \(y/10 + 3y^2/10|_{1/4}^{1/2} = 13/160\).
+\end{enumerate}
+
+\hypertarget{marginal-distribution}{%
+\section{Marginal Distribution}\label{marginal-distribution}}
+
+In a joint distribution, marginal distribution is the probability
+distributions of individual random variables. Define \(g(x)\) and
+\(h(y)\) as the marginal distributions of \(X\) and \(Y\).
+
+\[g(x) = \sum_y f(x,y), h(y) = \sum_y f(x,y)\]
+\[g(x) = \int_y f(x,y) dy, h(y) = \int_x f(x,y) dx\]
+
+Example: Go back to pen and walk in examples and calculate marginal
+probabilities.
+
+\hypertarget{conditional-distribution}{%
+\section{Conditional Distribution}\label{conditional-distribution}}
+
+Remember the conditional probability rule \(P(A|B) = P(A \cap B)/P(B)\)
+given \(P(B) > 0\). We can define conditional distribution as
+\(f(y|x) = f(x,y)/g(x)\), provided \(g(x) > 0\) whether they are
+discrete or continuous.
+
+Example: (pen example) Calculate \(P(X=0|Y=1)\)
+
+Solution: We know that \(h(1) = 3/7\). \(f(x=0,y=1) = 3/14\).
+\(f(x=0|y=1) = f(x=0,y=1)/h(1) = 1/2\)
+
+\hypertarget{statistical-independence}{%
+\section{Statistical Independence}\label{statistical-independence}}
+
+Two random variables distributions are statistically independent if and
+only if \(f(x,y) = g(x)h(y)\).
+
+Proof:
+
+\[f(x,y) = f(x|y)h(y)\] \[g(x) = \int f(x,y)dy = \int f(x|y)h(y) dy \]
+
+If \(f(x|y)\) does not depend on \(y\) we can write
+\(f(x|y) \int h(y) dy\). \(f(x|y)*1\). Therefore, \(g(x)=f(x|y)\) and
+\(f(x,y) = g(x)h(y)\).
+
+Any number of random variables (\(X_1 \dots X_n\)) are statistically
+independent if and only if \(f(x_1,\dots,x_n) = f(x_1)\dots f(x_n)\).
+
+\hypertarget{expectation-and-variance}{%
+\chapter{Expectation and Variance}\label{expectation-and-variance}}
+
+\emph{This chapter will be improved}
+
+\hypertarget{mathematical-expectation}{%
+\section{Mathematical Expectation}\label{mathematical-expectation}}
+
+\[E[X] = \sum x f(x)\] \[E[X] = \int x f(x) dx\]
+
+\hypertarget{variance}{%
+\section{Variance}\label{variance}}
+
+\[V(X) = E[X^2] - E[X]^2 \]
+
+\hypertarget{some-discrete-distributions}{%
+\chapter{Some Discrete
+Distributions}\label{some-discrete-distributions}}
+
+\hypertarget{bernoulli-distribution}{%
+\section{Bernoulli Distribution}\label{bernoulli-distribution}}
+
+It can also be called ``single coin toss distribution''. For a single
+event with probability of success \(p\) and failure \(q = 1 - p\), the
+distribution is called Bernoulli.
+
+\begin{itemize}
+\item
+  pmf: \(f(x = 0;p) = q\), \(f(x = 1) = p\)
+\item
+  \(E[X] = 0*(1-p) + 1*p = p\)
+\item
+  \(V[X] = pq\)
+\end{itemize}
+
+Example: Coin Toss
+
+\begin{itemize}
+\item
+  \(p = 0.5\), \(q = 1 - p = 0.5\)
+\item
+  pmf: \(f(x = 0) = 0.5\), \(f(x = 1) = 0.5\)
+\item
+  \(E[X] = 0*(1-0.5) + 1*0.5 = 0.5\)
+\item
+  \(V(X) = 0.5*0.5 = 0.25\)
+\end{itemize}
+
+\hypertarget{binomial-distribution}{%
+\section{Binomial Distribution}\label{binomial-distribution}}
+
+Think of multiple Bernoulli trials (e.g.~several coin tosses).
+
+\begin{itemize}
+\item
+  pmf: \(f(x;p,n) = \binom{n}{x} p^xq^{(n-x)}\)
+\item
+  \(E[X] = np\)
+\item
+  \(V(X) = npq\)
+\item
+  cdf: \(F(X \le x) = \sum_{i=0}^n f(i)\)
+\end{itemize}
+
+Example: Multiple Coin Tosses (x5 coins, p = 0.5)
+
+\begin{itemize}
+\tightlist
+\item
+  pmf: \(f(x=3;n=5) = \binom{5}{3} (0.5)^3(1-0.5)^{(5-3)} = 0.3125\)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#R way}
+\CommentTok{#(d)ensity(binom)ial}
+\KeywordTok{dbinom}\NormalTok{(}\DataTypeTok{x=}\DecValTok{3}\NormalTok{,}\DataTypeTok{size=}\DecValTok{5}\NormalTok{,}\DataTypeTok{prob=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3125
+\end{verbatim}
+
+\begin{itemize}
+\item
+  \(E[X] = 5*0.5 = 2.5\)
+\item
+  \(V(X) = 5*0.5*0.5 = 1.25\)
+\item
+  cdf: \(F(X \le 3;n=5) = \sum_{i=0}^5 f(i) = 0.8125\)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#R way}
+\KeywordTok{pbinom}\NormalTok{(}\DataTypeTok{q=}\DecValTok{3}\NormalTok{,}\DataTypeTok{size=}\DecValTok{5}\NormalTok{,}\DataTypeTok{prob=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8125
+\end{verbatim}
+
+\hypertarget{multinomial-distribution}{%
+\section{Multinomial Distribution}\label{multinomial-distribution}}
+
+Now suppose there is not one probability (\(p\)) but there are many
+probabilities (\(p_1, p_2, \dots, p_k\)).
+
+\begin{itemize}
+\item
+  pmf:
+  \(f(x_1, \dots , x_k;p_1, \dots, p_k;n) = \binom{n}{x_1, \dots , x_k} p_1^{x_1}*\dots *p_k^{x_k}\)
+
+  where \(\binom{n}{x_1, \dots , x_k} = \dfrac{n!}{x_1! \dots x_k!}\),
+  \(\sum_i^k x_i = n\) and \(\sum_i^k p_i = 1\).
+\end{itemize}
+
+Example: Customers of a coffee shop prefer Turkish coffee with
+probability 0.4, espresso 0.25 and filter coffee 0.35. What is the
+probability that out of the first 10 customers, 3 will prefer Turkish
+coffee, 5 will prefer espresso and 2 will prefer filter coffee?
+
+\(f(3,5,2;0.4,0.25,0.35;10) = \binom{10}{3,5,2} * 0.4^3 * 0.25^5 * 0.35^10 = 4.3 * 10^{-6} = 0.0193\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Explicit form}
+\KeywordTok{factorial}\NormalTok{(}\DecValTok{10}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{5}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{))}\OperatorTok{*}\FloatTok{0.4}\OperatorTok{^}\DecValTok{3} \OperatorTok{*}\StringTok{ }\FloatTok{0.25}\OperatorTok{^}\DecValTok{5} \OperatorTok{*}\StringTok{ }\FloatTok{0.35}\OperatorTok{^}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01929375
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Density multinomial}
+\KeywordTok{dmultinom}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{),}\DataTypeTok{prob=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.35}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01929375
+\end{verbatim}
+
+Binomial distribution is a special case of multinomial distribution.
+
+\hypertarget{hypergeometric-distribution}{%
+\section{Hypergeometric
+Distribution}\label{hypergeometric-distribution}}
+
+Hypergeometric distribution can be used in case the sample is divided in
+two such as defective/nondefective, white/black, Ankara/Istanbul.
+Suppose there are a total of \(N\) items, \(k\) of them are from group 1
+and \(N-k\) of them are from group 2. We want to know the probability of
+getting \(x\) items from group 1 and \(n-k\) items from group 2.
+
+\begin{itemize}
+\item
+  pmf:
+  \(f(x,n;k,N) = \dfrac{\binom{k}{x}\binom{N-k}{n-x}}{\binom{N}{n}}\)
+\item
+  \(E[X] = \dfrac{nk}{N}\)
+\item
+  \(V[X] = \dfrac{N-n}{N-1}*n*\dfrac{k}{N}*(1-\dfrac{k}{N})\)
+\end{itemize}
+
+Example: Suppose we have a group of 20 people, 12 from Istanbul and 8
+from Ankara. If we randomly select 5 people from it what is the
+probability that 1 of them is from Ankara and 4 of them from Istanbul.
+
+\(f(1,5;8,20) = \dfrac{\binom{8}{1}\binom{20-8}{5-1}}{\binom{20}{5}} = 0.256\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Explicit form}
+\NormalTok{x=}\DecValTok{1}
+\NormalTok{n=}\DecValTok{5}
+\NormalTok{k=}\DecValTok{8}
+\NormalTok{N=}\DecValTok{20}
+\NormalTok{(}\KeywordTok{choose}\NormalTok{(k,x)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(N}\OperatorTok{-}\NormalTok{k,n}\OperatorTok{-}\NormalTok{x))}\OperatorTok{/}\KeywordTok{choose}\NormalTok{(N,n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.255418
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Density hypergeometric, see ?dhyper for explanations}
+\KeywordTok{dhyper}\NormalTok{(}\DataTypeTok{x=}\DecValTok{1}\NormalTok{,}\DataTypeTok{m=}\DecValTok{8}\NormalTok{,}\DataTypeTok{n=}\DecValTok{12}\NormalTok{,}\DataTypeTok{k=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.255418
+\end{verbatim}
+
+\hypertarget{negative-binomial-distribution}{%
+\section{Negative Binomial
+Distribution}\label{negative-binomial-distribution}}
+
+Negative Binomial distribution answers the question ``What is the
+probability that k-th success occurs in n trials?''. Differently from
+the binomial case, we fix the last attempt as success.
+
+\begin{itemize}
+\tightlist
+\item
+  pmf: \(f(x;p,n) = \binom{n-1}{x-1} p^xq^{(n-x)}\)
+\end{itemize}
+
+Example: Suppose I'm repeatedly tossing coins. What is the probability
+that 3rd Heads come in the 5th toss?
+
+\(f(3;0.5,5) = \binom{5-1}{3-1} 0.5^30.5^{(5-3)} = 0.1875\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Explicit form}
+\KeywordTok{choose}\NormalTok{(}\DecValTok{5-1}\NormalTok{,}\DecValTok{3-1}\NormalTok{)}\OperatorTok{*}\FloatTok{0.5}\OperatorTok{^}\DecValTok{3}\OperatorTok{*}\FloatTok{0.5}\OperatorTok{^}\NormalTok{(}\DecValTok{5-3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1875
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Binomial way}
+\KeywordTok{dbinom}\NormalTok{(}\DecValTok{3-1}\NormalTok{,}\DecValTok{5-1}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}\OperatorTok{*}\FloatTok{0.5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1875
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Negative binomial way}
+\KeywordTok{dnbinom}\NormalTok{(}\DataTypeTok{x=}\DecValTok{5-3}\NormalTok{,}\DataTypeTok{size=}\DecValTok{3}\NormalTok{,}\DataTypeTok{prob=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1875
+\end{verbatim}
+
+\hypertarget{geometric-distribution}{%
+\section{Geometric Distribution}\label{geometric-distribution}}
+
+Geometric distribution answers ``What is the probability that first
+success comes in the n-th trial?''
+
+\begin{itemize}
+\item
+  pmf: \(f(x;p,n) = q^{(n-1)}p\)
+\item
+  \(E[X] = 1/p\)
+\item
+  \(V[X] = \dfrac{1-p}{p^2}\)
+\end{itemize}
+
+\hypertarget{chapter-questions}{%
+\section{Chapter Questions}\label{chapter-questions}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  A boutique shop offers three types of breads; olive, rye and white.
+  15\% of its customers buy olive bread, 55\% rye bread and the rest
+  white bread. What is the probability that the first 10 customers of
+  the shop buys 2 olive, 5 rye and 3 white bread?
+
+  \emph{Solution:} Multinomial distribution.
+
+  \[\binom{10}{2,5,3} 0.15^2 * 0.55^5 * 0.3^3 = 0.0770478\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n_total =}\StringTok{ }\DecValTok{10}
+\CommentTok{# Olive bread}
+\NormalTok{p_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\FloatTok{0.15}
+\NormalTok{n_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\DecValTok{2}
+\CommentTok{# Rye bread}
+\NormalTok{p_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\FloatTok{0.55}
+\NormalTok{n_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\DecValTok{5}
+\CommentTok{# White bread}
+\NormalTok{p_}\DecValTok{3}\NormalTok{ =}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{p_}\DecValTok{2} \OperatorTok{-}\StringTok{ }\NormalTok{p_}\DecValTok{1}
+\NormalTok{n_}\DecValTok{3}\NormalTok{ =}\StringTok{ }\DecValTok{3}
+
+\KeywordTok{factorial}\NormalTok{(n_total)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(n_}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(n_}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(n_}\DecValTok{3}\NormalTok{)) }\OperatorTok{*}\StringTok{ }\NormalTok{p_}\DecValTok{1}\OperatorTok{^}\NormalTok{n_}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{p_}\DecValTok{2}\OperatorTok{^}\NormalTok{n_}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{p_}\DecValTok{3}\OperatorTok{^}\NormalTok{n_}\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0770478
+\end{verbatim}
+\item
+  An urn contains 32 balls; 18 red, 14 white. If I take 8 balls randomly
+  from the urn, what is the probability of getting 4 red balls?
+
+  \emph{Solution:} Hypergeometric distribution.
+
+  \[\dfrac{\binom{18}{4}\binom{14}{4}}{\binom{32}{8}} = 0.2912125\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n_total =}\StringTok{ }\DecValTok{32} \CommentTok{#N}
+\NormalTok{k_total =}\StringTok{ }\DecValTok{8}
+\NormalTok{n_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\DecValTok{18}
+\NormalTok{n_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\DecValTok{14}
+\NormalTok{k_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\DecValTok{4}
+\NormalTok{k_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\DecValTok{4}
+
+\NormalTok{(}\KeywordTok{choose}\NormalTok{(n_}\DecValTok{1}\NormalTok{,k_}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(n_}\DecValTok{2}\NormalTok{,k_}\DecValTok{2}\NormalTok{))}\OperatorTok{/}\KeywordTok{choose}\NormalTok{(n_total,k_total)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2912125
+\end{verbatim}
+\item
+  A UNICEF activist asks bypassers to contribute to their efforts. Each
+  of her attempts has a 10\% chance of success. What is the probability
+  that she got the first contribution at the 10th attempt?
+
+  \emph{Solution:} Geometric distribution.
+
+  \[ (0.9)^9 * (0.1) = 0.03874205\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\FloatTok{0.9}\NormalTok{)}\OperatorTok{^}\DecValTok{9} \OperatorTok{*}\StringTok{ }\NormalTok{(}\FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.03874205
+\end{verbatim}
+\item
+  Suppose there are 10 cards in a deck numbered from 1 to 10. If I draw
+  four cards out of the deck without putting them back, what is the
+  probability that they are in increasing order (e.g.~3-4-5-8)?
+
+  \emph{Solution}: Increasing order is a special order. There is only
+  one decreasing order in every permutation set. For instance
+
+  \[8-5-4-3\] \[8-5-3-4\] \[8-4-5-3\] \[4-5-3-8\] \[\dots\]
+  \[**3-4-5-8**\]
+
+  So, the answer is \(1/(4!) = 1/24\).
+\item
+  A tennis player has the probability of 0.15 to ace a serve (i.e.~he
+  serves and gets the point without the opponent touching the ball) at
+  each shot. His trainer challenged him that he will pay the square of
+  the aces he makes out of 10 serves (e.g.~if he serves 8 aces out of
+  10, the trainer pays him \(8^2 = 64TL\)). But, if he serves less than
+  or equal to 6 aces, the player should pay the trainer 5 TL for each
+  ace he missed (e.g.~4 aces 6 misses, player pays up 6*5 = 30TL).
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \tightlist
+  \item
+    What is the maximum amount of money he can get?
+  \item
+    What is the expected earnings of the player?
+  \item
+    What is the variance of his earnings?
+  \end{enumerate}
+
+  \emph{Solution:}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \item
+    10 out of 10 means 10\^{}2 = 100.
+  \item
+    \(g(X = x) = x^2\) if \(x \geq 7\),
+    \(f(g(X) = x^2) = f(X = x) = \binom{10}{x} 0.15^x * 0.85^(10-k)\),
+    so \(E[g(x)] = \sum_{i=0}^10 g(x)f(x)\).
+
+    \(g(X = x) = -5*x\) if \(x \leq 6\).
+
+    So
+    \(49 * \binom{10}{7} 0.15^7 * 0.85^3 + 64 * \binom{10}{8} 0.15^8 * 0.85^2 + 81 * \binom{10}{9} 0.15^9 * 0.85 + 100 * (0.15)^10\)
+    \(-20 * \binom{10}{6} 0.15^6 * 0.85^4 -25 * \binom{10}{5} 0.15^5 * 0.85^5 - 30 * \binom{10}{4} 0.15^4 * 0.85^6 - 35 * \binom{10}{3} 0.15^3 * 0.85^7 - 40 * \binom{10}{2} 0.15^2 * 0.85^8 - 45 * \binom{10}{1} 0.15^1 * 0.85^9 - 50 * 0.85^10 = -42.5TL\).
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rewards <-}\StringTok{ }\NormalTok{(}\DecValTok{7}\OperatorTok{:}\DecValTok{10}\NormalTok{)}\OperatorTok{^}\DecValTok{2}
+\NormalTok{probs_rewards <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(}\DecValTok{7}\OperatorTok{:}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\FloatTok{0.15}\NormalTok{)}
+\NormalTok{losses <-}\StringTok{ }\DecValTok{-5}\OperatorTok{*}\NormalTok{(}\DecValTok{10}\OperatorTok{-}\NormalTok{(}\DecValTok{6}\OperatorTok{:}\DecValTok{0}\NormalTok{))}
+\NormalTok{probs_losses <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(}\DecValTok{6}\OperatorTok{:}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\FloatTok{0.15}\NormalTok{)}
+
+\NormalTok{expectation <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(rewards}\OperatorTok{*}\NormalTok{probs_rewards) }\OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(losses}\OperatorTok{*}\NormalTok{probs_losses)}
+\NormalTok{expectation}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -42.4913
+\end{verbatim}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \setcounter{enumii}{2}
+  \tightlist
+  \item
+    \(V(X) = E[X^2] - (E[X])^2\). We know that \(E[X] = -42.5\), then
+    \((E[X])^2 = 1805.51\). Also \(E[X^2] = 1838.434\) and
+    \(V(X) = 32.92\).
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ex2<-}\KeywordTok{sum}\NormalTok{(rewards}\OperatorTok{^}\DecValTok{2}\OperatorTok{*}\NormalTok{probs_rewards) }\OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(losses}\OperatorTok{^}\DecValTok{2}\OperatorTok{*}\NormalTok{probs_losses)}
+\NormalTok{ex2 }\OperatorTok{-}\StringTok{ }\NormalTok{expectation}\OperatorTok{^}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32.92423
+\end{verbatim}
+\end{enumerate}
+
+\bibliography{book.bib,packages.bib}
+
+
+\end{document}

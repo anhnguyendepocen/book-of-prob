@@ -1,0 +1,200 @@
+# Random Variables and Distributions
+
+## Scales on Measurement
+
++ Nominal scale: These are categorical values that has no relationship of order or rank among them. (e.g. colors, species)
++ Ordinal scale: These are categorical values that has relationship of order or rank among them (e.g. military ranks, competiton results). Though the relative order has no defined magnitude (e.g. Champion can get 40 points, runner up 39 and third place 30).
++ Interval scale: There is a numerical order but the difference can only be defined in intervals, *since there is no absolute minimum*. We cannot compare in relative values. For instance, we cannot say 10 degree celsius is twice as hot as 5 degree celsius; what about -5 vs +5?
++ Ratio scale: Scale with an absolute minimum. (e.g. If I have 50TL and my friend has 100TL, I can say that she has twice the money that I have.) Height, weight, age are similar examples.
+
+[See more on https://en.wikipedia.org/wiki/Level_of_measurement](https://en.wikipedia.org/wiki/Level_of_measurement). (p.s. Wikipedia wasn't banned when I prepared these notes)
+
+## Infinity
+
+The concept of infinity is very broad. Currently, you just need to keep the distinction of countable and uncountable infinities in mind.
+
++ Countably infinite: 1, 2, 3, 4, ... (e.g. natural numbers, integers, **rational numbers**)
++ Uncountably infinite: 1, 1.01, 1.001, 1.0001, 1.00001, ... (e.g. real numbers)
+
+How many real numbers are there between 0 and 1?
+
+## Descriptive Statistics
+
+Here are brief descriptions of mean (expectation), median, mode, variance, standard deviation, quantile.
+
++ Mean: $\bar{X} = \sum_i^N X_i$
+
++ Median: Let's say $X_k$ are ordered from smallest to largest and there are $n$ values in the sample. Median($X$)$=X_{(n+1)/2}$ if n is odd and (usually) Median($X$)$=\dfrac{X_{(n/2)} + X_{(n/2+1)}}{2}$.
+
++ Quantile: On an ordered list of values for quantile ($\alpha$) provides the $(\alpha*n)^{th}$ smallest value of the list. For instance, if $\alpha = 70\% = 0.7$ quantile value is the 7th smallest value in a list of 10 values. $\alpha = 1$ means the maximum. Quantile is an important parameter in especially statistics.
+
++ Mode: $X_k$ with the highest frequency in the sample. In a sample of ($1,2,2,3,4,5$), $2$ is the mode.
+
++ Variance: $V(X) = \dfrac{\sum_i^N (X_i - \bar{X})^2}{n-1}$
+
++ Standard Deviation: $\sigma(X) = \sqrt{\dfrac{\sum_i^N (X_i - \bar{X})^2}{n-1}}$
+
+```{r}
+set.seed(231)
+#Let's pick 10 values from the numbers between 1 and 50.
+numbers <- sample(1:50,10,replace=TRUE)
+#The sorted version of the numbers
+sort(numbers)
+#The mean values of the numbers
+sum(numbers)/10
+#or in R
+mean(numbers)
+#Median of the numbers
+median(numbers)
+#Quantile 7/9 of the numbers
+quantile(numbers,7/9)
+#Quantile 0 of the numbers (also the min)
+quantile(numbers,0)
+#Quantile 1 of the numbers (also the max)
+quantile(numbers,1)
+#No simple solution for mode in R
+freq_table<-table(numbers)
+freq_table
+names(freq_table[which.max(freq_table)])
+#Sample variance of numbers
+sum((numbers - mean(numbers))^2)/(10-1)
+#For large values you can take n ~ n-1
+#in R
+var(numbers)
+#Sample standard deviation of values
+sqrt(sum((numbers - mean(numbers))^2)/(10-1))
+#in R
+sd(numbers)
+```
+
+## Random Variables
+
+A random variable (usually defined with a capital letter or symbol i.e. $X$) is a quantity determined by the outcome of the experiment. Its realizations are usually symbolized with lowercase letter ($x$).
+
+Example: Suppose there are 10 balls in an urn, 5 black and 5 red. Two balls are randomly drawn from the urn without replacement. Define the random variable $X$ as the number of black balls. Then, $X = x$ can get the values of 0, 1 and 2. Let's enumerate $P(X = x)$.
+
+$$P(X = 0) = P(RR) = 5/10 * 4/9 = 2/9$$
+$$P(X = 1) = P(BR) + P(RB) = 5/10 + 5/9 + 5/10 * 5/9 = 5/9$$
+$$P(X = 2) = P(BB) = 5/10 * 4/9 = 2/9$$
+
+## Discrete Random Variables and Distributions
+
+If a sample space has finite number of possibilities or countably infinite number of elements, it is called a discrete sample space. Discrete random variable probabilities are shown as point probabilities $P(X = x)$. The probability distribution of discrete random variables is also called probability mass function (pmf).
+
+$$ P(X=x) = f(x)$$
+$$\sum_x f(x) = 1$$
+$$f(x) \ge 0$$
+
+Example: (Same as above) Enumerate the probability distribution.
+
+Solution: Random variable $X$ can take values ($x$) 0, 1 and 2. So $f(1) = 2/9$, $f(2) = 5/9$ and $f(3) = 2/9$.
+
+### Cumulative Distribution Function (CDF)
+
+Cumulative distribution function is a special defined function yielding the cumulative probability of random variables up to a value. It is usually symbolised as $F(x)$
+
+$$F(x) = P(X \le x) = \sum_{t \le x} f(t)$$
+$$F(x) = P(X \le x) = \sum_{\infty} f(t) = 1$$
+
+Example: (Same as above) Enumerate the cdf.
+
+$$F(0) = P(X \le 0) = P(X = 0) = 2/9$$
+$$F(1) = P(X \le 1) = P(X = 0) + P(X = 1) = 7/9$$
+$$F(2) = P(X \le 2) = P(X = 0) + P(X = 1) + P(X = 2) = 1$$
+
+## Continuous Random Variables and Distributions
+
+If a sample space has uncountably infinite number of possibilities, it is called a continuous sample space. Continuous random variables' probabilities are defined in intervals $P(a < X < b)$. The probability distribution of continuous random variables is also called probability density function (pdf).
+
+$$f(x) \ge 0$$
+$$ P(a < X < b) = f(x) = \int_a^b f(x)dx$$
+$$\int_{- \infty}^\infty f(x) = 1$$
+
+Example (from the book): Suppose the probability function of a continuous distribution $f(x) = x^2/3$ defined between $-1 < x < 2$ and $0$ everywhere else. Verify that it is a density function (i.e. the integral in the defined interval is 1) and calculate $P(0 < x < 1)$.
+
+a. $\int_{-1}^2 x^2/3 dx = x^3/9|_{-1}^2 = 8/9 - (-1/9) = 1$. Verified.
+b. $\int_{0}^1 x^2/3 dx = x^3/9|_{0}^1 = 1/9 - (0) = 1/9$. Verified.
+
+Cumulative distribution function (CDF) for continuous random variables is defined with the integral.
+
+$$F(x) = P(X < x) = \int_{- \infty}^a f(x)dx$$
+
+Example: (same as above) Calculate the cdf $F(3/2)$
+
+Solution: $F(1.5) = \int_{- \infty}^{3/2} f(x) = x^3/9|_{-1}^{3/2} = 3/8 - (-1/9) = 35/72$
+
+Example: Calculate $P(X > 1)$.
+
+Solution: $P(X > 1) = 1 - P(X < 1) = 1 - F(1) = 1 - \int_{- \infty}^{1} = 1 - ((1/9) - (-1/9)) = 7/9$.
+
+
+## Joint Distribution
+
+So far we had distributions with only one random variable. What if we had more than one random variable in a distribution? It is not that different from univariate distributions.
+
+$$f(x,y) \ge 0$$
+$$\sum_x\sum_y f(x,y) = 1$$
+$$P(X=x,Y=y) = f(x,y)$$
+
+Example (from the book): Two pens are selected at random from a box of 3 blue, 2 red and 3 green pens. Define $X$ as the number of blue pens and $Y$ as the red pens selected. Find
+
+a. Joint probability function $f(x,y)$
+b. $P[(X,Y) \ in A]$ where $A$ is the region $\{(x,y)|x+y \le 1\}$.
+
+Solution:
+
+a. The possible cases for $(x,y)$ are $(0,0),(0,1),(0,2),(1,0),(2,0),(1,1)$. For instance $(0,1)$ is one green and one red pen selected. There are a total of 8 pens. Then sample space size for two pens selected is $\binom{8}{2} = 28$. There are $\binom{2}{1}\binom{3}{1} = 6$ ways of selecting 2 pens from green and red pens. So the probability is $f(0,1) = P(X=0,Y=1) = 6/28 = 3/14$. It is possible to calculate other possible outcomes in a similar way. A generalized formula would be as follows.
+
+$$\dfrac{\binom{3}{x}\binom{2}{y}\binom{3}{2-x-y}}{\binom{8}{2}}$$
+
+
+b. Possible outcomes satisfying $A = (x,y) \le 1$ are $(0,0),(0,1),(1,0)$. So $P(X+Y \le 1) = P(0,0) + P(0,1) + P(1,0) = 9/14$.
+
+In the continuous case it is similar. It is now called joint probability density function.
+
+$$f(x,y) \ge 0$$
+$$\int_x\int_y f(x,y)dxdy = 1$$
+$$P(X=x,Y=y) \in A = \int\int_A f(x,y)dxdy$$
+
+Example: (from the book)
+
+A privately owned business operates both a drive in and a walk in facility. Define $X$ and $Y$ as the proportions of using the drive in and walk in facilities. Suppose the joint density function is $f(x,y) = 2/5*(2x+3y)$ where $0 \le x \le 1$ and $0 \le y \le 1$ (0, otherwise).
+
+a. Verify it is a distribution function.
+b. Find $P[(X,Y)] \in A$, where $A = \{(x,y)|0 < x < 1/2, 1/4 < y < 1/2\}$.
+
+Solution:
+
+a. $\int\int f(x,y)dxdy = \int 2/5*(x^2 + 3xy)dy|_0^1 = \int (2/5 + 6/5*y)dy = 2y/5 + 3/5*y^2 |^1_0 = 2/5 + 3/5 = 1$.
+
+b. $\int_{1/4}^{1/2}\int_0^{1/2} f(x,y)dxdy = \int 2/5*(x^2 + 3xy)dy|_0^{1/2} = \int_{1/4}^{1/2} (1/10 + 3/5*y) dy$, $y/10 + 3y^2/10|_{1/4}^{1/2} = 13/160$.
+
+## Marginal Distribution
+
+In a joint distribution, marginal distribution is the probability distributions of individual random variables. Define $g(x)$ and $h(y)$ as the marginal distributions of $X$ and $Y$.
+
+$$g(x) = \sum_y f(x,y), h(y) = \sum_y f(x,y)$$
+$$g(x) = \int_y f(x,y) dy, h(y) = \int_x f(x,y) dx$$
+
+Example: Go back to pen and walk in examples and calculate marginal probabilities.
+
+## Conditional Distribution
+
+Remember the conditional probability rule $P(A|B) = P(A \cap B)/P(B)$ given $P(B) > 0$. We can define conditional distribution as $f(y|x) = f(x,y)/g(x)$, provided $g(x) > 0$ whether they are discrete or continuous.
+
+Example: (pen example) Calculate $P(X=0|Y=1)$
+
+Solution: We know that $h(1) = 3/7$. $f(x=0,y=1) = 3/14$. $f(x=0|y=1) = f(x=0,y=1)/h(1) = 1/2$
+
+## Statistical Independence
+
+Two random variables distributions are statistically independent if and only if $f(x,y) = g(x)h(y)$.
+
+Proof:
+
+$$f(x,y) = f(x|y)h(y)$$
+$$g(x) = \int f(x,y)dy = \int f(x|y)h(y) dy $$
+
+If $f(x|y)$ does not depend on $y$ we can write $f(x|y) \int h(y) dy$. $f(x|y)*1$. Therefore, $g(x)=f(x|y)$ and $f(x,y) = g(x)h(y)$.
+
+Any number of random variables ($X_1 \dots X_n$) are statistically independent if and only if $f(x_1,\dots,x_n) = f(x_1)\dots f(x_n)$.
