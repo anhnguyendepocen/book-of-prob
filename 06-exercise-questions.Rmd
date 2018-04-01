@@ -1,0 +1,180 @@
+# Exercise Questions
+
+### Question 1
+
+How many ways are there to arrange "ECONOMETRICS".
+
+Solution: There 12 characters, 5 vowels 7 consonants. 2 Cs, 2 Es and 2 Os.
+
+a) In any order.
+
+Solution: $\dfrac{12!}{2!2!2!}$.
+
+b) Vowels together.
+
+Solution: Add one representative letter to consonants to denote vowels as a single letter. $\dfrac{8!}{2!}\dfrac{5!}{2!2!}$.
+
+c) No consecutive vowels.
+
+Solution: $\dfrac{7!}{2!}\dfrac{8!}{(8-5)!2!2!}$
+
+<!-- Permutation/Combination -->
+
+### Question 2
+
+7 people from Istanbul (suppose names A-B-C-D-E-F-G) and 7 people from Ankara (M-N-O-P-Q-R-S) will sit around a round table.
+
+a) In how many different ways can they sit around the table?
+
+Solution: $(14-1)! = 13!$
+
+b) Same as (a) but no two people from Ankara should sit together.
+
+Solution: Fix one from Istanbul to a position. $(7-1)!(7)!$
+
+c) Same as (a) but all the people from Istanbul should sit together.
+
+Solution: Suppose there are 8 people from Ankara, 1 reserved for Istanbul group and Istanbul people have their own permutation within. $(8-1)!7!$
+
+<!-- Expectation -->
+
+### Question 3
+
+You roll a die once, and assume the number your rolled is X. Then continue rolling the die until you either match or exceed X. What is the expected number of additional rolls?
+
+Solution:
+
+$$E[n|X_1=i] = 1/P(X_2 \ge i| X_1 = i) = 6/(6-i+1)$$
+
+$$\sum_{i=1}^6 = 6/(6-i+1) * P(X=i) = 2.45$$
+
+
+<!-- Expectation -->
+
+### Question 4
+
+In a three dice roll, if at least two dice have the same number (e.g. 5-5-4 or 3-3-3) you win.
+
+a) What is the probability that you win at least three times in a 30 rolls game?
+
+Solution:
+All combinations $N = 6^3 = 216$.
+Non repeating permutations $n_{lose} = \dfrac{6!}{3!} = 120$.
+Probability of win is $1 - \dfrac{n_lose}{N} = 0.444$.
+Probability of winning at least 3 times is
+$$P(X \ge 3| T = 30) = 1 - P(X = 0|T=30) - P(X = 1|T=30) - P(X=2|T=30)$$
+$$P(X \ge 3| T = 30) = 1 - 0.9999933$$
+
+b) What is the expected number and variance of the number of wins?
+
+$$E[X] = np = 30*(0.444) = 13.33$$
+$$V[X] = np(1-p) = 30*(0.444)*(1-0.444) = 7.407407$$
+
+<!-- Negative Binomial -->
+
+### Question 5
+
+In a Go game, a player that wins three games out of five is the winner. Suppose the artificial intelligence Alpha Go has probability 0.65 of winning against the World's (Human) Go Champion. What is the probability that Alpha Go wins the game at the 4th game?
+
+Solution: AI should win 2 games in the first 3 and win the 4th game. $\binom{3}{2}(0.65)^2(0.35)(0.65) = 0.289$
+
+<!-- Hypergeometric  -->
+<!-- Negative binomial  -->
+
+### Question 6
+
+An egg basket contains 8 eggs, 4 of which are broken. 3 eggs are selected to make an omelette.
+
+a) What is the probability that all 3 eggs are intact?
+
+Solution: $\dfrac{\binom{4}{3}}{\binom{8}{3}} = 0.0714$
+
+b) What is the probability that the 2nd broken egg is the 3rd egg?
+
+Solution: Probability of getting 1 intact and 1 broken egg $\dfrac{\binom{4}{1}\binom{4}{1}}{\binom{8}{2}} = 0.571$. At 3rd egg there should be 3 intact and 3 broken eggs remaining, so getting the 3rd broken egg is 1/2. Final probability is $0.286$.
+
+<!-- Conditional Probability -->
+
+### Question 7
+
+Nejat is a film critic and he will attend to IKSV Film Festival between April 5-15. Nejat likes a movie with probability 0.6 if the genre of the movie is mystery. For other genres, he likes the movie with probability 0.4. There will be 40 movies during the festival, 10 of which are mystery.
+
+a) What is the probability that Nejat will like a randomly selected movie?
+
+Solution: (L)ike, (D)islike, (M)ystery, (O)ther. $P(M) = 10/40 = 0.25$.
+$$P(L) = P(L|M)P(M) + P(L|O)P(O) = 0.6*0.25 + 0.4*0.75 = 0.45$$
+
+b) Suppose Nejat did not like the film. What is the probability that the selected movie is a non-mystery film?
+
+Solution: $P(O|D) = \dfrac{P(D|O)P(O)}{P(D)} = \dfrac{P(D|O)P(O)}{1-P(L)} = 0.6*0.75/0.55 = 0.818$
+
+<!-- Binomial Distribution -->
+
+### Question 8
+
+A student applies for internships to 11 companies. She has a 0.6 probability to get an offer for an internship.
+
+a) What is the probability that she will get offers from at least 4 companies?
+
+Solution: $P(X \ge 4) = \sum_{i=4}^{11} \binom{8}{i} (0.6)^i(0.4)^{n-i} = 0.97$
+
+b) What is the probability that she gets her fourth offer at the seventh application?
+
+Solution: $\binom{6}{3} (0.6)^3(0.4)^{3}(0.6) = 0.166$
+
+c) What is the expected value and variance of the applications?
+
+Solution: $E[X] = np = 11*0.6 = 6.6$, $V(X) = np(1-p) = 11*0.6*0.4 = 2.64$.
+
+<!-- Multinomial Distribution -->
+
+### Question 9
+
+A steakhouse serves (C)hateaubriand, (K)obe Beef Tenderloin and (T)-Bone. Customers order C with probability 0.35, K w.p. 0.2 and T w.p. 0.45.
+
+a) 12 customers arrive. What is the probability that 4 of them order C, 3 order K and 5 order T?
+
+Solution: $\binom{12}{4,3,5}(0.35)^4(0.2)^3(0.45)^5 = 0.0614$.
+
+b) Suppose C sells for 90TL, K for 150TL and T for 120TL. If 100 customers are served that day, what is the expected revenue?
+
+Solution: $100*(90*0.35 + 150*0.2 + 120*0.45) = 11550TL$.
+
+### Question 10
+
+An international student group will select a committee of 4 people at random. There are 7 Turkish, 6 Greek, 4 Italian and 5 Irish students in the group.
+
+a) What is the probability that all countries are represented?
+
+Solution: Total number students is 22. $\dfrac{7*6*4*5}{\binom{22}{4}} = 0.1148325$
+
+b) If the committee consisted of 5 people what would be the probability of (a)?
+
+Solution: $\dfrac{7*6*4*\binom{5}{2} + 7*6*5*\binom{4}{2} + 7*5*4*\binom{6}{2} + 6*5*4*\binom{7}{2}}{\binom{22}{4}} = 0.287$
+
+### Question 11
+
+There are 3 balls in an urn, each of them is either (B)lack or (W)hite. At each step $i$, a ball is drawn from the urn randomly and another ball is thrown the urn with equal probability for both colors. So there are three balls at the end of each step. Let $X_i$ be the number of White balls at time $i$. We know that at step 0, there are two white balls and one black ball in the urn (i.e. $X_0 = 2$). Calculate the following.
+
+a\) $P(X_1 = 2 | X_0 = 2)$
+
+b\) $P(X_2 = 1 | X_0 = 2)$
+
+Now consider that the process is switched. First, a ball is thrown at random inside the urn then a ball is drawn from the urn. Again at step 0, there are two white balls and one black ball (i.e. $X_0 = 2$). Calculate the following.
+
+c\) $P(X_1 = 1 | X_0 = 2)$
+
+d\) $P(X_2 = 2 | X_0 = 2)$
+
+Solution: Define $Y_i$ as the ball drawn the urn and $Z_i$ as the ball added at stage $i$. Probabilities of $Z$ will always be the same. $P(Z_i=W) = P(Z_i=B) = 0.5$. For a and b, probabilities of $Y_i$ is dependent only on $X_{i-1}$. But, for c and d, $Y$ depends on both $X_{i-1}$ and $Z_i$.
+
+a\) $P(X_1 = 2 | X_0 = 2) = P(Y_1 = W|X_0=2)P(Z_1 = W) + P(Y_1 = B|X_0=2)P(Z_1 = B) = 2/3*1/2 + 1/3*1/2 = 1/2$.
+b\) $P(X_2 = 1|X_0=2) = P(X_2 = 1| X_1 = 2, X_0=2) + P(X_2 = 1| X_1 = 1,X_0=2) = P(X_2=1|X_1=2)P(X_1=2|X_0=2) + P(X_2=1|X_1=1)P(X_1=1|X_0=2)$. We can say that P(X_i = x_i|X_{i-1} = x_{i-1}) is equal for all $i$. So $P(X_2=1|X_1=2)P(X_1=2|X_0=2) + P(X_2=1|X_1=1)P(X_1=1|X_0=2) = P(X_1=1|X_0=2)P(X_1=2|X_0=2) + P(X_1=1|X_0=1)P(X_1=1|X_0=2) = P(X_1=1|X_0=2)(P(X_1=2|X_0=2)+P(X_1=1|X_0=1))$. Then $P(X_1=1|X_0=2) = P(Y_1=W|X_0=2)P(Z_1=B) = 2/3*1/2 = 1/3$. $P(X_1=1|X_0=1) = P(Y_1 = W|X_0=1)P(Z_1 = W) + P(Y_1 = B|X_0=1)P(Z_1 = B) = 1/3*1/2 + 2/3*1/2 = 1/2$.
+
+So, $P(X_1 = 2 | X_0 = 2) = 1/3*(1/2 + 1/2) = 1/3$.
+
+c\) Similar but this time $Z_i$ is more important. $P(X_1 = 1 | X_0 = 2) = P(Z_1 = B)P(Y_1 = B|X_0=2,Z_1=B) = 1/2*1/2=1/4$.
+
+d\) $P(X_2 = 2 | X_0 = 2) = P(X_2 = 2 | X_1 = 2)P(X_1 = 2 | X_0 = 2) + P(X_2 = 2 | X_1 = 1)P(X_1 = 1 | X_0 = 2) + P(X_2 = 2 | X_1 = 3)P(X_1 = 3 | X_0 = 2)$. Let's rephrase $P(X_1 = 2 | X_0 = 2)^2 + P(X_1 = 2 | X_0 = 1)P(X_1 = 1 | X_0 = 2) + P(X_1 = 2 | X_0 = 3)P(X_1 = 3 | X_0 = 2)$. $P(X_1 = 2 | X_0 = 2) = 1/2*3/4 + 1/2*1/4 = 1/2$. $P(X_1 = 2|X_0 = 1) = 1/2*1/2 = 1/4$. $P(X_1 = 3|X_0 = 2) = 1/2*1/4 = 1/8$. $P(X_1 = 2|X_0 = 3) = 1/2*3/4 = 3/8$.
+
+$$(1/2)^2 + 1/4 * 1/4 + 1/8*3/8 = 23/64$$

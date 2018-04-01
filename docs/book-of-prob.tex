@@ -165,7 +165,7 @@ name suggests, these notes consist of an abbreviated version of the
 course as the objective is to give the essence of very significant parts
 of Probability. The course mainly follows \citep{myers2012}.
 
-This book is periodically updated. Latest update is on 2018-03-25.
+This book is periodically updated. Latest update is on 2018-04-01.
 
 \hypertarget{about-the-author}{%
 \section*{About the Author}\label{about-the-author}}
@@ -1769,6 +1769,54 @@ success comes in the n-th trial?''
   \(V[X] = \dfrac{1-p}{p^2}\)
 \end{itemize}
 
+\hypertarget{poisson-distribution}{%
+\section{Poisson Distribution}\label{poisson-distribution}}
+
+Poisson distribution is widely used to represent occurences in an
+interval, mostly time but sometimes area. Examples include arrivals to
+queues in a day, number of breakdowns in a machine in a year, typos in a
+letter, oil reserve in a region.
+
+\hypertarget{binomial-approximation-to-poisson-distribution}{%
+\subsection{Binomial Approximation to Poisson
+Distribution}\label{binomial-approximation-to-poisson-distribution}}
+
+We know from binomial distribution that \(k\) occurences in \(n\) trials
+with probability \(p\) has the following function.
+
+\[P\{X = k\} = \binom{n}{k} p^k (1-p)^{n-k} = \dfrac{n!}{(n-k)!k!} p^k (1-p)^{n-k}\]
+
+and expected value is \(E[X] = np\). Now define \(\lambda = np\).
+
+\begin{align*}
+P\{X = k\} =& \dfrac{n!}{(n-k)!k!} \left(\dfrac{\lambda}{n}\right)^k \left(1-\left(\dfrac{\lambda}{n}\right)\right)^{n-k} \\
+           =& \dfrac{n (n-1) \dots (n-k+1)}{n^k} \left(\dfrac{\lambda^k}{k!}\right) \dfrac{(1-\dfrac{\lambda}{n})^n}{(1-\dfrac{\lambda}{n})^k}
+\end{align*}
+
+For very large \(n\) and very small \(p\) the resulting pdf becomes
+\(\dfrac{\lambda^k e^{-\lambda}}{k!}\).
+
+\hypertarget{properties-of-poisson-distribution}{%
+\chapter{Properties of Poisson
+Distribution}\label{properties-of-poisson-distribution}}
+
+\begin{itemize}
+\item
+  PMF: \(P\{X = k\} = \dfrac{\lambda^k e^{-\lambda}}{k!}\)
+\item
+  CDF:
+  \(P\{X \le k\} = \sum_{i=0}^k \dfrac{\lambda^i e^{-\lambda}}{i!}\)
+\item
+  \(E[X] = \lambda (due to \sum_{i=0}^\infty\dfrac{x^i}{i!} = e^x)\)
+\item
+  \(V(X) = \lambda\)
+\end{itemize}
+
+Rate parameter \(\lambda\) can also be defined as \(\lambda t\), \(t\)
+being the scale parameter. For instance, let arrivals in 30 minutes
+interval be \(\lambda t_{30} = 4\). If we would want to work on hourly
+intervals, we should simply rescale, \(\lambda t_{60} = 8\).
+
 \hypertarget{chapter-questions}{%
 \section{Chapter Questions}\label{chapter-questions}}
 
@@ -1885,11 +1933,9 @@ success comes in the n-th trial?''
   \item
     10 out of 10 means 10\^{}2 = 100.
   \item
-    \(g(X = x) = x^2\) if \(x \geq 7\),
+    \(g(X = x) = x^2\) if \(x \geq 7\), \(-x\) else,
     \(f(g(X) = x^2) = f(X = x) = \binom{10}{x} 0.15^x * 0.85^(10-k)\),
     so \(E[g(x)] = \sum_{i=0}^10 g(x)f(x)\).
-
-    \(g(X = x) = -5*x\) if \(x \leq 6\).
 
     So
     \(49 * \binom{10}{7} 0.15^7 * 0.85^3 + 64 * \binom{10}{8} 0.15^8 * 0.85^2 + 81 * \binom{10}{9} 0.15^9 * 0.85 + 100 * (0.15)^10\)
@@ -1932,7 +1978,447 @@ success comes in the n-th trial?''
 \begin{verbatim}
 ## [1] 32.92423
 \end{verbatim}
+\item
+  Suppose a machine has a probability of failure 0.001 per hour. What is
+  the probability that the machine had failed at least three times
+  within 2000 hours.
+
+  \emph{Binomial solution}
+
+  \begin{align*}
+   P\{X \ge 3\} &= 1 - \binom{2000}{0} 0.001^0 0.999^{750} - \binom{2000}{1} 0.001^1 0.999^{749} - \binom{2000}{2} 0.001^2 0.999^{748} \\
+   &= 0.3233236
+   \end{align*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#R version}
+\DecValTok{1}\OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{2}\NormalTok{,}\DecValTok{2000}\NormalTok{,}\FloatTok{0.001}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3233236
+\end{verbatim}
+
+  \emph{Poisson solution}
+
+  \begin{align*}
+   \lambda &= np = 2000*0.001 = 2 \\
+   P\{X \ge 3\} &= 1 - \dfrac{e^{-2}2^0}{0!} - \dfrac{e^{-2}2^1}{1!} - \dfrac{e^{-2}2^2}{2!} \\
+       &= 0.3233236
+   \end{align*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#R version}
+\NormalTok{lambda=}\DecValTok{2000}\OperatorTok{*}\FloatTok{0.001}
+\DecValTok{1}\OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dpois}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{2}\NormalTok{,lambda))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3233236
+\end{verbatim}
+\item
+  People arrive at a bank with rate \(\lambda = 5\) every 10 minutes.
+  What is the probability that 10 people arrive in 30 minutes?
+
+  \[\lambda t_{10} = 5\]
+
+  \[\lambda^\prime = \lambda t_{30} = 15 \]
+
+  \[P\{X = 10, t=30\} = \dfrac{e^{-15}15^{10}}{10!} =  0.049\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dpois}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{15}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.04861075
+\end{verbatim}
+\item
+  A machine breaks down with a poisson rate of \(\lambda = 10\) per
+  year. A new method is tried to reduce the failure rate to
+  \(\lambda = 3\), but there is a 50\% chance that it won't work. If the
+  method is tried and the machine fails only 3 times that year, what is
+  the probability that the method worked on the machine?
+
+  \begin{align*}
+   P\{Works | X = 3\}  &= \dfrac{P\{Works and X = 3\}}{P\{X = 3\}} \\~\\
+   P\{Works\} &= 0.5\\~\\
+   P\{Works and X = 3\} &= 0.5 * \dfrac{e^{-3}3^3}{3!} = 0.1120209\\~\\
+   P\{X = 3\} &= P\{Works and X = 3\} + P\{Doesn't\ Work and X = 3\} = 0.5 * \dfrac{e^{-3}3^3}{3!} + 0.5 * \dfrac{e^{-10}10^3}{3!} \\
+   &= 0.96733
+   \end{align*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#R codes}
+\CommentTok{#Probability that it works}
+\NormalTok{pw =}\StringTok{ }\FloatTok{0.5}
+\CommentTok{#Probability of 3 fails if lambda is 10}
+\NormalTok{ppois10 =}\StringTok{ }\KeywordTok{dpois}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{10}\NormalTok{)}
+\CommentTok{#Probability of 3 fails if lambda is 3}
+\NormalTok{ppois3 =}\StringTok{ }\KeywordTok{dpois}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\CommentTok{#P(Works | X = 3)}
+\NormalTok{(pw}\OperatorTok{*}\NormalTok{ppois3)}\OperatorTok{/}\NormalTok{(pw}\OperatorTok{*}\NormalTok{ppois3 }\OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{pw)}\OperatorTok{*}\NormalTok{ppois10)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.96733
+\end{verbatim}
 \end{enumerate}
+
+\hypertarget{exercise-questions}{%
+\chapter{Exercise Questions}\label{exercise-questions}}
+
+\hypertarget{question-1}{%
+\subsection{Question 1}\label{question-1}}
+
+How many ways are there to arrange ``ECONOMETRICS''.
+
+Solution: There 12 characters, 5 vowels 7 consonants. 2 Cs, 2 Es and 2
+Os.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  In any order.
+\end{enumerate}
+
+Solution: \(\dfrac{12!}{2!2!2!}\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Vowels together.
+\end{enumerate}
+
+Solution: Add one representative letter to consonants to denote vowels
+as a single letter. \(\dfrac{8!}{2!}\dfrac{5!}{2!2!}\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  No consecutive vowels.
+\end{enumerate}
+
+Solution: \(\dfrac{7!}{2!}\dfrac{8!}{(8-5)!2!2!}\)
+
+\hypertarget{question-2}{%
+\subsection{Question 2}\label{question-2}}
+
+7 people from Istanbul (suppose names A-B-C-D-E-F-G) and 7 people from
+Ankara (M-N-O-P-Q-R-S) will sit around a round table.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  In how many different ways can they sit around the table?
+\end{enumerate}
+
+Solution: \((14-1)! = 13!\)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Same as (a) but no two people from Ankara should sit together.
+\end{enumerate}
+
+Solution: Fix one from Istanbul to a position. \((7-1)!(7)!\)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Same as (a) but all the people from Istanbul should sit together.
+\end{enumerate}
+
+Solution: Suppose there are 8 people from Ankara, 1 reserved for
+Istanbul group and Istanbul people have their own permutation within.
+\((8-1)!7!\)
+
+\hypertarget{question-3}{%
+\subsection{Question 3}\label{question-3}}
+
+You roll a die once, and assume the number your rolled is X. Then
+continue rolling the die until you either match or exceed X. What is the
+expected number of additional rolls?
+
+Solution:
+
+\[E[n|X_1=i] = 1/P(X_2 \ge i| X_1 = i) = 6/(6-i+1)\]
+
+\[\sum_{i=1}^6 = 6/(6-i+1) * P(X=i) = 2.45\]
+
+\hypertarget{question-4}{%
+\subsection{Question 4}\label{question-4}}
+
+In a three dice roll, if at least two dice have the same number
+(e.g.~5-5-4 or 3-3-3) you win.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  What is the probability that you win at least three times in a 30
+  rolls game?
+\end{enumerate}
+
+Solution: All combinations \(N = 6^3 = 216\). Non repeating permutations
+\(n_{lose} = \dfrac{6!}{3!} = 120\). Probability of win is
+\(1 - \dfrac{n_lose}{N} = 0.444\). Probability of winning at least 3
+times is
+\[P(X \ge 3| T = 30) = 1 - P(X = 0|T=30) - P(X = 1|T=30) - P(X=2|T=30)\]
+\[P(X \ge 3| T = 30) = 1 - 0.9999933\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  What is the expected number and variance of the number of wins?
+\end{enumerate}
+
+\[E[X] = np = 30*(0.444) = 13.33\]
+\[V[X] = np(1-p) = 30*(0.444)*(1-0.444) = 7.407407\]
+
+\hypertarget{question-5}{%
+\subsection{Question 5}\label{question-5}}
+
+In a Go game, a player that wins three games out of five is the winner.
+Suppose the artificial intelligence Alpha Go has probability 0.65 of
+winning against the World's (Human) Go Champion. What is the probability
+that Alpha Go wins the game at the 4th game?
+
+Solution: AI should win 2 games in the first 3 and win the 4th game.
+\(\binom{3}{2}(0.65)^2(0.35)(0.65) = 0.289\)
+
+\hypertarget{question-6}{%
+\subsection{Question 6}\label{question-6}}
+
+An egg basket contains 8 eggs, 4 of which are broken. 3 eggs are
+selected to make an omelette.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  What is the probability that all 3 eggs are intact?
+\end{enumerate}
+
+Solution: \(\dfrac{\binom{4}{3}}{\binom{8}{3}} = 0.0714\)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  What is the probability that the 2nd broken egg is the 3rd egg?
+\end{enumerate}
+
+Solution: Probability of getting 1 intact and 1 broken egg
+\(\dfrac{\binom{4}{1}\binom{4}{1}}{\binom{8}{2}} = 0.571\). At 3rd egg
+there should be 3 intact and 3 broken eggs remaining, so getting the 3rd
+broken egg is 1/2. Final probability is \(0.286\).
+
+\hypertarget{question-7}{%
+\subsection{Question 7}\label{question-7}}
+
+Nejat is a film critic and he will attend to IKSV Film Festival between
+April 5-15. Nejat likes a movie with probability 0.6 if the genre of the
+movie is mystery. For other genres, he likes the movie with probability
+0.4. There will be 40 movies during the festival, 10 of which are
+mystery.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  What is the probability that Nejat will like a randomly selected
+  movie?
+\end{enumerate}
+
+Solution: (L)ike, (D)islike, (M)ystery, (O)ther.
+\(P(M) = 10/40 = 0.25\).
+\[P(L) = P(L|M)P(M) + P(L|O)P(O) = 0.6*0.25 + 0.4*0.75 = 0.45\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Suppose Nejat did not like the film. What is the probability that the
+  selected movie is a non-mystery film?
+\end{enumerate}
+
+Solution:
+\(P(O|D) = \dfrac{P(D|O)P(O)}{P(D)} = \dfrac{P(D|O)P(O)}{1-P(L)} = 0.6*0.75/0.55 = 0.818\)
+
+\hypertarget{question-8}{%
+\subsection{Question 8}\label{question-8}}
+
+A student applies for internships to 11 companies. She has a 0.6
+probability to get an offer for an internship.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  What is the probability that she will get offers from at least 4
+  companies?
+\end{enumerate}
+
+Solution:
+\(P(X \ge 4) = \sum_{i=4}^{11} \binom{8}{i} (0.6)^i(0.4)^{n-i} = 0.97\)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  What is the probability that she gets her fourth offer at the seventh
+  application?
+\end{enumerate}
+
+Solution: \(\binom{6}{3} (0.6)^3(0.4)^{3}(0.6) = 0.166\)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  What is the expected value and variance of the applications?
+\end{enumerate}
+
+Solution: \(E[X] = np = 11*0.6 = 6.6\),
+\(V(X) = np(1-p) = 11*0.6*0.4 = 2.64\).
+
+\hypertarget{question-9}{%
+\subsection{Question 9}\label{question-9}}
+
+A steakhouse serves (C)hateaubriand, (K)obe Beef Tenderloin and
+(T)-Bone. Customers order C with probability 0.35, K w.p. 0.2 and T w.p.
+0.45.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  12 customers arrive. What is the probability that 4 of them order C, 3
+  order K and 5 order T?
+\end{enumerate}
+
+Solution: \(\binom{12}{4,3,5}(0.35)^4(0.2)^3(0.45)^5 = 0.0614\).
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Suppose C sells for 90TL, K for 150TL and T for 120TL. If 100
+  customers are served that day, what is the expected revenue?
+\end{enumerate}
+
+Solution: \(100*(90*0.35 + 150*0.2 + 120*0.45) = 11550TL\).
+
+\hypertarget{question-10}{%
+\subsection{Question 10}\label{question-10}}
+
+An international student group will select a committee of 4 people at
+random. There are 7 Turkish, 6 Greek, 4 Italian and 5 Irish students in
+the group.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  What is the probability that all countries are represented?
+\end{enumerate}
+
+Solution: Total number students is 22.
+\(\dfrac{7*6*4*5}{\binom{22}{4}} = 0.1148325\)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  If the committee consisted of 5 people what would be the probability
+  of (a)?
+\end{enumerate}
+
+Solution:
+\(\dfrac{7*6*4*\binom{5}{2} + 7*6*5*\binom{4}{2} + 7*5*4*\binom{6}{2} + 6*5*4*\binom{7}{2}}{\binom{22}{4}} = 0.287\)
+
+\hypertarget{question-11}{%
+\subsection{Question 11}\label{question-11}}
+
+There are 3 balls in an urn, each of them is either (B)lack or (W)hite.
+At each step \(i\), a ball is drawn from the urn randomly and another
+ball is thrown the urn with equal probability for both colors. So there
+are three balls at the end of each step. Let \(X_i\) be the number of
+White balls at time \(i\). We know that at step 0, there are two white
+balls and one black ball in the urn (i.e. \(X_0 = 2\)). Calculate the
+following.
+
+a) \(P(X_1 = 2 | X_0 = 2)\)
+
+b) \(P(X_2 = 1 | X_0 = 2)\)
+
+Now consider that the process is switched. First, a ball is thrown at
+random inside the urn then a ball is drawn from the urn. Again at step
+0, there are two white balls and one black ball (i.e. \(X_0 = 2\)).
+Calculate the following.
+
+c) \(P(X_1 = 1 | X_0 = 2)\)
+
+d) \(P(X_2 = 2 | X_0 = 2)\)
+
+Solution: Define \(Y_i\) as the ball drawn the urn and \(Z_i\) as the
+ball added at stage \(i\). Probabilities of \(Z\) will always be the
+same. \(P(Z_i=W) = P(Z_i=B) = 0.5\). For a and b, probabilities of
+\(Y_i\) is dependent only on \(X_{i-1}\). But, for c and d, \(Y\)
+depends on both \(X_{i-1}\) and \(Z_i\).
+
+a)
+\(P(X_1 = 2 | X_0 = 2) = P(Y_1 = W|X_0=2)P(Z_1 = W) + P(Y_1 = B|X_0=2)P(Z_1 = B) = 2/3*1/2 + 1/3*1/2 = 1/2\).
+b)
+\(P(X_2 = 1|X_0=2) = P(X_2 = 1| X_1 = 2, X_0=2) + P(X_2 = 1| X_1 = 1,X_0=2) = P(X_2=1|X_1=2)P(X_1=2|X_0=2) + P(X_2=1|X_1=1)P(X_1=1|X_0=2)\).
+We can say that P(X\_i = x\_i\textbar{}X\_\{i-1\} = x\_\{i-1\}) is equal
+for all \(i\). So
+\(P(X_2=1|X_1=2)P(X_1=2|X_0=2) + P(X_2=1|X_1=1)P(X_1=1|X_0=2) = P(X_1=1|X_0=2)P(X_1=2|X_0=2) + P(X_1=1|X_0=1)P(X_1=1|X_0=2) = P(X_1=1|X_0=2)(P(X_1=2|X_0=2)+P(X_1=1|X_0=1))\).
+Then \(P(X_1=1|X_0=2) = P(Y_1=W|X_0=2)P(Z_1=B) = 2/3*1/2 = 1/3\).
+\(P(X_1=1|X_0=1) = P(Y_1 = W|X_0=1)P(Z_1 = W) + P(Y_1 = B|X_0=1)P(Z_1 = B) = 1/3*1/2 + 2/3*1/2 = 1/2\).
+
+So, \(P(X_1 = 2 | X_0 = 2) = 1/3*(1/2 + 1/2) = 1/3\).
+
+c) Similar but this time \(Z_i\) is more important.
+\(P(X_1 = 1 | X_0 = 2) = P(Z_1 = B)P(Y_1 = B|X_0=2,Z_1=B) = 1/2*1/2=1/4\).
+
+d)
+\(P(X_2 = 2 | X_0 = 2) = P(X_2 = 2 | X_1 = 2)P(X_1 = 2 | X_0 = 2) + P(X_2 = 2 | X_1 = 1)P(X_1 = 1 | X_0 = 2) + P(X_2 = 2 | X_1 = 3)P(X_1 = 3 | X_0 = 2)\).
+Let's rephrase
+\(P(X_1 = 2 | X_0 = 2)^2 + P(X_1 = 2 | X_0 = 1)P(X_1 = 1 | X_0 = 2) + P(X_1 = 2 | X_0 = 3)P(X_1 = 3 | X_0 = 2)\).
+\(P(X_1 = 2 | X_0 = 2) = 1/2*3/4 + 1/2*1/4 = 1/2\).
+\(P(X_1 = 2|X_0 = 1) = 1/2*1/2 = 1/4\).
+\(P(X_1 = 3|X_0 = 2) = 1/2*1/4 = 1/8\).
+\(P(X_1 = 2|X_0 = 3) = 1/2*3/4 = 3/8\).
+
+\[(1/2)^2 + 1/4 * 1/4 + 1/8*3/8 = 23/64\]
 
 \bibliography{book.bib,packages.bib}
 

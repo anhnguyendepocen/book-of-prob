@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="random-variables-and-distributions.html">
-<link rel="next" href="some-discrete-distributions.html">
+<link rel="prev" href="properties-of-poisson-distribution.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -220,18 +220,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="expectation-and-variance" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Expectation and Variance</h1>
-<p><em>This chapter will be improved</em></p>
-<div id="mathematical-expectation" class="section level2">
-<h2><span class="header-section-number">4.1</span> Mathematical Expectation</h2>
-<p><span class="math display">\[E[X] = \sum x f(x)\]</span>
-<span class="math display">\[E[X] = \int x f(x) dx\]</span></p>
+<div id="exercise-questions" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Exercise Questions</h1>
+<div id="question-1" class="section level3">
+<h3><span class="header-section-number">7.0.1</span> Question 1</h3>
+<p>How many ways are there to arrange “ECONOMETRICS”.</p>
+<p>Solution: There 12 characters, 5 vowels 7 consonants. 2 Cs, 2 Es and 2 Os.</p>
+<ol style="list-style-type: lower-alpha">
+<li>In any order.</li>
+</ol>
+<p>Solution: <span class="math inline">\(\dfrac{12!}{2!2!2!}\)</span>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Vowels together.</li>
+</ol>
+<p>Solution: Add one representative letter to consonants to denote vowels as a single letter. <span class="math inline">\(\dfrac{8!}{2!}\dfrac{5!}{2!2!}\)</span>.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>No consecutive vowels.</li>
+</ol>
+<p>Solution: <span class="math inline">\(\dfrac{7!}{2!}\dfrac{8!}{(8-5)!2!2!}\)</span></p>
+<!-- Permutation/Combination -->
 </div>
-<div id="variance" class="section level2">
-<h2><span class="header-section-number">4.2</span> Variance</h2>
-<p><span class="math display">\[V(X) = E[X^2] - E[X]^2 \]</span></p>
+<div id="question-2" class="section level3">
+<h3><span class="header-section-number">7.0.2</span> Question 2</h3>
+<p>7 people from Istanbul (suppose names A-B-C-D-E-F-G) and 7 people from Ankara (M-N-O-P-Q-R-S) will sit around a round table.</p>
+<ol style="list-style-type: lower-alpha">
+<li>In how many different ways can they sit around the table?</li>
+</ol>
+<p>Solution: <span class="math inline">\((14-1)! = 13!\)</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Same as (a) but no two people from Ankara should sit together.</li>
+</ol>
+<p>Solution: Fix one from Istanbul to a position. <span class="math inline">\((7-1)!(7)!\)</span></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Same as (a) but all the people from Istanbul should sit together.</li>
+</ol>
+<p>Solution: Suppose there are 8 people from Ankara, 1 reserved for Istanbul group and Istanbul people have their own permutation within. <span class="math inline">\((8-1)!7!\)</span></p>
+<!-- Expectation -->
+</div>
+<div id="question-3" class="section level3">
+<h3><span class="header-section-number">7.0.3</span> Question 3</h3>
+<p>You roll a die once, and assume the number your rolled is X. Then continue rolling the die until you either match or exceed X. What is the expected number of additional rolls?</p>
+<p>Solution:</p>
+<p><span class="math display">\[E[n|X_1=i] = 1/P(X_2 \ge i| X_1 = i) = 6/(6-i+1)\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^6 = 6/(6-i+1) * P(X=i) = 2.45\]</span></p>
+<!-- Expectation -->
+</div>
+<div id="question-4" class="section level3">
+<h3><span class="header-section-number">7.0.4</span> Question 4</h3>
+<p>In a three dice roll, if at least two dice have the same number (e.g. 5-5-4 or 3-3-3) you win.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that you win at least three times in a 30 rolls game?</li>
+</ol>
+<p>Solution:
+All combinations <span class="math inline">\(N = 6^3 = 216\)</span>.
+Non repeating permutations <span class="math inline">\(n_{lose} = \dfrac{6!}{3!} = 120\)</span>.
+Probability of win is <span class="math inline">\(1 - \dfrac{n_lose}{N} = 0.444\)</span>.
+Probability of winning at least 3 times is
+<span class="math display">\[P(X \ge 3| T = 30) = 1 - P(X = 0|T=30) - P(X = 1|T=30) - P(X=2|T=30)\]</span>
+<span class="math display">\[P(X \ge 3| T = 30) = 1 - 0.9999933\]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the expected number and variance of the number of wins?</li>
+</ol>
+<p><span class="math display">\[E[X] = np = 30*(0.444) = 13.33\]</span>
+<span class="math display">\[V[X] = np(1-p) = 30*(0.444)*(1-0.444) = 7.407407\]</span></p>
+<!-- Negative Binomial -->
+</div>
+<div id="question-5" class="section level3">
+<h3><span class="header-section-number">7.0.5</span> Question 5</h3>
+<p>In a Go game, a player that wins three games out of five is the winner. Suppose the artificial intelligence Alpha Go has probability 0.65 of winning against the World’s (Human) Go Champion. What is the probability that Alpha Go wins the game at the 4th game?</p>
+<p>Solution: AI should win 2 games in the first 3 and win the 4th game. <span class="math inline">\(\binom{3}{2}(0.65)^2(0.35)(0.65) = 0.289\)</span></p>
+<!-- Hypergeometric  -->
+<!-- Negative binomial  -->
+</div>
+<div id="question-6" class="section level3">
+<h3><span class="header-section-number">7.0.6</span> Question 6</h3>
+<p>An egg basket contains 8 eggs, 4 of which are broken. 3 eggs are selected to make an omelette.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that all 3 eggs are intact?</li>
+</ol>
+<p>Solution: <span class="math inline">\(\dfrac{\binom{4}{3}}{\binom{8}{3}} = 0.0714\)</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the probability that the 2nd broken egg is the 3rd egg?</li>
+</ol>
+<p>Solution: Probability of getting 1 intact and 1 broken egg <span class="math inline">\(\dfrac{\binom{4}{1}\binom{4}{1}}{\binom{8}{2}} = 0.571\)</span>. At 3rd egg there should be 3 intact and 3 broken eggs remaining, so getting the 3rd broken egg is 1/2. Final probability is <span class="math inline">\(0.286\)</span>.</p>
+<!-- Conditional Probability -->
+</div>
+<div id="question-7" class="section level3">
+<h3><span class="header-section-number">7.0.7</span> Question 7</h3>
+<p>Nejat is a film critic and he will attend to IKSV Film Festival between April 5-15. Nejat likes a movie with probability 0.6 if the genre of the movie is mystery. For other genres, he likes the movie with probability 0.4. There will be 40 movies during the festival, 10 of which are mystery.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that Nejat will like a randomly selected movie?</li>
+</ol>
+<p>Solution: (L)ike, (D)islike, (M)ystery, (O)ther. <span class="math inline">\(P(M) = 10/40 = 0.25\)</span>.
+<span class="math display">\[P(L) = P(L|M)P(M) + P(L|O)P(O) = 0.6*0.25 + 0.4*0.75 = 0.45\]</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Suppose Nejat did not like the film. What is the probability that the selected movie is a non-mystery film?</li>
+</ol>
+<p>Solution: <span class="math inline">\(P(O|D) = \dfrac{P(D|O)P(O)}{P(D)} = \dfrac{P(D|O)P(O)}{1-P(L)} = 0.6*0.75/0.55 = 0.818\)</span></p>
+<!-- Binomial Distribution -->
+</div>
+<div id="question-8" class="section level3">
+<h3><span class="header-section-number">7.0.8</span> Question 8</h3>
+<p>A student applies for internships to 11 companies. She has a 0.6 probability to get an offer for an internship.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that she will get offers from at least 4 companies?</li>
+</ol>
+<p>Solution: <span class="math inline">\(P(X \ge 4) = \sum_{i=4}^{11} \binom{8}{i} (0.6)^i(0.4)^{n-i} = 0.97\)</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the probability that she gets her fourth offer at the seventh application?</li>
+</ol>
+<p>Solution: <span class="math inline">\(\binom{6}{3} (0.6)^3(0.4)^{3}(0.6) = 0.166\)</span></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>What is the expected value and variance of the applications?</li>
+</ol>
+<p>Solution: <span class="math inline">\(E[X] = np = 11*0.6 = 6.6\)</span>, <span class="math inline">\(V(X) = np(1-p) = 11*0.6*0.4 = 2.64\)</span>.</p>
+<!-- Multinomial Distribution -->
+</div>
+<div id="question-9" class="section level3">
+<h3><span class="header-section-number">7.0.9</span> Question 9</h3>
+<p>A steakhouse serves (C)hateaubriand, (K)obe Beef Tenderloin and (T)-Bone. Customers order C with probability 0.35, K w.p. 0.2 and T w.p. 0.45.</p>
+<ol style="list-style-type: lower-alpha">
+<li>12 customers arrive. What is the probability that 4 of them order C, 3 order K and 5 order T?</li>
+</ol>
+<p>Solution: <span class="math inline">\(\binom{12}{4,3,5}(0.35)^4(0.2)^3(0.45)^5 = 0.0614\)</span>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Suppose C sells for 90TL, K for 150TL and T for 120TL. If 100 customers are served that day, what is the expected revenue?</li>
+</ol>
+<p>Solution: <span class="math inline">\(100*(90*0.35 + 150*0.2 + 120*0.45) = 11550TL\)</span>.</p>
+</div>
+<div id="question-10" class="section level3">
+<h3><span class="header-section-number">7.0.10</span> Question 10</h3>
+<p>An international student group will select a committee of 4 people at random. There are 7 Turkish, 6 Greek, 4 Italian and 5 Irish students in the group.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that all countries are represented?</li>
+</ol>
+<p>Solution: Total number students is 22. <span class="math inline">\(\dfrac{7*6*4*5}{\binom{22}{4}} = 0.1148325\)</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>If the committee consisted of 5 people what would be the probability of (a)?</li>
+</ol>
+<p>Solution: <span class="math inline">\(\dfrac{7*6*4*\binom{5}{2} + 7*6*5*\binom{4}{2} + 7*5*4*\binom{6}{2} + 6*5*4*\binom{7}{2}}{\binom{22}{4}} = 0.287\)</span></p>
+</div>
+<div id="question-11" class="section level3">
+<h3><span class="header-section-number">7.0.11</span> Question 11</h3>
+<p>There are 3 balls in an urn, each of them is either (B)lack or (W)hite. At each step <span class="math inline">\(i\)</span>, a ball is drawn from the urn randomly and another ball is thrown the urn with equal probability for both colors. So there are three balls at the end of each step. Let <span class="math inline">\(X_i\)</span> be the number of White balls at time <span class="math inline">\(i\)</span>. We know that at step 0, there are two white balls and one black ball in the urn (i.e. <span class="math inline">\(X_0 = 2\)</span>). Calculate the following.</p>
+<p>a) <span class="math inline">\(P(X_1 = 2 | X_0 = 2)\)</span></p>
+<p>b) <span class="math inline">\(P(X_2 = 1 | X_0 = 2)\)</span></p>
+<p>Now consider that the process is switched. First, a ball is thrown at random inside the urn then a ball is drawn from the urn. Again at step 0, there are two white balls and one black ball (i.e. <span class="math inline">\(X_0 = 2\)</span>). Calculate the following.</p>
+<p>c) <span class="math inline">\(P(X_1 = 1 | X_0 = 2)\)</span></p>
+<p>d) <span class="math inline">\(P(X_2 = 2 | X_0 = 2)\)</span></p>
+<p>Solution: Define <span class="math inline">\(Y_i\)</span> as the ball drawn the urn and <span class="math inline">\(Z_i\)</span> as the ball added at stage <span class="math inline">\(i\)</span>. Probabilities of <span class="math inline">\(Z\)</span> will always be the same. <span class="math inline">\(P(Z_i=W) = P(Z_i=B) = 0.5\)</span>. For a and b, probabilities of <span class="math inline">\(Y_i\)</span> is dependent only on <span class="math inline">\(X_{i-1}\)</span>. But, for c and d, <span class="math inline">\(Y\)</span> depends on both <span class="math inline">\(X_{i-1}\)</span> and <span class="math inline">\(Z_i\)</span>.</p>
+<p>a) <span class="math inline">\(P(X_1 = 2 | X_0 = 2) = P(Y_1 = W|X_0=2)P(Z_1 = W) + P(Y_1 = B|X_0=2)P(Z_1 = B) = 2/3*1/2 + 1/3*1/2 = 1/2\)</span>.
+b) <span class="math inline">\(P(X_2 = 1|X_0=2) = P(X_2 = 1| X_1 = 2, X_0=2) + P(X_2 = 1| X_1 = 1,X_0=2) = P(X_2=1|X_1=2)P(X_1=2|X_0=2) + P(X_2=1|X_1=1)P(X_1=1|X_0=2)\)</span>. We can say that P(X_i = x_i|X_{i-1} = x_{i-1}) is equal for all <span class="math inline">\(i\)</span>. So <span class="math inline">\(P(X_2=1|X_1=2)P(X_1=2|X_0=2) + P(X_2=1|X_1=1)P(X_1=1|X_0=2) = P(X_1=1|X_0=2)P(X_1=2|X_0=2) + P(X_1=1|X_0=1)P(X_1=1|X_0=2) = P(X_1=1|X_0=2)(P(X_1=2|X_0=2)+P(X_1=1|X_0=1))\)</span>. Then <span class="math inline">\(P(X_1=1|X_0=2) = P(Y_1=W|X_0=2)P(Z_1=B) = 2/3*1/2 = 1/3\)</span>. <span class="math inline">\(P(X_1=1|X_0=1) = P(Y_1 = W|X_0=1)P(Z_1 = W) + P(Y_1 = B|X_0=1)P(Z_1 = B) = 1/3*1/2 + 2/3*1/2 = 1/2\)</span>.</p>
+<p>So, <span class="math inline">\(P(X_1 = 2 | X_0 = 2) = 1/3*(1/2 + 1/2) = 1/3\)</span>.</p>
+<p>c) Similar but this time <span class="math inline">\(Z_i\)</span> is more important. <span class="math inline">\(P(X_1 = 1 | X_0 = 2) = P(Z_1 = B)P(Y_1 = B|X_0=2,Z_1=B) = 1/2*1/2=1/4\)</span>.</p>
+<p>d) <span class="math inline">\(P(X_2 = 2 | X_0 = 2) = P(X_2 = 2 | X_1 = 2)P(X_1 = 2 | X_0 = 2) + P(X_2 = 2 | X_1 = 1)P(X_1 = 1 | X_0 = 2) + P(X_2 = 2 | X_1 = 3)P(X_1 = 3 | X_0 = 2)\)</span>. Let’s rephrase <span class="math inline">\(P(X_1 = 2 | X_0 = 2)^2 + P(X_1 = 2 | X_0 = 1)P(X_1 = 1 | X_0 = 2) + P(X_1 = 2 | X_0 = 3)P(X_1 = 3 | X_0 = 2)\)</span>. <span class="math inline">\(P(X_1 = 2 | X_0 = 2) = 1/2*3/4 + 1/2*1/4 = 1/2\)</span>. <span class="math inline">\(P(X_1 = 2|X_0 = 1) = 1/2*1/2 = 1/4\)</span>. <span class="math inline">\(P(X_1 = 3|X_0 = 2) = 1/2*1/4 = 1/8\)</span>. <span class="math inline">\(P(X_1 = 2|X_0 = 3) = 1/2*3/4 = 3/8\)</span>.</p>
+<p><span class="math display">\[(1/2)^2 + 1/4 * 1/4 + 1/8*3/8 = 23/64\]</span></p>
 
+<div id="refs" class="references">
+<div>
+<p>Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, and Keying Ye. 2012. <em>Probability and Statistics for Engineers and Scientists</em>. 9th ed. Boston, MA: Pearson.</p>
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -239,8 +388,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="random-variables-and-distributions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="some-discrete-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="properties-of-poisson-distribution.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

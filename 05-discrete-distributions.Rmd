@@ -128,6 +128,37 @@ Geometric distribution answers "What is the probability that first success comes
 
 + $V[X] = \dfrac{1-p}{p^2}$
 
+## Poisson Distribution
+
+Poisson distribution is widely used to represent occurences in an interval, mostly time but sometimes area. Examples include arrivals to queues in a day, number of breakdowns in a machine in a year, typos in a letter, oil reserve in a region.
+
+### Binomial Approximation to Poisson Distribution
+
+We know from binomial distribution that $k$ occurences in $n$ trials with probability $p$ has the following function.
+
+$$P\{X = k\} = \binom{n}{k} p^k (1-p)^{n-k} = \dfrac{n!}{(n-k)!k!} p^k (1-p)^{n-k}$$
+
+and expected value is $E[X] = np$. Now define $\lambda = np$.
+
+\begin{align*}
+P\{X = k\} =& \dfrac{n!}{(n-k)!k!} \left(\dfrac{\lambda}{n}\right)^k \left(1-\left(\dfrac{\lambda}{n}\right)\right)^{n-k} \\
+           =& \dfrac{n (n-1) \dots (n-k+1)}{n^k} \left(\dfrac{\lambda^k}{k!}\right) \dfrac{(1-\dfrac{\lambda}{n})^n}{(1-\dfrac{\lambda}{n})^k}
+\end{align*}
+
+For very large $n$ and very small $p$ the resulting pdf becomes $\dfrac{\lambda^k e^{-\lambda}}{k!}$.
+
+# Properties of Poisson Distribution
+
++ PMF: $P\{X = k\}  = \dfrac{\lambda^k e^{-\lambda}}{k!}$
+
++ CDF: $P\{X \le k\}  = \sum_{i=0}^k \dfrac{\lambda^i e^{-\lambda}}{i!}$
+
++ $E[X] = \lambda (due to \sum_{i=0}^\infty\dfrac{x^i}{i!} = e^x)$
+
++ $V(X) = \lambda$
+
+Rate parameter $\lambda$ can also be defined as $\lambda t$, $t$ being the scale parameter. For instance, let arrivals in 30 minutes interval be $\lambda t_{30} = 4$. If we would want to work on hourly intervals, we should simply rescale, $\lambda t_{60} = 8$.
+
 
 ## Chapter Questions
 
@@ -202,9 +233,7 @@ Geometric distribution answers "What is the probability that first success comes
     _Solution:_
 
     a) 10 out of 10 means 10^2 = 100.
-    b) $g(X = x) = x^2$ if $x \geq 7$, $f(g(X) = x^2) = f(X = x) = \binom{10}{x} 0.15^x * 0.85^(10-k)$, so $E[g(x)] = \sum_{i=0}^10 g(x)f(x)$.
-
-        $g(X = x) = -5*x$ if $x \leq 6$.
+    b) $g(X = x) = x^2$ if $x \geq 7$, $-x$ else, $f(g(X) = x^2) = f(X = x) = \binom{10}{x} 0.15^x * 0.85^(10-k)$, so $E[g(x)] = \sum_{i=0}^10 g(x)f(x)$.
 
         So $49 * \binom{10}{7} 0.15^7 * 0.85^3 + 64 * \binom{10}{8} 0.15^8 * 0.85^2 + 81 * \binom{10}{9} 0.15^9 * 0.85 + 100 * (0.15)^10$ $-20 * \binom{10}{6} 0.15^6 * 0.85^4 -25 * \binom{10}{5} 0.15^5 * 0.85^5 - 30 * \binom{10}{4} 0.15^4 * 0.85^6 - 35 * \binom{10}{3} 0.15^3 * 0.85^7 - 40 * \binom{10}{2} 0.15^2 * 0.85^8 - 45 * \binom{10}{1} 0.15^1 * 0.85^9 - 50 * 0.85^10 = -42.5TL$.
 
@@ -223,4 +252,66 @@ Geometric distribution answers "What is the probability that first success comes
     ```{r}
     ex2<-sum(rewards^2*probs_rewards) + sum(losses^2*probs_losses)
     ex2 - expectation^2
+    ```
+
+6. Suppose a machine has a probability of failure 0.001 per hour. What is the probability that the machine had failed at least three times within 2000 hours.
+
+    _Binomial solution_
+
+    \begin{align*}
+    P\{X \ge 3\} &= 1 - \binom{2000}{0} 0.001^0 0.999^{750} - \binom{2000}{1} 0.001^1 0.999^{749} - \binom{2000}{2} 0.001^2 0.999^{748} \\
+    &= 0.3233236
+    \end{align*}
+
+    ```{r}
+    #R version
+    1- sum(dbinom(0:2,2000,0.001))
+    ```
+
+    _Poisson solution_
+
+    \begin{align*}
+    \lambda &= np = 2000*0.001 = 2 \\
+    P\{X \ge 3\} &= 1 - \dfrac{e^{-2}2^0}{0!} - \dfrac{e^{-2}2^1}{1!} - \dfrac{e^{-2}2^2}{2!} \\
+        &= 0.3233236
+    \end{align*}
+
+    ```{r}
+    #R version
+    lambda=2000*0.001
+    1- sum(dpois(0:2,lambda))
+    ```
+
+7. People arrive at a bank with rate $\lambda = 5$ every 10 minutes. What is the probability that 10 people arrive in 30 minutes?
+
+    $$\lambda t_{10} = 5$$
+
+    $$\lambda^\prime = \lambda t_{30} = 15 $$
+
+    $$P\{X = 10, t=30\} = \dfrac{e^{-15}15^{10}}{10!} =  0.049$$
+
+    ```{r}
+    dpois(10,15)
+    ```
+
+8. A machine breaks down with a poisson rate of $\lambda = 10$ per year. A new method is tried to reduce the failure rate to $\lambda = 3$, but there is a 50% chance that it won't work. If the method is tried and the machine fails only 3 times that year, what is the probability that the method worked on the machine?
+
+    \begin{align*}
+    P\{Works | X = 3\}  &= \dfrac{P\{Works and X = 3\}}{P\{X = 3\}} \\~\\
+    P\{Works\} &= 0.5\\~\\
+    P\{Works and X = 3\} &= 0.5 * \dfrac{e^{-3}3^3}{3!} = 0.1120209\\~\\
+    P\{X = 3\} &= P\{Works and X = 3\} + P\{Doesn't\ Work and X = 3\} = 0.5 * \dfrac{e^{-3}3^3}{3!} + 0.5 * \dfrac{e^{-10}10^3}{3!} \\
+    &= 0.96733
+    \end{align*}
+
+    ```{r}
+    #R codes
+    #Probability that it works
+    pw = 0.5
+    #Probability of 3 fails if lambda is 10
+    ppois10 = dpois(3,10)
+    #Probability of 3 fails if lambda is 3
+    ppois3 = dpois(3,3)
+    #P(Works | X = 3)
+    (pw*ppois3)/(pw*ppois3 + (1-pw)*ppois10)
     ```

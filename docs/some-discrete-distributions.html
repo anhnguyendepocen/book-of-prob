@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="expectation-and-variance.html">
-
+<link rel="next" href="properties-of-poisson-distribution.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -179,7 +179,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="some-discrete-distributions.html"><a href="some-discrete-distributions.html#hypergeometric-distribution"><i class="fa fa-check"></i><b>5.4</b> Hypergeometric Distribution</a></li>
 <li class="chapter" data-level="5.5" data-path="some-discrete-distributions.html"><a href="some-discrete-distributions.html#negative-binomial-distribution"><i class="fa fa-check"></i><b>5.5</b> Negative Binomial Distribution</a></li>
 <li class="chapter" data-level="5.6" data-path="some-discrete-distributions.html"><a href="some-discrete-distributions.html#geometric-distribution"><i class="fa fa-check"></i><b>5.6</b> Geometric Distribution</a></li>
-<li class="chapter" data-level="5.7" data-path="some-discrete-distributions.html"><a href="some-discrete-distributions.html#chapter-questions"><i class="fa fa-check"></i><b>5.7</b> Chapter Questions</a></li>
+<li class="chapter" data-level="5.7" data-path="some-discrete-distributions.html"><a href="some-discrete-distributions.html#poisson-distribution"><i class="fa fa-check"></i><b>5.7</b> Poisson Distribution</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="some-discrete-distributions.html"><a href="some-discrete-distributions.html#binomial-approximation-to-poisson-distribution"><i class="fa fa-check"></i><b>5.7.1</b> Binomial Approximation to Poisson Distribution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="properties-of-poisson-distribution.html"><a href="properties-of-poisson-distribution.html"><i class="fa fa-check"></i><b>6</b> Properties of Poisson Distribution</a><ul>
+<li class="chapter" data-level="6.1" data-path="properties-of-poisson-distribution.html"><a href="properties-of-poisson-distribution.html#chapter-questions"><i class="fa fa-check"></i><b>6.1</b> Chapter Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="exercise-questions.html"><a href="exercise-questions.html"><i class="fa fa-check"></i><b>7</b> Exercise Questions</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="exercise-questions.html"><a href="exercise-questions.html#question-1"><i class="fa fa-check"></i><b>7.0.1</b> Question 1</a></li>
+<li class="chapter" data-level="7.0.2" data-path="exercise-questions.html"><a href="exercise-questions.html#question-2"><i class="fa fa-check"></i><b>7.0.2</b> Question 2</a></li>
+<li class="chapter" data-level="7.0.3" data-path="exercise-questions.html"><a href="exercise-questions.html#question-3"><i class="fa fa-check"></i><b>7.0.3</b> Question 3</a></li>
+<li class="chapter" data-level="7.0.4" data-path="exercise-questions.html"><a href="exercise-questions.html#question-4"><i class="fa fa-check"></i><b>7.0.4</b> Question 4</a></li>
+<li class="chapter" data-level="7.0.5" data-path="exercise-questions.html"><a href="exercise-questions.html#question-5"><i class="fa fa-check"></i><b>7.0.5</b> Question 5</a></li>
+<li class="chapter" data-level="7.0.6" data-path="exercise-questions.html"><a href="exercise-questions.html#question-6"><i class="fa fa-check"></i><b>7.0.6</b> Question 6</a></li>
+<li class="chapter" data-level="7.0.7" data-path="exercise-questions.html"><a href="exercise-questions.html#question-7"><i class="fa fa-check"></i><b>7.0.7</b> Question 7</a></li>
+<li class="chapter" data-level="7.0.8" data-path="exercise-questions.html"><a href="exercise-questions.html#question-8"><i class="fa fa-check"></i><b>7.0.8</b> Question 8</a></li>
+<li class="chapter" data-level="7.0.9" data-path="exercise-questions.html"><a href="exercise-questions.html#question-9"><i class="fa fa-check"></i><b>7.0.9</b> Question 9</a></li>
+<li class="chapter" data-level="7.0.10" data-path="exercise-questions.html"><a href="exercise-questions.html#question-10"><i class="fa fa-check"></i><b>7.0.10</b> Question 10</a></li>
+<li class="chapter" data-level="7.0.11" data-path="exercise-questions.html"><a href="exercise-questions.html#question-11"><i class="fa fa-check"></i><b>7.0.11</b> Question 11</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown.</a></li>
@@ -311,84 +329,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><span class="math inline">\(V[X] = \dfrac{1-p}{p^2}\)</span></p></li>
 </ul>
 </div>
-<div id="chapter-questions" class="section level2">
-<h2><span class="header-section-number">5.7</span> Chapter Questions</h2>
-<ol style="list-style-type: decimal">
-<li><p>A boutique shop offers three types of breads; olive, rye and white. 15% of its customers buy olive bread, 55% rye bread and the rest white bread. What is the probability that the first 10 customers of the shop buys 2 olive, 5 rye and 3 white bread?</p>
-<p><em>Solution:</em> Multinomial distribution.</p>
-<p><span class="math display">\[\binom{10}{2,5,3} 0.15^2 * 0.55^5 * 0.3^3 = 0.0770478\]</span></p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">n_total =<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb92-2" data-line-number="2"><span class="co"># Olive bread</span></a>
-<a class="sourceLine" id="cb92-3" data-line-number="3">p_<span class="dv">1</span> =<span class="st"> </span><span class="fl">0.15</span></a>
-<a class="sourceLine" id="cb92-4" data-line-number="4">n_<span class="dv">1</span> =<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb92-5" data-line-number="5"><span class="co"># Rye bread</span></a>
-<a class="sourceLine" id="cb92-6" data-line-number="6">p_<span class="dv">2</span> =<span class="st"> </span><span class="fl">0.55</span></a>
-<a class="sourceLine" id="cb92-7" data-line-number="7">n_<span class="dv">2</span> =<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb92-8" data-line-number="8"><span class="co"># White bread</span></a>
-<a class="sourceLine" id="cb92-9" data-line-number="9">p_<span class="dv">3</span> =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">2</span> <span class="op">-</span><span class="st"> </span>p_<span class="dv">1</span></a>
-<a class="sourceLine" id="cb92-10" data-line-number="10">n_<span class="dv">3</span> =<span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb92-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb92-12" data-line-number="12"><span class="kw">factorial</span>(n_total)<span class="op">/</span>(<span class="kw">factorial</span>(n_<span class="dv">1</span>)<span class="op">*</span><span class="kw">factorial</span>(n_<span class="dv">2</span>)<span class="op">*</span><span class="kw">factorial</span>(n_<span class="dv">3</span>)) <span class="op">*</span><span class="st"> </span>p_<span class="dv">1</span><span class="op">^</span>n_<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>p_<span class="dv">2</span><span class="op">^</span>n_<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>p_<span class="dv">3</span><span class="op">^</span>n_<span class="dv">3</span></a></code></pre></div>
-<pre><code>## [1] 0.0770478</code></pre></li>
-<li><p>An urn contains 32 balls; 18 red, 14 white. If I take 8 balls randomly from the urn, what is the probability of getting 4 red balls?</p>
-<p><em>Solution:</em> Hypergeometric distribution.</p>
-<p><span class="math display">\[\dfrac{\binom{18}{4}\binom{14}{4}}{\binom{32}{8}} = 0.2912125\]</span></p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">n_total =<span class="st"> </span><span class="dv">32</span> <span class="co">#N</span></a>
-<a class="sourceLine" id="cb94-2" data-line-number="2">k_total =<span class="st"> </span><span class="dv">8</span></a>
-<a class="sourceLine" id="cb94-3" data-line-number="3">n_<span class="dv">1</span> =<span class="st"> </span><span class="dv">18</span></a>
-<a class="sourceLine" id="cb94-4" data-line-number="4">n_<span class="dv">2</span> =<span class="st"> </span><span class="dv">14</span></a>
-<a class="sourceLine" id="cb94-5" data-line-number="5">k_<span class="dv">1</span> =<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb94-6" data-line-number="6">k_<span class="dv">2</span> =<span class="st"> </span><span class="dv">4</span></a>
-<a class="sourceLine" id="cb94-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb94-8" data-line-number="8">(<span class="kw">choose</span>(n_<span class="dv">1</span>,k_<span class="dv">1</span>)<span class="op">*</span><span class="kw">choose</span>(n_<span class="dv">2</span>,k_<span class="dv">2</span>))<span class="op">/</span><span class="kw">choose</span>(n_total,k_total)</a></code></pre></div>
-<pre><code>## [1] 0.2912125</code></pre></li>
-<li><p>A UNICEF activist asks bypassers to contribute to their efforts. Each of her attempts has a 10% chance of success. What is the probability that she got the first contribution at the 10th attempt?</p>
-<p><em>Solution:</em> Geometric distribution.</p>
-<p><span class="math display">\[ (0.9)^9 * (0.1) = 0.03874205\]</span></p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">(<span class="fl">0.9</span>)<span class="op">^</span><span class="dv">9</span> <span class="op">*</span><span class="st"> </span>(<span class="fl">0.1</span>)</a></code></pre></div>
-<pre><code>## [1] 0.03874205</code></pre></li>
-<li><p>Suppose there are 10 cards in a deck numbered from 1 to 10. If I draw four cards out of the deck without putting them back, what is the probability that they are in increasing order (e.g. 3-4-5-8)?</p>
-<p><em>Solution</em>: Increasing order is a special order. There is only one decreasing order in every permutation set. For instance</p>
-<p><span class="math display">\[8-5-4-3\]</span>
-<span class="math display">\[8-5-3-4\]</span>
-<span class="math display">\[8-4-5-3\]</span>
-<span class="math display">\[4-5-3-8\]</span>
-<span class="math display">\[\dots\]</span>
-<span class="math display">\[**3-4-5-8**\]</span></p>
-<p>So, the answer is <span class="math inline">\(1/(4!) = 1/24\)</span>.</p></li>
-<li><p>A tennis player has the probability of 0.15 to ace a serve (i.e. he serves and gets the point without the opponent touching the ball) at each shot. His trainer challenged him that he will pay the square of the aces he makes out of 10 serves (e.g. if he serves 8 aces out of 10, the trainer pays him <span class="math inline">\(8^2 = 64TL\)</span>). But, if he serves less than or equal to 6 aces, the player should pay the trainer 5 TL for each ace he missed (e.g. 4 aces 6 misses, player pays up 6*5 = 30TL).</p>
-<ol style="list-style-type: lower-alpha">
-<li>What is the maximum amount of money he can get?</li>
-<li>What is the expected earnings of the player?</li>
-<li>What is the variance of his earnings?</li>
-</ol>
-<p><em>Solution:</em></p>
-<ol style="list-style-type: lower-alpha">
-<li>10 out of 10 means 10^2 = 100.</li>
-<li><p><span class="math inline">\(g(X = x) = x^2\)</span> if <span class="math inline">\(x \geq 7\)</span>, <span class="math inline">\(f(g(X) = x^2) = f(X = x) = \binom{10}{x} 0.15^x * 0.85^(10-k)\)</span>, so <span class="math inline">\(E[g(x)] = \sum_{i=0}^10 g(x)f(x)\)</span>.</p>
-<p><span class="math inline">\(g(X = x) = -5*x\)</span> if <span class="math inline">\(x \leq 6\)</span>.</p>
-<p>So <span class="math inline">\(49 * \binom{10}{7} 0.15^7 * 0.85^3 + 64 * \binom{10}{8} 0.15^8 * 0.85^2 + 81 * \binom{10}{9} 0.15^9 * 0.85 + 100 * (0.15)^10\)</span> <span class="math inline">\(-20 * \binom{10}{6} 0.15^6 * 0.85^4 -25 * \binom{10}{5} 0.15^5 * 0.85^5 - 30 * \binom{10}{4} 0.15^4 * 0.85^6 - 35 * \binom{10}{3} 0.15^3 * 0.85^7 - 40 * \binom{10}{2} 0.15^2 * 0.85^8 - 45 * \binom{10}{1} 0.15^1 * 0.85^9 - 50 * 0.85^10 = -42.5TL\)</span>.</p></li>
-</ol>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1">rewards &lt;-<span class="st"> </span>(<span class="dv">7</span><span class="op">:</span><span class="dv">10</span>)<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb98-2" data-line-number="2">probs_rewards &lt;-<span class="st"> </span><span class="kw">dbinom</span>(<span class="dv">7</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">10</span>,<span class="fl">0.15</span>)</a>
-<a class="sourceLine" id="cb98-3" data-line-number="3">losses &lt;-<span class="st"> </span><span class="dv">-5</span><span class="op">*</span>(<span class="dv">10</span><span class="op">-</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb98-4" data-line-number="4">probs_losses &lt;-<span class="st"> </span><span class="kw">dbinom</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">0</span>,<span class="dv">10</span>,<span class="fl">0.15</span>)</a>
-<a class="sourceLine" id="cb98-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb98-6" data-line-number="6">expectation &lt;-<span class="st"> </span><span class="kw">sum</span>(rewards<span class="op">*</span>probs_rewards) <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(losses<span class="op">*</span>probs_losses)</a>
-<a class="sourceLine" id="cb98-7" data-line-number="7">expectation</a></code></pre></div>
-<pre><code>## [1] -42.4913</code></pre>
-<ol start="3" style="list-style-type: lower-alpha">
-<li><span class="math inline">\(V(X) = E[X^2] - (E[X])^2\)</span>. We know that <span class="math inline">\(E[X] = -42.5\)</span>, then <span class="math inline">\((E[X])^2 = 1805.51\)</span>. Also <span class="math inline">\(E[X^2] = 1838.434\)</span> and <span class="math inline">\(V(X) = 32.92\)</span>.</li>
-</ol>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">ex2&lt;-<span class="kw">sum</span>(rewards<span class="op">^</span><span class="dv">2</span><span class="op">*</span>probs_rewards) <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(losses<span class="op">^</span><span class="dv">2</span><span class="op">*</span>probs_losses)</a>
-<a class="sourceLine" id="cb100-2" data-line-number="2">ex2 <span class="op">-</span><span class="st"> </span>expectation<span class="op">^</span><span class="dv">2</span></a></code></pre></div>
-<pre><code>## [1] 32.92423</code></pre></li>
-</ol>
-
-<div id="refs" class="references">
-<div>
-<p>Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, and Keying Ye. 2012. <em>Probability and Statistics for Engineers and Scientists</em>. 9th ed. Boston, MA: Pearson.</p>
-</div>
+<div id="poisson-distribution" class="section level2">
+<h2><span class="header-section-number">5.7</span> Poisson Distribution</h2>
+<p>Poisson distribution is widely used to represent occurences in an interval, mostly time but sometimes area. Examples include arrivals to queues in a day, number of breakdowns in a machine in a year, typos in a letter, oil reserve in a region.</p>
+<div id="binomial-approximation-to-poisson-distribution" class="section level3">
+<h3><span class="header-section-number">5.7.1</span> Binomial Approximation to Poisson Distribution</h3>
+<p>We know from binomial distribution that <span class="math inline">\(k\)</span> occurences in <span class="math inline">\(n\)</span> trials with probability <span class="math inline">\(p\)</span> has the following function.</p>
+<p><span class="math display">\[P\{X = k\} = \binom{n}{k} p^k (1-p)^{n-k} = \dfrac{n!}{(n-k)!k!} p^k (1-p)^{n-k}\]</span></p>
+<p>and expected value is <span class="math inline">\(E[X] = np\)</span>. Now define <span class="math inline">\(\lambda = np\)</span>.</p>
+<span class="math display">\[\begin{align*}
+P\{X = k\} =&amp; \dfrac{n!}{(n-k)!k!} \left(\dfrac{\lambda}{n}\right)^k \left(1-\left(\dfrac{\lambda}{n}\right)\right)^{n-k} \\
+           =&amp; \dfrac{n (n-1) \dots (n-k+1)}{n^k} \left(\dfrac{\lambda^k}{k!}\right) \dfrac{(1-\dfrac{\lambda}{n})^n}{(1-\dfrac{\lambda}{n})^k}
+\end{align*}\]</span>
+<p>For very large <span class="math inline">\(n\)</span> and very small <span class="math inline">\(p\)</span> the resulting pdf becomes <span class="math inline">\(\dfrac{\lambda^k e^{-\lambda}}{k!}\)</span>.</p>
 </div>
 </div>
 </div>
@@ -397,8 +350,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="expectation-and-variance.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="expectation-and-variance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="properties-of-poisson-distribution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
