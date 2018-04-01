@@ -1,6 +1,6 @@
 # Exercise Questions
 
-### Question 1
+**Question 1**
 
 How many ways are there to arrange "ECONOMETRICS".
 
@@ -20,7 +20,7 @@ Solution: $\dfrac{7!}{2!}\dfrac{8!}{(8-5)!2!2!}$
 
 <!-- Permutation/Combination -->
 
-### Question 2
+**Question 2**
 
 7 people from Istanbul (suppose names A-B-C-D-E-F-G) and 7 people from Ankara (M-N-O-P-Q-R-S) will sit around a round table.
 
@@ -38,7 +38,7 @@ Solution: Suppose there are 8 people from Ankara, 1 reserved for Istanbul group 
 
 <!-- Expectation -->
 
-### Question 3
+**Question 3**
 
 You roll a die once, and assume the number your rolled is X. Then continue rolling the die until you either match or exceed X. What is the expected number of additional rolls?
 
@@ -51,7 +51,7 @@ $$\sum_{i=1}^6 = 6/(6-i+1) * P(X=i) = 2.45$$
 
 <!-- Expectation -->
 
-### Question 4
+**Question 4**
 
 In a three dice roll, if at least two dice have the same number (e.g. 5-5-4 or 3-3-3) you win.
 
@@ -72,7 +72,7 @@ $$V[X] = np(1-p) = 30*(0.444)*(1-0.444) = 7.407407$$
 
 <!-- Negative Binomial -->
 
-### Question 5
+**Question 5**
 
 In a Go game, a player that wins three games out of five is the winner. Suppose the artificial intelligence Alpha Go has probability 0.65 of winning against the World's (Human) Go Champion. What is the probability that Alpha Go wins the game at the 4th game?
 
@@ -81,7 +81,7 @@ Solution: AI should win 2 games in the first 3 and win the 4th game. $\binom{3}{
 <!-- Hypergeometric  -->
 <!-- Negative binomial  -->
 
-### Question 6
+**Question 6**
 
 An egg basket contains 8 eggs, 4 of which are broken. 3 eggs are selected to make an omelette.
 
@@ -95,7 +95,7 @@ Solution: Probability of getting 1 intact and 1 broken egg $\dfrac{\binom{4}{1}\
 
 <!-- Conditional Probability -->
 
-### Question 7
+**Question 7**
 
 Nejat is a film critic and he will attend to IKSV Film Festival between April 5-15. Nejat likes a movie with probability 0.6 if the genre of the movie is mystery. For other genres, he likes the movie with probability 0.4. There will be 40 movies during the festival, 10 of which are mystery.
 
@@ -110,7 +110,7 @@ Solution: $P(O|D) = \dfrac{P(D|O)P(O)}{P(D)} = \dfrac{P(D|O)P(O)}{1-P(L)} = 0.6*
 
 <!-- Binomial Distribution -->
 
-### Question 8
+**Question 8**
 
 A student applies for internships to 11 companies. She has a 0.6 probability to get an offer for an internship.
 
@@ -128,7 +128,7 @@ Solution: $E[X] = np = 11*0.6 = 6.6$, $V(X) = np(1-p) = 11*0.6*0.4 = 2.64$.
 
 <!-- Multinomial Distribution -->
 
-### Question 9
+**Question 9**
 
 A steakhouse serves (C)hateaubriand, (K)obe Beef Tenderloin and (T)-Bone. Customers order C with probability 0.35, K w.p. 0.2 and T w.p. 0.45.
 
@@ -140,7 +140,7 @@ b) Suppose C sells for 90TL, K for 150TL and T for 120TL. If 100 customers are s
 
 Solution: $100*(90*0.35 + 150*0.2 + 120*0.45) = 11550TL$.
 
-### Question 10
+**Question 10**
 
 An international student group will select a committee of 4 people at random. There are 7 Turkish, 6 Greek, 4 Italian and 5 Irish students in the group.
 
@@ -152,7 +152,7 @@ b) If the committee consisted of 5 people what would be the probability of (a)?
 
 Solution: $\dfrac{7*6*4*\binom{5}{2} + 7*6*5*\binom{4}{2} + 7*5*4*\binom{6}{2} + 6*5*4*\binom{7}{2}}{\binom{22}{4}} = 0.287$
 
-### Question 11
+**Question 11**
 
 There are 3 balls in an urn, each of them is either (B)lack or (W)hite. At each step $i$, a ball is drawn from the urn randomly and another ball is thrown the urn with equal probability for both colors. So there are three balls at the end of each step. Let $X_i$ be the number of White balls at time $i$. We know that at step 0, there are two white balls and one black ball in the urn (i.e. $X_0 = 2$). Calculate the following.
 
