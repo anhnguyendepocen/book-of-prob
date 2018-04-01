@@ -147,7 +147,7 @@ P\{X = k\} =& \dfrac{n!}{(n-k)!k!} \left(\dfrac{\lambda}{n}\right)^k \left(1-\le
 
 For very large $n$ and very small $p$ the resulting pdf becomes $\dfrac{\lambda^k e^{-\lambda}}{k!}$.
 
-# Properties of Poisson Distribution
+### Properties of Poisson Distribution
 
 + PMF: $P\{X = k\}  = \dfrac{\lambda^k e^{-\lambda}}{k!}$
 
