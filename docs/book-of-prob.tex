@@ -165,7 +165,7 @@ name suggests, these notes consist of an abbreviated version of the
 course as the objective is to give the essence of very significant parts
 of Probability. The course mainly follows \citep{myers2012}.
 
-This book is periodically updated. Latest update is on 2018-04-01.
+This book is periodically updated. Latest update is on 2018-04-06.
 
 \hypertarget{about-the-author}{%
 \section*{About the Author}\label{about-the-author}}
@@ -2408,6 +2408,107 @@ Let's rephrase
 \(P(X_1 = 2|X_0 = 3) = 1/2*3/4 = 3/8\).
 
 \[(1/2)^2 + 1/4 * 1/4 + 1/8*3/8 = 23/64\]
+
+\textbf{Question 12}
+
+Calculate the number of permutations of the word ``SUCCESSFUL'' with
+vowels together.
+
+Solution: 3S, 2C, 1L, 1F, 2U and 1F. 7 consonants, 3 vowels.
+\(\dfrac{(7+1)!}{3!2!}\dfrac{3!}{2!}=10800\).
+
+\textbf{Question 13}
+
+10 students enter the cafeteria. There are three different meal choices;
+red meat, vegeterian and fish. A student prefers red meat with 50\%
+probability, vegeterian 20\% and fish 30\%. What is the probability
+that, of this group of 10, 4 students prefer eat red meat, 3 students
+prefer vegeterian and 3 students prefer fish?
+
+Solution: Multinomial Distribution
+\(\binom{10}{4,3,3}(0.5)^4(0.2)^3(0.3)^3 = 0.0567\)
+
+\textbf{Question 14}
+
+Three students are going to start an internship on January. There are
+five internship posts on the department website. Each has to apply to
+only one internship. What is the probability that none of the students
+apply to the same internship?
+
+Solution: Similar to birthday problem. \(\dfrac{5!}{2!}/5^3 = 0.48\).
+
+\textbf{Question 15}
+
+Baran is an activist who raises funds for UNICEF on the street. 80\% of
+people walking by stops when Baran asks to tell about UNICEF. 50\% of
+those who stop donates 10TL to UNICEF. What is the expected amount of
+donations if Baran tried to reach 15 people that day.
+
+Solution: P(Donation) = P(Stop)P(Donation\textbar{}Stop) = 0.8*0.5 =
+0.4. Expectation of binomial distribution np = 15*0.4 = 60.
+
+\textbf{Question 16}
+
+Merve is an aspiring singer. She has 25\% chance to be offered to sing
+at a concert, if she applies. She applied to 8 concerts for the next
+season. What is the probability that she got at least 2 offers?
+
+Solution: P(Reject) = 0.75.
+\(P(X \ge 2) = 1 - P(0) - P(1) = 1 - (0.75^8 + 8*0.75^7*0.25) = 0.64\)
+
+\textbf{Question 17}
+
+Bureau of Statistics provide you with the following information. 40\% of
+Architects, 60\% of Engineers and 30\% of Lawyers make more than 5000TL
+per month in the first two years of their career. Of those interested in
+these occupations 20\% choose Architecture, 50\% choose Engineering and,
+30\% choose Law.
+
+a) What is the probability that a randomly selected person from these
+careers make less than 5000TL per month in the first two years of
+his/her career?
+
+b) If a person makes more than 5000TL, what is the probability that
+he/she is an Architect?
+
+Solution: Define \(W\) as making more than 5000TL, \(W^c\) as less and
+(A) as choosing Architecture career, (E) Engineering and (L) Law.
+
+a) \(P(W^c|A) = 1 - P(W|A) = 0.6\), \(P(W^c|E) = 1 - P(W|E) = 0.4\),
+\(P(W^c|L) = 1 - P(W|L) = 0.7\).
+\(P(W^c) = P(A)P(W^c|A)+P(E)P(W^c|E)+P(L)P(W^c|L) = 0.2*0.6+0.5*0.4+0.3*0.7 = 0.53\).
+
+b) \(P(A|W) = P(A \cap W)/P(W)\).
+\(P(A \cap W) = P(A)P(W|A) = 0.2*0.4 = 0.08\).
+\(P(W) = 1 - P(W^c) = 0.47\). \(P(A|W) = 0.08/0.47 = 0.17\).
+
+\textbf{Question 18}
+
+Let \(X\) and \(Y\) be the random variables and \(f(x,y)\) is the
+probability density function of the joint distribution. Suppose
+\(f(x,y)\) is defined as \(k(2x^2 + y)\) if \(0<x<2\) and \(0<y<1\) (0
+otherwise).
+
+a) Find \(k\).
+
+b) Find the marginal distribution of \(y\) (\(h(y)\)) and \(h(y<0.5)\).
+
+c) Find the conditional distribution of \(f(y|x)\).
+
+Solution:
+
+a)
+\(\int^1_0 \int^2_0 k(2x^2 + y) dx dy = \int^1_0 k((2/3)*x^3 + xy)dy|^2_0 = \int^1_0 k(16/3+2y) dy\).
+(This is also \(h(y)\) if \(k\) is known.)
+\(k(16y/3+y^2)|^1_0 = k(19/3)\). In order to be a distribution it should
+be equal to 1. So \(k = 3/19\).
+
+b) As given in (a) \(h(y) = 3/19(16/3+2y)\). So
+\(h(y<0.5) = \int^{0.5}_0 3/19(16/3+2y) dy = 3/19(16y/3+y^2)|^{0.5}_0 = 3/19(8/3 + 1/4) = 3/19*33/12 = 0.43\)
+
+c) We need to find
+\(g(x) = \int^1_0 3/19(2x^2 + y)dy = 3/19(2x^2 + 1/2)\).
+\(f(y|x) = f(x,y)/g(x) = \dfrac{3/19(2x^2+y)}{3/19(2x^2 + 1/2)} = \dfrac{4x^2 + 2y}{4x^2 + 1}\).
 
 \bibliography{book.bib,packages.bib}
 
