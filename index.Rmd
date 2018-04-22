@@ -11,7 +11,10 @@ description: "A book for introduction to probability."
 ---
 
 ```{r,eval=FALSE,echo=FALSE}
+setwd("/Users/berkorbay/git_repositories/book-of-prob/")
 bookdown::render_book("/Users/berkorbay/git_repositories/book-of-prob/index.Rmd", "bookdown::gitbook")
+bookdown::render_book("/Users/berkorbay/git_repositories/book-of-prob/index.Rmd", "bookdown::pdf_book")
+bookdown::render_book("/Users/berkorbay/git_repositories/book-of-prob/index.Rmd", "bookdown::epub_book")
 ```
 
 # Introduction {-}

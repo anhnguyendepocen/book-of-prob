@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="intro.html">
-<link rel="next" href="random-variables-and-distributions.html">
+<link rel="prev" href="exercise-questions.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -218,109 +218,137 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cond" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Conditional Probability and Bayes’ Rule</h1>
-<p>Let’s recall some probability concepts.</p>
+<div id="some-continuous-distributions" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Some Continuous Distributions</h1>
+<p>So far we had only seen discrete distributions which only specific values have positive probability values. Now we are going to see continuous variables where each real value defined in the domain of the distribution has a positive probability.</p>
+<p>In this class we are going to see uniform, exponential, normal, gamma and weibull distributions. Of those, we will see uniform, exponential and normal distributions in detail.</p>
+<div id="uniform-distribution" class="section level2">
+<h2><span class="header-section-number">7.1</span> Uniform Distribution</h2>
+<p>Given an interval <span class="math inline">\([a,b]\)</span>, each value within the interval has equal probability in uniform distribution.</p>
+<p><span class="math display">\[X \sim U[a,b]\]</span></p>
 <ul>
-<li>Probability is the quantification of uncertainty. For instance in a coin toss, <span class="math inline">\(P(H) = 1/2\)</span>.</li>
-<li>Set of the union of all possible events is the sample space. For instance single coin toss sample space is <span class="math inline">\(S = \{H,T\}\)</span>.</li>
-<li>Probability of an event is actually the relative “size” of the event to the sample space.</li>
-<li>In an experiment, that has equally likely outcomes, number of potential outcomes in an event relative to the total number of outcomes in the sample space corresponds to the probability of that event.</li>
-<li>Some events are mutually exclusive and some events are dependent.</li>
-<li>Sample space is not always easy to measure and is not always finite. Counting is one way of estimating a sample space (especially discrete ones).</li>
-<li>Estimation of probability of events is not always easy. One way to estimate is to repeat the experiment for a number of times. As we increase the number of repetitions, the probability will become more stable. For instance suppose we don’t know the probability of getting (H)eads in a coin toss and we repeat coin tossing for a number of times.</li>
+<li><p>Density: <span class="math inline">\(f(X) = \dfrac{1}{b-a}\)</span></p></li>
+<li><p>CDF: <span class="math inline">\(F(X \le x) = \dfrac{x-a}{b-a}\)</span></p></li>
+<li><p><span class="math inline">\(E[X] = (b+a)/2\)</span></p></li>
+<li><p><span class="math inline">\(V(X) = 1/12(b-a)^2\)</span></p></li>
 </ul>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">231</span>)</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">coin_toss_probability&lt;-<span class="cf">function</span>(repetitions){</a>
-<a class="sourceLine" id="cb39-3" data-line-number="3">    experiment&lt;-<span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;H&quot;</span>,<span class="st">&quot;T&quot;</span>),<span class="dt">size=</span>repetitions,<span class="dt">replace=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb39-4" data-line-number="4">    <span class="kw">return</span>(<span class="kw">round</span>(<span class="kw">sum</span>(experiment<span class="op">==</span><span class="st">&quot;H&quot;</span>)<span class="op">/</span>repetitions,<span class="dv">4</span>))</a>
-<a class="sourceLine" id="cb39-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb39-6" data-line-number="6"><span class="co">#Do the experiment with increasing repetitions</span></a>
-<a class="sourceLine" id="cb39-7" data-line-number="7"><span class="kw">coin_toss_probability</span>(<span class="dt">repetitions=</span><span class="dv">10</span>)</a></code></pre></div>
-<pre><code>## [1] 0.6</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">coin_toss_probability</span>(<span class="dt">repetitions=</span><span class="dv">100</span>)</a></code></pre></div>
-<pre><code>## [1] 0.57</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">coin_toss_probability</span>(<span class="dt">repetitions=</span><span class="dv">1000</span>)</a></code></pre></div>
-<pre><code>## [1] 0.505</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">coin_toss_probability</span>(<span class="dt">repetitions=</span><span class="dv">50000</span>)</a></code></pre></div>
-<pre><code>## [1] 0.4989</code></pre>
-<div id="some-examples" class="section level2">
-<h2><span class="header-section-number">2.1</span> Some Examples</h2>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1">the_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="dt">length.out=</span><span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb110-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb110-3" data-line-number="3"><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(the_seq),<span class="kw">aes</span>(<span class="dt">x=</span>the_seq)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb110-4" data-line-number="4"><span class="st">    </span><span class="kw">stat_function</span>(<span class="dt">fun=</span>dunif,<span class="dt">args=</span><span class="kw">list</span>(<span class="dt">min=</span><span class="op">-</span><span class="dv">5</span>,<span class="dt">max=</span><span class="dv">5</span>),<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<p><img src="book-of-prob_files/figure-html/unif-1.png" width="672" /></p>
+<p>Example: Suppose there is a lecture that can end anytime between 11:00 and 13:00. What is the probability that it ends before 12:30?</p>
+<p>Solution: There are 120 minutes betweeen 11:00 (a) and 13:00 (b) and 90 minutes between 11:00 (a) and 12:30 (x).</p>
+<p><span class="math display">\[P(X \le 90) = 90/120 = 3/4\]</span></p>
+</div>
+<div id="exponential-distribution" class="section level2">
+<h2><span class="header-section-number">7.2</span> Exponential Distribution</h2>
+<p>Exponential distribution is generally used to measure time before an event happens. Common examples are component (i.e. light bulb) lifetime and job processing (i.e. queue serving). It is closely related to Poisson distribution. While Poisson is used to estimate number of events in a given time period, Exponential distribution estimates the time of an event.</p>
+<ul>
+<li><p>Density: <span class="math inline">\(f(X) = \lambda e^{-\lambda x}\)</span></p></li>
+<li><p>CDF: <span class="math inline">\(F(X \le x) = 1 - e^{-\lambda x}\)</span></p></li>
+<li><p><span class="math inline">\(E[X] = 1/\lambda\)</span></p></li>
+<li><p><span class="math inline">\(V(X) = 1/\lambda^2\)</span></p></li>
+</ul>
+<p>Exponential distribution has memoryless property.</p>
+<p><span class="math display">\[P(X &gt; t + s | X &gt; t) = \dfrac{P(X &gt; t + s)}{P(X &gt; t)} = \dfrac{e^{-\lambda (t+s)}}{e^{-\lambda t}} = e^{-\lambda s}\]</span></p>
+<p>Note: Exponential distribution is frequently used in maintenance themed questions (e.g. “A machine breaks down…”). Though, memoryless property in exponential distribution might seem a bit off as it kind of assumes replenished starting point and no “wear and tear effect”. Don’t forget these are mathematical questions and applications might differ.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">the_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="dt">length.out=</span><span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb111-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb111-3" data-line-number="3"><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>the_seq),<span class="kw">aes</span>(<span class="dt">x=</span>x)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb111-4" data-line-number="4"><span class="kw">stat_function</span>(<span class="dt">fun=</span>dexp,<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb111-5" data-line-number="5"><span class="kw">stat_function</span>(<span class="dt">fun=</span>dexp,<span class="dt">args=</span><span class="kw">list</span>(<span class="dt">rate=</span><span class="fl">0.5</span>),<span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb111-6" data-line-number="6"><span class="kw">stat_function</span>(<span class="dt">fun=</span>dexp,<span class="dt">args=</span><span class="kw">list</span>(<span class="dt">rate=</span><span class="dv">2</span>),<span class="dt">color=</span><span class="st">&quot;purple&quot;</span>)</a></code></pre></div>
+<p><img src="book-of-prob_files/figure-html/exp-1.png" width="672" /></p>
+<p>Example: Lifetime of a bulb is expected to be 10,000 hours, estimated with exponential distribution. What is the probability that the bulb will fail in the first 3,000 hours?</p>
+<p><span class="math display">\[\lambda = 1/10^5\]</span></p>
+<p><span class="math display">\[P(X &lt; 3,000) = 1 - e^{-\lambda x} = 1 - e^{- 10^{-5}*3*10^3} = 0.0296\]</span></p>
+<p>Example: Using the same properties of the question above, what is the probability that the bulb will last more than 7,000 hours if it didn’t fail in the first 5,000 hours?</p>
+<p>From memoryless property.</p>
+<p><span class="math display">\[P(X &gt; 7000 | X &gt; 5000) = P(X &gt; 5000 + 2000)/P(X&gt;5000) = P(X &gt; 2000) = e^{-\lambda x} = 0.9801987\]</span></p>
+</div>
+<div id="normal-distribution" class="section level2">
+<h2><span class="header-section-number">7.3</span> Normal Distribution</h2>
+<p>It is the most popular continuous distribution with uniform distribution and it has many applications. Also several discrete and continuous distributions (i.e. Binomial, t and chi-squared) converge to normal distribution when data size increases. It is also called Gaussian distribution. Many miscalculations or failed prediction happen because people approximate empirical distributions to normal distribution. It has two main parameters mean (location) <span class="math inline">\(\mu\)</span> and standard deviation (scale) <span class="math inline">\(\sigma\)</span>.</p>
+<p><span class="math display">\[X \sim N(\mu,\sigma)\]</span></p>
+<ul>
+<li><p>Density: <span class="math inline">\(f(X) = \dfrac{1}{\sqrt{2\pi}\sigma}e^{-\dfrac{1}{2\sigma^2}(x-\mu)^2}\)</span></p></li>
+<li><p><span class="math inline">\(E[X] = \mu\)</span></p></li>
+<li><p><span class="math inline">\(V(X) = \sigma^2\)</span></p></li>
+</ul>
+<p>If <span class="math inline">\(X \sim N(0,1)\)</span>, it is called standard normal distribution.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">the_seq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="dt">length.out=</span><span class="dv">1000</span>)</a>
+<a class="sourceLine" id="cb112-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb112-3" data-line-number="3"><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(<span class="dt">x=</span>the_seq),<span class="kw">aes</span>(<span class="dt">x=</span>x)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-4" data-line-number="4"><span class="kw">stat_function</span>(<span class="dt">fun=</span>dnorm,<span class="dt">color=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-5" data-line-number="5"><span class="kw">stat_function</span>(<span class="dt">fun=</span>dnorm,<span class="dt">args=</span><span class="kw">list</span>(<span class="dt">sd=</span><span class="dv">2</span>),<span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb112-6" data-line-number="6"><span class="kw">stat_function</span>(<span class="dt">fun=</span>dnorm,<span class="dt">args=</span><span class="kw">list</span>(<span class="dt">mean=</span><span class="op">-</span><span class="dv">2</span>),<span class="dt">color=</span><span class="st">&quot;purple&quot;</span>)</a></code></pre></div>
+<p><img src="book-of-prob_files/figure-html/norm-1.png" width="672" /></p>
+<div id="standard-normal-distribution" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> Standard Normal Distribution</h3>
+<p>Standard Normal Distribution is a special case of normal distribution with mean (<span class="math inline">\(\mu\)</span>) 0 and standard deviation (<span class="math inline">\(\sigma\)</span>) 1 <span class="math inline">\(X ~ N(0,1)\)</span>. Probability calculations in normal distribution is usually done with converting the parameters to standard normal parameters and finding the probabilities from the standard normal table (or z-table). Conversion to standard normal is done as follows. (<em>You can find the z-table on course website.</em>)</p>
+<p><span class="math display">\[\dfrac{X-\mu}{\sigma}\]</span></p>
+<p>Example: In a population height of the individuals are normally distributed with mean 170cm and standard deviation 5cm. What is the probability of a randomly selected person’s height is 160cm or lower?</p>
+<p>Solution: <span class="math inline">\(P(X &lt; 160; \mu = 170, \sigma = 5) = P(X &lt; \dfrac{160 - 170}{5}) = \phi(-2) = 0.0228\)</span>.</p>
+</div>
+</div>
+<div id="gamma-distribution" class="section level2">
+<h2><span class="header-section-number">7.4</span> Gamma Distribution</h2>
+<p>First, let’s define the gamma function.</p>
+<p><span class="math display">\[\Gamma(n) = \int_0^\infty x^{n-1}e^{-x}dx\]</span></p>
+<p>By extensions there are some interesting properties.</p>
+<p><span class="math display">\[\Gamma(n) = (n-1)\Gamma(n-1)\]</span></p>
+<p>If n is a positive integer then <span class="math display">\[\Gamma(n) = (n-1)!\]</span>.</p>
+<p>You can use Gamma Distribution in reliability calculations with multiple components.</p>
+<ul>
+<li><p>Density: <span class="math inline">\(f(X) = \dfrac{\lambda}{\Gamma(r)}(\lambda x)^{r-1} e^{-\lambda x}, x &gt; 0\)</span>.</p></li>
+<li><p><span class="math inline">\(E[X] = r/\lambda\)</span></p></li>
+<li><p><span class="math inline">\(V(X) = r/\lambda^2\)</span></p></li>
+</ul>
+<p>Exponential distribution is a special case of Gamma distribution with <span class="math inline">\(r=1\)</span>.</p>
+</div>
+<div id="weibull-distribution" class="section level2">
+<h2><span class="header-section-number">7.5</span> Weibull Distribution</h2>
+<p>Some application of Weibull distribution are to estimate the time for failure in multi component electrical or mechanical systems, and modelling wind speed.</p>
+<ul>
+<li><p>Density: <span class="math inline">\(f(X) = \dfrac{\beta}{\delta}\left(\dfrac{x - \gamma}{\delta}\right)^{\beta-1} e^{-\left(\dfrac{x - \gamma}{\delta}\right)^\beta}\)</span>.</p></li>
+<li><p>CDF: <span class="math inline">\(F(X) = 1 - e^{-\left(\dfrac{x - \gamma}{\delta}\right)^\beta}\)</span></p></li>
+<li><p><span class="math inline">\(E[X] = \gamma + \delta \Gamma(1 + 1/\beta)\)</span></p></li>
+<li><p><span class="math inline">\(V(X) = \delta^2\left[\Gamma\left(1+\dfrac{2}{\beta}\right) - \left[\Gamma\left(1 + \dfrac{1}{\beta}\right)\right]^2 \right]\)</span></p></li>
+</ul>
+</div>
+<div id="r-functions" class="section level2">
+<h2><span class="header-section-number">7.6</span> R Functions</h2>
+<p>R has predefined functions for virtually all distributions. Just write <code>?Distributions</code> to the console.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1">dunif <span class="co">#density of uniform distribution</span></a>
+<a class="sourceLine" id="cb113-2" data-line-number="2">punif <span class="co">#cdf of uniform distribution</span></a>
+<a class="sourceLine" id="cb113-3" data-line-number="3">qunif <span class="co">#quantile of uniform distribution</span></a>
+<a class="sourceLine" id="cb113-4" data-line-number="4">runif <span class="co">#uniform distributed random variate</span></a>
+<a class="sourceLine" id="cb113-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb113-6" data-line-number="6">dnorm <span class="co">#normal distribution</span></a>
+<a class="sourceLine" id="cb113-7" data-line-number="7">dgamma <span class="co">#gamma distribution</span></a>
+<a class="sourceLine" id="cb113-8" data-line-number="8">dweibull <span class="co">#weibull distribution</span></a>
+<a class="sourceLine" id="cb113-9" data-line-number="9">dexp <span class="co">#exponential distribution</span></a></code></pre></div>
+</div>
+<div id="mini-in-class-exercises" class="section level2">
+<h2><span class="header-section-number">7.7</span> Mini In-Class Exercises</h2>
+<p><em>These exercises are at will attempt questions. They will not be graded, you will not turn in any submission.</em></p>
 <ol style="list-style-type: decimal">
-<li><p>In a sports bar, there are 10 football fans, 15 basketball fans, 12 tennis fans and 6 curling fans. Suppose there is a single TV and there are matches of football, basketball, tennis and curling at the same time. If the TV remote is handed to one of them randomly, what is the probability that curling will be the show on TV?</p>
-<p>Answer: There are a total of 43 fans in the sports bar and 6 curling fans. P(Curling) = 6/43.</p></li>
-<li><p>Suppose there is a group of 20 people; 10 from Ankara, 10 from Istanbul. Suppose we randomly choose 5 people from that group.</p>
+<li><p>Waiters in Çengelköy Çınaraltı Cafe, goes on a tea serving tour every 5 minutes. What is the probability that a newly arrived customer waits between 2 and 3 minutes?</p></li>
+<li><p>The waiting time at Çengelköy Börekçisi queue is exponentially distributed with a mean of 10 minutes. What is the probability that a customer would wait less than 8 minutes?</p></li>
+<li><p>Suppose Z is a standard normal distributed random variable (<span class="math inline">\(Z ~ N(0,1)\)</span>).</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>What is the probability that all of this subgroup is from Ankara?</p>
-<p>Answer: (# of combinations including people only from Ankara) / (# of total combinations)</p>
-<p><span class="math display">\[\dfrac{\binom{10}{5}}{\binom{20}{5}} = 0.01625387\]</span></p>
-<p>Alternative answer is: <span class="math inline">\((10/20)*(9/19)\dots * (6/16) = 0.01625387\)</span>.</p></li>
-<li><p>What is the probability that at least two from Ankara and at least two from Istanbul?</p>
-<p>Answer: P(Ankara = 2, Istanbul = 3 OR Ankara = 3, Istanbul = 2) = (P(Ankara = 2, Istanbul = 3) + P(Ankara = 3, Istanbul = 2)) = ((# of comb. Ank 2, Ist 3) + (# of comb. Ank 3, Ist 2))/(# of total combinations)</p>
-<p><span class="math display">\[\dfrac{\binom{10}{2}*\binom{10}{3} + \binom{10}{3}*\binom{10}{2}}{\binom{20}{5}} = 0.6965944\]</span></p></li>
+<li><span class="math inline">\(P(-0.2 \le Z \le 0.4) = ?\)</span></li>
+<li>If <span class="math inline">\(P(Z &lt; k) = 0.0987\)</span> what is <span class="math inline">\(k\)</span>?</li>
+<li>If <span class="math inline">\(P(|Z| &lt; k) = 0.95\)</span> what is <span class="math inline">\(k\)</span>?</li>
 </ol></li>
-<li><p>(“Blackjack”) Suppose you are drawing two cards from the deck. Assume all number rank cards (2-10) are points, Ace (A) is 11 points and (J)ack, (Q)ueen and (K)ing are 10 points. What is the probability that total points of these two cards exceed 20.</p>
-<p>Answer: Max score for two cards is 22 (two Aces). To exceed 20, one needs Ace-9 pairs or any pair of 10-Ace-J-Q-K cards. We know that there are 4 of each rank. So <span class="math inline">\(P(Score \ge 20) = P(A and 9) + P(any\ two\ of\ 10-Ace-J-Q-K)\)</span>. We know that total number of hands is <span class="math inline">\(\binom{52}{2} = 1326\)</span>. So # of combinations with either A-9 or 9-A is <span class="math inline">\(4*4 = 16\)</span>. # of combinations of getting two cards from 10-Ace-J-Q-K ranks is <span class="math inline">\(\binom{20}{2} = 190\)</span>. So <span class="math inline">\(P(Score \ge 20) = \dfrac{190 + 16}{1326} = 0.1553544\)</span></p>
-<p>Alternative answer: <span class="math inline">\(P(A-9 or 9-A) = 4/52*4/51 + 4/52*4/51 = 0.01206637\)</span> and <span class="math inline">\(P(any two of 10-Ace-J-Q-K) = 20/52 * 19/51 = 0.1432881\)</span>. Total probability is <span class="math inline">\(P(Score \ge 20) = 0.01206637 + 0.1432881 = 0.1553545\)</span></p></li>
-<li><p>Suppose you are the gatekeeper of a playing ground for 10 year old boys and try to assess their age by their height. Height of 90% of boys aged 10 falls between 130 and 150 cms. It is equally likely that a boy aged 10 has the height lower than 130 cm or higher than 150 cm. What is the probability of rejecting a child because he’s too long?</p>
-<p>Answer: <span class="math inline">\(P(130 \le X \le 150) = 0.9\)</span> and <span class="math inline">\(P(X \le 130) = P(X \ge 150)\)</span>. So <span class="math inline">\(P(X \ge 150) = 1 - P(130 \le X \le 150) - P(X \le 130)\)</span>. <span class="math inline">\(2.P(X \ge 150) = 0.1\)</span> and <span class="math inline">\(P(X \ge 150) = 0.05\)</span>.</p></li>
 </ol>
-</div>
-<div id="conditional-probability" class="section level2">
-<h2><span class="header-section-number">2.2</span> Conditional Probability</h2>
-<p>Definition: <span class="math inline">\(P(A|B)\)</span> means that probability of event A given that event B already occured or probability of A <strong>conditional on</strong> B.</p>
-<p><img src="img/cond1.png" /></p>
-<p>Example: What is the probability of getting two heads (HH) if we know that the first coin is H? (1/2)</p>
-<p>Example: Suppose we are rolling two dice.</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>What is the probability of getting the sum equal to 8?</p>
-<p><span class="math inline">\(P(Sum = 8) = P(D_1 = 2, D_2 = 6) + P({3,5}) + P({4,4})*2 + P({5,3}) + P({6,2}) = 6/36 = 1/6\)</span></p></li>
-<li><p>What is the probability of getting the sum more than or equal to 8 given the first roll is 3?</p>
-<p><span class="math inline">\(P(Sum \ge 8 | D_1 = 3) = P({3,5}) + P({3,6}) = 2/6 = 1/3\)</span></p></li>
-</ol>
-<p>Conditional probability of event A given B, can be defined as <span class="math inline">\(P(A|B)=\dfrac{P(A \cap B)}{P(B)}\)</span> if <span class="math inline">\(P(B) &gt; 0\)</span>.</p>
-<p>Example: We asked 1000 people, 400 men and 600 women: ‘Where do you want to visit this summer? Amsterdam or London?’. The answers are as follows.</p>
-<pre><code>##       Amsterdam London
-## Men         150    250
-## Women       450    150</code></pre>
-<ol style="list-style-type: lower-alpha">
-<li><p>What is the probability of a randomly chosen person is a woman?</p>
-<p>Answer: <span class="math inline">\(P(W) = (n(W|L) + n(W|P))/n(S) = (150 + 450)/1000 = 0.6\)</span></p></li>
-<li><p>What is the probability of a randomly chosen person chooses to to visit Amsterdam?</p>
-<p>Answer: <span class="math inline">\(P(A) = (n(A|W) + n(A|M))/n(S) = (450 + 150)/1000 = 0.6\)</span></p></li>
-<li><p>What is the probability of a London visitor is a man?</p>
-<p>Answer: <span class="math inline">\(P(M|L) = \dfrac{P(M\cap L)}{P(L)} = \dfrac{n(M\cap L)/n(S)}{n(L)/n(S)} = 250/400 = 0.625\)</span></p></li>
-</ol>
-</div>
-<div id="independence" class="section level2">
-<h2><span class="header-section-number">2.3</span> Independence</h2>
-<p>Two events can be independent. It means <span class="math inline">\(P(A|B) = P(A)\)</span> or <span class="math inline">\(P(B|A) = P(B)\)</span>.</p>
-<p>If the events (<span class="math inline">\(A_i\)</span>) are independent then <span class="math inline">\(P(A_1 \cap A_2 \dots A_k) = P(A_1)P(A_2)\dots P(A_k)\)</span>.</p>
-<p>Example: Suppose you rolled a die 5 times and they all ended up 4. What is the probability that, at the 6th time, the die will get 4 again?</p>
-<p>Solution: Die rolls are independent events. So outcome of a roll does not affect the outcome of the other rolls. It is 1/6.</p>
-</div>
-<div id="product-rule" class="section level2">
-<h2><span class="header-section-number">2.4</span> Product rule</h2>
-<p>If both <span class="math inline">\(P(A)&gt;0\)</span> and <span class="math inline">\(P(B)&gt;0\)</span>, then <span class="math inline">\(P(A\cap B) = P(A)P(B|A)\)</span>. We can also say <span class="math inline">\(P(A\cap B) = P(B\cap A) = P(B)P(A|B)\)</span></p>
-<p>Example: You draw two cards from a deck. What is the probability that you get two (A)ces?</p>
-<p>Solution: <span class="math inline">\(P(A \cap B) = 4/52 * 3/52 = 0.00443787\)</span></p>
-<p>Example: You are at a tea shop. There are 10 (W)hite teas, 12 (B)lack teas and 8 (G)reen teas on the menu. According to the waiter all teas are equally tasty. You ask the waiter bring a tea but it should not be green tea. What is the probability that you will get a white tea?</p>
-<p>Solution: <span class="math inline">\(P(W|G^{\prime}) = P(W \cap G^{\prime})/P(G^{\prime}) = P(W) / P(G^{\prime}) = \dfrac{10/30}{22/30} = 10/22\)</span></p>
-</div>
-<div id="bayes-rule" class="section level2">
-<h2><span class="header-section-number">2.5</span> Bayes’ Rule</h2>
-<p><strong>Theorem of total probability:</strong> Given the events <span class="math inline">\(B_i\)</span> are collective parts of the sample space and <span class="math inline">\(P(B_i) &gt; 0\)</span>, then for any event <span class="math inline">\(A\)</span>, <span class="math inline">\(P(A) &gt; 0\)</span></p>
-<p><span class="math display">\[P(A) = \sum_i^k P(B_i \cap A) = \sum_i^k P(B_i)P(A|B_i)\]</span></p>
-<p><strong>Bayes’rule:</strong> Given the events <span class="math inline">\(B_i\)</span> are collective parts of the sample space and <span class="math inline">\(P(B_i) &gt; 0\)</span>, then for any event <span class="math inline">\(A\)</span>, <span class="math inline">\(P(A) &gt; 0\)</span></p>
-<p><span class="math display">\[P(B_r|A) = \dfrac{P(B_r|A)}{\sum_i^k P(B_i \cap A)} = \dfrac{P(B_r)P(A|B_r)}{\sum_i^k P(B_i)P(A|B_i)}\]</span></p>
-<p>Example 2.41 from the book: In an assembly plant, there are three machines <span class="math inline">\(B_1\)</span>, <span class="math inline">\(B_2\)</span> and <span class="math inline">\(B_3\)</span>. These machines make the 30%, 45% and 25% of the products. 2%, 3% and 2% of their output is known to be defective. So, what is the probability of getting a defective product at a random time?</p>
-<p>Solution:</p>
-<p>Say, event of getting a defective item is A and we want to know <span class="math inline">\(P(A)\)</span>.
-<span class="math inline">\(P(B_i)\)</span> is the probability of a product being manufactured by machine <span class="math inline">\(i\)</span>. <span class="math inline">\(P(B_1) = 0.3\)</span>, <span class="math inline">\(P(B_2) = 0.45\)</span>, <span class="math inline">\(P(B_3) = 0.25\)</span>. The defect probabilities given the machine are <span class="math inline">\(P(A|B_1) = 0.02\)</span>, <span class="math inline">\(P(A|B_1) = 0.03\)</span>, <span class="math inline">\(P(A|B_1) = 0.02\)</span>.</p>
-<p>So, <span class="math inline">\(P(A) = \sum_{i=1}^3 P(B_i)P(A|B_i) = 0.3*0.02 + 0.45*0.03 + 0.25*0.02 = 0.0245\)</span>.</p>
-<p>Example 2.42: If the product is defective, what is the probability that it came from machine 3?</p>
-<p><span class="math display">\[P(B_3|A) = \dfrac{P(B_3 \cap A)}{\sum_{i=1}^3 P(B_i)P(A|B_i)} = \dfrac{P(B_3)P(A|B_3)}{\sum_{i=1}^3 P(B_i)P(A|B_i)} = \dfrac{0.25 * 0.02}{0.0245} = 10/49\]</span></p>
 
+<div id="refs" class="references">
+<div>
+<p>Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, and Keying Ye. 2012. <em>Probability and Statistics for Engineers and Scientists</em>. 9th ed. Boston, MA: Pearson.</p>
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -328,8 +356,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="random-variables-and-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercise-questions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

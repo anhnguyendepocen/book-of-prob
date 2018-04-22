@@ -165,7 +165,7 @@ name suggests, these notes consist of an abbreviated version of the
 course as the objective is to give the essence of very significant parts
 of Probability. The course mainly follows \citep{myers2012}.
 
-This book is periodically updated. Latest update is on 2018-04-06.
+This book is periodically updated. Latest update is on 2018-04-22.
 
 \hypertarget{about-the-author}{%
 \section*{About the Author}\label{about-the-author}}
@@ -2509,6 +2509,278 @@ b) As given in (a) \(h(y) = 3/19(16/3+2y)\). So
 c) We need to find
 \(g(x) = \int^1_0 3/19(2x^2 + y)dy = 3/19(2x^2 + 1/2)\).
 \(f(y|x) = f(x,y)/g(x) = \dfrac{3/19(2x^2+y)}{3/19(2x^2 + 1/2)} = \dfrac{4x^2 + 2y}{4x^2 + 1}\).
+
+\hypertarget{some-continuous-distributions}{%
+\chapter{Some Continuous
+Distributions}\label{some-continuous-distributions}}
+
+So far we had only seen discrete distributions which only specific
+values have positive probability values. Now we are going to see
+continuous variables where each real value defined in the domain of the
+distribution has a positive probability.
+
+In this class we are going to see uniform, exponential, normal, gamma
+and weibull distributions. Of those, we will see uniform, exponential
+and normal distributions in detail.
+
+\hypertarget{uniform-distribution}{%
+\section{Uniform Distribution}\label{uniform-distribution}}
+
+Given an interval \([a,b]\), each value within the interval has equal
+probability in uniform distribution.
+
+\[X \sim U[a,b]\]
+
+\begin{itemize}
+\item
+  Density: \(f(X) = \dfrac{1}{b-a}\)
+\item
+  CDF: \(F(X \le x) = \dfrac{x-a}{b-a}\)
+\item
+  \(E[X] = (b+a)/2\)
+\item
+  \(V(X) = 1/12(b-a)^2\)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{the_seq <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DataTypeTok{length.out=}\DecValTok{1000}\NormalTok{)}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\KeywordTok{data.frame}\NormalTok{(the_seq),}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{the_seq)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dunif,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{min=}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DataTypeTok{max=}\DecValTok{5}\NormalTok{),}\DataTypeTok{color=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{book-of-prob_files/figure-latex/unif-1.pdf}
+
+Example: Suppose there is a lecture that can end anytime between 11:00
+and 13:00. What is the probability that it ends before 12:30?
+
+Solution: There are 120 minutes betweeen 11:00 (a) and 13:00 (b) and 90
+minutes between 11:00 (a) and 12:30 (x).
+
+\[P(X \le 90) = 90/120 = 3/4\]
+
+\hypertarget{exponential-distribution}{%
+\section{Exponential Distribution}\label{exponential-distribution}}
+
+Exponential distribution is generally used to measure time before an
+event happens. Common examples are component (i.e.~light bulb) lifetime
+and job processing (i.e.~queue serving). It is closely related to
+Poisson distribution. While Poisson is used to estimate number of events
+in a given time period, Exponential distribution estimates the time of
+an event.
+
+\begin{itemize}
+\item
+  Density: \(f(X) = \lambda e^{-\lambda x}\)
+\item
+  CDF: \(F(X \le x) = 1 - e^{-\lambda x}\)
+\item
+  \(E[X] = 1/\lambda\)
+\item
+  \(V(X) = 1/\lambda^2\)
+\end{itemize}
+
+Exponential distribution has memoryless property.
+
+\[P(X > t + s | X > t) = \dfrac{P(X > t + s)}{P(X > t)} = \dfrac{e^{-\lambda (t+s)}}{e^{-\lambda t}} = e^{-\lambda s}\]
+
+Note: Exponential distribution is frequently used in maintenance themed
+questions (e.g. ``A machine breaks down\ldots{}''). Though, memoryless
+property in exponential distribution might seem a bit off as it kind of
+assumes replenished starting point and no ``wear and tear effect''.
+Don't forget these are mathematical questions and applications might
+differ.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{the_seq <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DataTypeTok{length.out=}\DecValTok{1000}\NormalTok{)}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\NormalTok{the_seq),}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x)) }\OperatorTok{+}
+\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dexp,}\DataTypeTok{color=}\StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dexp,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{rate=}\FloatTok{0.5}\NormalTok{),}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dexp,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{rate=}\DecValTok{2}\NormalTok{),}\DataTypeTok{color=}\StringTok{"purple"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{book-of-prob_files/figure-latex/exp-1.pdf}
+
+Example: Lifetime of a bulb is expected to be 10,000 hours, estimated
+with exponential distribution. What is the probability that the bulb
+will fail in the first 3,000 hours?
+
+\[\lambda = 1/10^5\]
+
+\[P(X < 3,000) = 1 - e^{-\lambda x} = 1 - e^{- 10^{-5}*3*10^3} = 0.0296\]
+
+Example: Using the same properties of the question above, what is the
+probability that the bulb will last more than 7,000 hours if it didn't
+fail in the first 5,000 hours?
+
+From memoryless property.
+
+\[P(X > 7000 | X > 5000) = P(X > 5000 + 2000)/P(X>5000) = P(X > 2000) = e^{-\lambda x} = 0.9801987\]
+
+\hypertarget{normal-distribution}{%
+\section{Normal Distribution}\label{normal-distribution}}
+
+It is the most popular continuous distribution with uniform distribution
+and it has many applications. Also several discrete and continuous
+distributions (i.e.~Binomial, t and chi-squared) converge to normal
+distribution when data size increases. It is also called Gaussian
+distribution. Many miscalculations or failed prediction happen because
+people approximate empirical distributions to normal distribution. It
+has two main parameters mean (location) \(\mu\) and standard deviation
+(scale) \(\sigma\).
+
+\[X \sim N(\mu,\sigma)\]
+
+\begin{itemize}
+\item
+  Density:
+  \(f(X) = \dfrac{1}{\sqrt{2\pi}\sigma}e^{-\dfrac{1}{2\sigma^2}(x-\mu)^2}\)
+\item
+  \(E[X] = \mu\)
+\item
+  \(V(X) = \sigma^2\)
+\end{itemize}
+
+If \(X \sim N(0,1)\), it is called standard normal distribution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{the_seq <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DataTypeTok{length.out=}\DecValTok{1000}\NormalTok{)}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\NormalTok{the_seq),}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x)) }\OperatorTok{+}
+\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dnorm,}\DataTypeTok{color=}\StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dnorm,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{sd=}\DecValTok{2}\NormalTok{),}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dnorm,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{mean=}\OperatorTok{-}\DecValTok{2}\NormalTok{),}\DataTypeTok{color=}\StringTok{"purple"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{book-of-prob_files/figure-latex/norm-1.pdf}
+
+\hypertarget{standard-normal-distribution}{%
+\subsection{Standard Normal
+Distribution}\label{standard-normal-distribution}}
+
+Standard Normal Distribution is a special case of normal distribution
+with mean (\(\mu\)) 0 and standard deviation (\(\sigma\)) 1
+\(X ~ N(0,1)\). Probability calculations in normal distribution is
+usually done with converting the parameters to standard normal
+parameters and finding the probabilities from the standard normal table
+(or z-table). Conversion to standard normal is done as follows.
+(\emph{You can find the z-table on course website.})
+
+\[\dfrac{X-\mu}{\sigma}\]
+
+Example: In a population height of the individuals are normally
+distributed with mean 170cm and standard deviation 5cm. What is the
+probability of a randomly selected person's height is 160cm or lower?
+
+Solution:
+\(P(X < 160; \mu = 170, \sigma = 5) = P(X < \dfrac{160 - 170}{5}) = \phi(-2) = 0.0228\).
+
+\hypertarget{gamma-distribution}{%
+\section{Gamma Distribution}\label{gamma-distribution}}
+
+First, let's define the gamma function.
+
+\[\Gamma(n) = \int_0^\infty x^{n-1}e^{-x}dx\]
+
+By extensions there are some interesting properties.
+
+\[\Gamma(n) = (n-1)\Gamma(n-1)\]
+
+If n is a positive integer then \[\Gamma(n) = (n-1)!\].
+
+You can use Gamma Distribution in reliability calculations with multiple
+components.
+
+\begin{itemize}
+\item
+  Density:
+  \(f(X) = \dfrac{\lambda}{\Gamma(r)}(\lambda x)^{r-1} e^{-\lambda x}, x > 0\).
+\item
+  \(E[X] = r/\lambda\)
+\item
+  \(V(X) = r/\lambda^2\)
+\end{itemize}
+
+Exponential distribution is a special case of Gamma distribution with
+\(r=1\).
+
+\hypertarget{weibull-distribution}{%
+\section{Weibull Distribution}\label{weibull-distribution}}
+
+Some application of Weibull distribution are to estimate the time for
+failure in multi component electrical or mechanical systems, and
+modelling wind speed.
+
+\begin{itemize}
+\item
+  Density:
+  \(f(X) = \dfrac{\beta}{\delta}\left(\dfrac{x - \gamma}{\delta}\right)^{\beta-1} e^{-\left(\dfrac{x - \gamma}{\delta}\right)^\beta}\).
+\item
+  CDF: \(F(X) = 1 - e^{-\left(\dfrac{x - \gamma}{\delta}\right)^\beta}\)
+\item
+  \(E[X] = \gamma + \delta \Gamma(1 + 1/\beta)\)
+\item
+  \(V(X) = \delta^2\left[\Gamma\left(1+\dfrac{2}{\beta}\right) - \left[\Gamma\left(1 + \dfrac{1}{\beta}\right)\right]^2 \right]\)
+\end{itemize}
+
+\hypertarget{r-functions}{%
+\section{R Functions}\label{r-functions}}
+
+R has predefined functions for virtually all distributions. Just write
+\texttt{?Distributions} to the console.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dunif }\CommentTok{#density of uniform distribution}
+\NormalTok{punif }\CommentTok{#cdf of uniform distribution}
+\NormalTok{qunif }\CommentTok{#quantile of uniform distribution}
+\NormalTok{runif }\CommentTok{#uniform distributed random variate}
+
+\NormalTok{dnorm }\CommentTok{#normal distribution}
+\NormalTok{dgamma }\CommentTok{#gamma distribution}
+\NormalTok{dweibull }\CommentTok{#weibull distribution}
+\NormalTok{dexp }\CommentTok{#exponential distribution}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{mini-in-class-exercises}{%
+\section{Mini In-Class Exercises}\label{mini-in-class-exercises}}
+
+\emph{These exercises are at will attempt questions. They will not be
+graded, you will not turn in any submission.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Waiters in Çengelköy Çınaraltı Cafe, goes on a tea serving tour every
+  5 minutes. What is the probability that a newly arrived customer waits
+  between 2 and 3 minutes?
+\item
+  The waiting time at Çengelköy Börekçisi queue is exponentially
+  distributed with a mean of 10 minutes. What is the probability that a
+  customer would wait less than 8 minutes?
+\item
+  Suppose Z is a standard normal distributed random variable
+  (\(Z ~ N(0,1)\)).
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    \(P(-0.2 \le Z \le 0.4) = ?\)
+  \item
+    If \(P(Z < k) = 0.0987\) what is \(k\)?
+  \item
+    If \(P(|Z| < k) = 0.95\) what is \(k\)?
+  \end{enumerate}
+\end{enumerate}
 
 \bibliography{book.bib,packages.bib}
 
