@@ -8,6 +8,11 @@ biblio-style: apalike
 link-citations: yes
 github-repo: berkorbay/book-of-prob
 description: "A book for introduction to probability."
+header-includes:
+- \usepackage{graphicx}
+- \usepackage{float}
+- \usepackage[utf8]{inputenc}
+
 ---
 
 ```{r,eval=FALSE,echo=FALSE}
@@ -15,6 +20,14 @@ setwd("/Users/berkorbay/git_repositories/book-of-prob/")
 bookdown::render_book("/Users/berkorbay/git_repositories/book-of-prob/index.Rmd", "bookdown::gitbook")
 bookdown::render_book("/Users/berkorbay/git_repositories/book-of-prob/index.Rmd", "bookdown::pdf_book")
 bookdown::render_book("/Users/berkorbay/git_repositories/book-of-prob/index.Rmd", "bookdown::epub_book")
+```
+
+```{r, echo=FALSE, message = FALSE}
+if(knitr::opts_knit$get("rmarkdown.pandoc.to") %in% c("latex","pdf")){
+    knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo = FALSE, dev = "cairo_pdf",fig.pos="H",external=TRUE)
+}else{
+    knitr::opts_chunk$set(dev="png")
+}
 ```
 
 # Introduction {-}

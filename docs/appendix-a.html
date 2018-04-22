@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="some-discrete-distributions.html">
-<link rel="next" href="some-continuous-distributions.html">
+<link rel="prev" href="some-continuous-distributions.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -228,180 +228,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-questions" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> Exercise Questions</h1>
-<p><strong>Question 1</strong></p>
-<p>How many ways are there to arrange “ECONOMETRICS”.</p>
-<p>Solution: There 12 characters, 5 vowels 7 consonants. 2 Cs, 2 Es and 2 Os.</p>
-<ol style="list-style-type: lower-alpha">
-<li>In any order.</li>
-</ol>
-<p>Solution: <span class="math inline">\(\dfrac{12!}{2!2!2!}\)</span>.</p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Vowels together.</li>
-</ol>
-<p>Solution: Add one representative letter to consonants to denote vowels as a single letter. <span class="math inline">\(\dfrac{8!}{2!}\dfrac{5!}{2!2!}\)</span>.</p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>No consecutive vowels.</li>
-</ol>
-<p>Solution: <span class="math inline">\(\dfrac{7!}{2!}\dfrac{8!}{(8-5)!2!2!}\)</span></p>
-<!-- Permutation/Combination -->
-<p><strong>Question 2</strong></p>
-<p>7 people from Istanbul (suppose names A-B-C-D-E-F-G) and 7 people from Ankara (M-N-O-P-Q-R-S) will sit around a round table.</p>
-<ol style="list-style-type: lower-alpha">
-<li>In how many different ways can they sit around the table?</li>
-</ol>
-<p>Solution: <span class="math inline">\((14-1)! = 13!\)</span></p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Same as (a) but no two people from Ankara should sit together.</li>
-</ol>
-<p>Solution: Fix one from Istanbul to a position. <span class="math inline">\((7-1)!(7)!\)</span></p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>Same as (a) but all the people from Istanbul should sit together.</li>
-</ol>
-<p>Solution: Suppose there are 8 people from Ankara, 1 reserved for Istanbul group and Istanbul people have their own permutation within. <span class="math inline">\((8-1)!7!\)</span></p>
-<!-- Expectation -->
-<p><strong>Question 3</strong></p>
-<p>You roll a die once, and assume the number your rolled is X. Then continue rolling the die until you either match or exceed X. What is the expected number of additional rolls?</p>
-<p>Solution:</p>
-<p><span class="math display">\[E[n|X_1=i] = 1/P(X_2 \ge i| X_1 = i) = 6/(6-i+1)\]</span></p>
-<p><span class="math display">\[\sum_{i=1}^6 = 6/(6-i+1) * P(X=i) = 2.45\]</span></p>
-<!-- Expectation -->
-<p><strong>Question 4</strong></p>
-<p>In a three dice roll, if at least two dice have the same number (e.g. 5-5-4 or 3-3-3) you win.</p>
-<ol style="list-style-type: lower-alpha">
-<li>What is the probability that you win at least three times in a 30 rolls game?</li>
-</ol>
-<p>Solution:
-All combinations <span class="math inline">\(N = 6^3 = 216\)</span>.
-Non repeating permutations <span class="math inline">\(n_{lose} = \dfrac{6!}{3!} = 120\)</span>.
-Probability of win is <span class="math inline">\(1 - \dfrac{n_lose}{N} = 0.444\)</span>.
-Probability of winning at least 3 times is
-<span class="math display">\[P(X \ge 3| T = 30) = 1 - P(X = 0|T=30) - P(X = 1|T=30) - P(X=2|T=30)\]</span>
-<span class="math display">\[P(X \ge 3| T = 30) = 1 - 0.9999933\]</span></p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>What is the expected number and variance of the number of wins?</li>
-</ol>
-<p><span class="math display">\[E[X] = np = 30*(0.444) = 13.33\]</span>
-<span class="math display">\[V[X] = np(1-p) = 30*(0.444)*(1-0.444) = 7.407407\]</span></p>
-<!-- Negative Binomial -->
-<p><strong>Question 5</strong></p>
-<p>In a Go game, a player that wins three games out of five is the winner. Suppose the artificial intelligence Alpha Go has probability 0.65 of winning against the World’s (Human) Go Champion. What is the probability that Alpha Go wins the game at the 4th game?</p>
-<p>Solution: AI should win 2 games in the first 3 and win the 4th game. <span class="math inline">\(\binom{3}{2}(0.65)^2(0.35)(0.65) = 0.289\)</span></p>
-<!-- Hypergeometric  -->
-<!-- Negative binomial  -->
-<p><strong>Question 6</strong></p>
-<p>An egg basket contains 8 eggs, 4 of which are broken. 3 eggs are selected to make an omelette.</p>
-<ol style="list-style-type: lower-alpha">
-<li>What is the probability that all 3 eggs are intact?</li>
-</ol>
-<p>Solution: <span class="math inline">\(\dfrac{\binom{4}{3}}{\binom{8}{3}} = 0.0714\)</span></p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>What is the probability that the 2nd broken egg is the 3rd egg?</li>
-</ol>
-<p>Solution: Probability of getting 1 intact and 1 broken egg <span class="math inline">\(\dfrac{\binom{4}{1}\binom{4}{1}}{\binom{8}{2}} = 0.571\)</span>. At 3rd egg there should be 3 intact and 3 broken eggs remaining, so getting the 3rd broken egg is 1/2. Final probability is <span class="math inline">\(0.286\)</span>.</p>
-<!-- Conditional Probability -->
-<p><strong>Question 7</strong></p>
-<p>Nejat is a film critic and he will attend to IKSV Film Festival between April 5-15. Nejat likes a movie with probability 0.6 if the genre of the movie is mystery. For other genres, he likes the movie with probability 0.4. There will be 40 movies during the festival, 10 of which are mystery.</p>
-<ol style="list-style-type: lower-alpha">
-<li>What is the probability that Nejat will like a randomly selected movie?</li>
-</ol>
-<p>Solution: (L)ike, (D)islike, (M)ystery, (O)ther. <span class="math inline">\(P(M) = 10/40 = 0.25\)</span>.
-<span class="math display">\[P(L) = P(L|M)P(M) + P(L|O)P(O) = 0.6*0.25 + 0.4*0.75 = 0.45\]</span></p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Suppose Nejat did not like the film. What is the probability that the selected movie is a non-mystery film?</li>
-</ol>
-<p>Solution: <span class="math inline">\(P(O|D) = \dfrac{P(D|O)P(O)}{P(D)} = \dfrac{P(D|O)P(O)}{1-P(L)} = 0.6*0.75/0.55 = 0.818\)</span></p>
-<!-- Binomial Distribution -->
-<p><strong>Question 8</strong></p>
-<p>A student applies for internships to 11 companies. She has a 0.6 probability to get an offer for an internship.</p>
-<ol style="list-style-type: lower-alpha">
-<li>What is the probability that she will get offers from at least 4 companies?</li>
-</ol>
-<p>Solution: <span class="math inline">\(P(X \ge 4) = \sum_{i=4}^{11} \binom{8}{i} (0.6)^i(0.4)^{n-i} = 0.97\)</span></p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>What is the probability that she gets her fourth offer at the seventh application?</li>
-</ol>
-<p>Solution: <span class="math inline">\(\binom{6}{3} (0.6)^3(0.4)^{3}(0.6) = 0.166\)</span></p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>What is the expected value and variance of the applications?</li>
-</ol>
-<p>Solution: <span class="math inline">\(E[X] = np = 11*0.6 = 6.6\)</span>, <span class="math inline">\(V(X) = np(1-p) = 11*0.6*0.4 = 2.64\)</span>.</p>
-<!-- Multinomial Distribution -->
-<p><strong>Question 9</strong></p>
-<p>A steakhouse serves (C)hateaubriand, (K)obe Beef Tenderloin and (T)-Bone. Customers order C with probability 0.35, K w.p. 0.2 and T w.p. 0.45.</p>
-<ol style="list-style-type: lower-alpha">
-<li>12 customers arrive. What is the probability that 4 of them order C, 3 order K and 5 order T?</li>
-</ol>
-<p>Solution: <span class="math inline">\(\binom{12}{4,3,5}(0.35)^4(0.2)^3(0.45)^5 = 0.0614\)</span>.</p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Suppose C sells for 90TL, K for 150TL and T for 120TL. If 100 customers are served that day, what is the expected revenue?</li>
-</ol>
-<p>Solution: <span class="math inline">\(100*(90*0.35 + 150*0.2 + 120*0.45) = 11550TL\)</span>.</p>
-<p><strong>Question 10</strong></p>
-<p>An international student group will select a committee of 4 people at random. There are 7 Turkish, 6 Greek, 4 Italian and 5 Irish students in the group.</p>
-<ol style="list-style-type: lower-alpha">
-<li>What is the probability that all countries are represented?</li>
-</ol>
-<p>Solution: Total number students is 22. <span class="math inline">\(\dfrac{7*6*4*5}{\binom{22}{4}} = 0.1148325\)</span></p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>If the committee consisted of 5 people what would be the probability of (a)?</li>
-</ol>
-<p>Solution: <span class="math inline">\(\dfrac{7*6*4*\binom{5}{2} + 7*6*5*\binom{4}{2} + 7*5*4*\binom{6}{2} + 6*5*4*\binom{7}{2}}{\binom{22}{4}} = 0.287\)</span></p>
-<p><strong>Question 11</strong></p>
-<p>There are 3 balls in an urn, each of them is either (B)lack or (W)hite. At each step <span class="math inline">\(i\)</span>, a ball is drawn from the urn randomly and another ball is thrown the urn with equal probability for both colors. So there are three balls at the end of each step. Let <span class="math inline">\(X_i\)</span> be the number of White balls at time <span class="math inline">\(i\)</span>. We know that at step 0, there are two white balls and one black ball in the urn (i.e. <span class="math inline">\(X_0 = 2\)</span>). Calculate the following.</p>
-<p>a) <span class="math inline">\(P(X_1 = 2 | X_0 = 2)\)</span></p>
-<p>b) <span class="math inline">\(P(X_2 = 1 | X_0 = 2)\)</span></p>
-<p>Now consider that the process is switched. First, a ball is thrown at random inside the urn then a ball is drawn from the urn. Again at step 0, there are two white balls and one black ball (i.e. <span class="math inline">\(X_0 = 2\)</span>). Calculate the following.</p>
-<p>c) <span class="math inline">\(P(X_1 = 1 | X_0 = 2)\)</span></p>
-<p>d) <span class="math inline">\(P(X_2 = 2 | X_0 = 2)\)</span></p>
-<p>Solution: Define <span class="math inline">\(Y_i\)</span> as the ball drawn the urn and <span class="math inline">\(Z_i\)</span> as the ball added at stage <span class="math inline">\(i\)</span>. Probabilities of <span class="math inline">\(Z\)</span> will always be the same. <span class="math inline">\(P(Z_i=W) = P(Z_i=B) = 0.5\)</span>. For a and b, probabilities of <span class="math inline">\(Y_i\)</span> is dependent only on <span class="math inline">\(X_{i-1}\)</span>. But, for c and d, <span class="math inline">\(Y\)</span> depends on both <span class="math inline">\(X_{i-1}\)</span> and <span class="math inline">\(Z_i\)</span>.</p>
-<p>a) <span class="math inline">\(P(X_1 = 2 | X_0 = 2) = P(Y_1 = W|X_0=2)P(Z_1 = W) + P(Y_1 = B|X_0=2)P(Z_1 = B) = 2/3*1/2 + 1/3*1/2 = 1/2\)</span>.
-b) <span class="math inline">\(P(X_2 = 1|X_0=2) = P(X_2 = 1| X_1 = 2, X_0=2) + P(X_2 = 1| X_1 = 1,X_0=2) = P(X_2=1|X_1=2)P(X_1=2|X_0=2) + P(X_2=1|X_1=1)P(X_1=1|X_0=2)\)</span>. We can say that P(X_i = x_i|X_{i-1} = x_{i-1}) is equal for all <span class="math inline">\(i\)</span>. So <span class="math inline">\(P(X_2=1|X_1=2)P(X_1=2|X_0=2) + P(X_2=1|X_1=1)P(X_1=1|X_0=2) = P(X_1=1|X_0=2)P(X_1=2|X_0=2) + P(X_1=1|X_0=1)P(X_1=1|X_0=2) = P(X_1=1|X_0=2)(P(X_1=2|X_0=2)+P(X_1=1|X_0=1))\)</span>. Then <span class="math inline">\(P(X_1=1|X_0=2) = P(Y_1=W|X_0=2)P(Z_1=B) = 2/3*1/2 = 1/3\)</span>. <span class="math inline">\(P(X_1=1|X_0=1) = P(Y_1 = W|X_0=1)P(Z_1 = W) + P(Y_1 = B|X_0=1)P(Z_1 = B) = 1/3*1/2 + 2/3*1/2 = 1/2\)</span>.</p>
-<p>So, <span class="math inline">\(P(X_1 = 2 | X_0 = 2) = 1/3*(1/2 + 1/2) = 1/3\)</span>.</p>
-<p>c) Similar but this time <span class="math inline">\(Z_i\)</span> is more important. <span class="math inline">\(P(X_1 = 1 | X_0 = 2) = P(Z_1 = B)P(Y_1 = B|X_0=2,Z_1=B) = 1/2*1/2=1/4\)</span>.</p>
-<p>d) <span class="math inline">\(P(X_2 = 2 | X_0 = 2) = P(X_2 = 2 | X_1 = 2)P(X_1 = 2 | X_0 = 2) + P(X_2 = 2 | X_1 = 1)P(X_1 = 1 | X_0 = 2) + P(X_2 = 2 | X_1 = 3)P(X_1 = 3 | X_0 = 2)\)</span>. Let’s rephrase <span class="math inline">\(P(X_1 = 2 | X_0 = 2)^2 + P(X_1 = 2 | X_0 = 1)P(X_1 = 1 | X_0 = 2) + P(X_1 = 2 | X_0 = 3)P(X_1 = 3 | X_0 = 2)\)</span>. <span class="math inline">\(P(X_1 = 2 | X_0 = 2) = 1/2*3/4 + 1/2*1/4 = 1/2\)</span>. <span class="math inline">\(P(X_1 = 2|X_0 = 1) = 1/2*1/2 = 1/4\)</span>. <span class="math inline">\(P(X_1 = 3|X_0 = 2) = 1/2*1/4 = 1/8\)</span>. <span class="math inline">\(P(X_1 = 2|X_0 = 3) = 1/2*3/4 = 3/8\)</span>.</p>
-<p><span class="math display">\[(1/2)^2 + 1/4 * 1/4 + 1/8*3/8 = 23/64\]</span></p>
-<p><strong>Question 12</strong></p>
-<p>Calculate the number of permutations of the word “SUCCESSFUL” with vowels together.</p>
-<p>Solution: 3S, 2C, 1L, 1F, 2U and 1F. 7 consonants, 3 vowels. <span class="math inline">\(\dfrac{(7+1)!}{3!2!}\dfrac{3!}{2!}=10800\)</span>.</p>
-<p><strong>Question 13</strong></p>
-<p>10 students enter the cafeteria. There are three different meal choices; red meat, vegeterian and fish. A student prefers red meat with 50% probability, vegeterian 20% and fish 30%. What is the probability that, of this group of 10, 4 students prefer eat red meat, 3 students prefer vegeterian and 3 students prefer fish?</p>
-<p>Solution: Multinomial Distribution <span class="math inline">\(\binom{10}{4,3,3}(0.5)^4(0.2)^3(0.3)^3 = 0.0567\)</span></p>
-<p><strong>Question 14</strong></p>
-<p>Three students are going to start an internship on January. There are five internship posts on the department website. Each has to apply to only one internship. What is the probability that none of the students apply to the same internship?</p>
-<p>Solution: Similar to birthday problem. <span class="math inline">\(\dfrac{5!}{2!}/5^3 = 0.48\)</span>.</p>
-<p><strong>Question 15</strong></p>
-<p>Baran is an activist who raises funds for UNICEF on the street. 80% of people walking by stops when Baran asks to tell about UNICEF. 50% of those who stop donates 10TL to UNICEF. What is the expected amount of donations if Baran tried to reach 15 people that day.</p>
-<p>Solution: P(Donation) = P(Stop)P(Donation|Stop) = 0.8*0.5 = 0.4. Expectation of binomial distribution np = 15*0.4 = 60.</p>
-<p><strong>Question 16</strong></p>
-<p>Merve is an aspiring singer. She has 25% chance to be offered to sing at a concert, if she applies. She applied to 8 concerts for the next season. What is the probability that she got at least 2 offers?</p>
-<p>Solution: P(Reject) = 0.75. <span class="math inline">\(P(X \ge 2) = 1 - P(0) - P(1) = 1 - (0.75^8 + 8*0.75^7*0.25) = 0.64\)</span></p>
-<p><strong>Question 17</strong></p>
-<p>Bureau of Statistics provide you with the following information. 40% of Architects, 60% of Engineers and 30% of Lawyers make more than 5000TL per month in the first two years of their career. Of those interested in these occupations 20% choose Architecture, 50% choose Engineering and, 30% choose Law.</p>
-<p>a) What is the probability that a randomly selected person from these careers make less than 5000TL per month in the first two years of his/her career?</p>
-<p>b) If a person makes more than 5000TL, what is the probability that he/she is an Architect?</p>
-<p>Solution: Define <span class="math inline">\(W\)</span> as making more than 5000TL, <span class="math inline">\(W^c\)</span> as less and (A) as choosing Architecture career, (E) Engineering and (L) Law.</p>
-<p>a) <span class="math inline">\(P(W^c|A) = 1 - P(W|A) = 0.6\)</span>, <span class="math inline">\(P(W^c|E) = 1 - P(W|E) = 0.4\)</span>, <span class="math inline">\(P(W^c|L) = 1 - P(W|L) = 0.7\)</span>. <span class="math inline">\(P(W^c) = P(A)P(W^c|A)+P(E)P(W^c|E)+P(L)P(W^c|L) = 0.2*0.6+0.5*0.4+0.3*0.7 = 0.53\)</span>.</p>
-<p>b) <span class="math inline">\(P(A|W) = P(A \cap W)/P(W)\)</span>. <span class="math inline">\(P(A \cap W) = P(A)P(W|A) = 0.2*0.4 = 0.08\)</span>. <span class="math inline">\(P(W) = 1 - P(W^c) = 0.47\)</span>. <span class="math inline">\(P(A|W) = 0.08/0.47 = 0.17\)</span>.</p>
-<p><strong>Question 18</strong></p>
-<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be the random variables and <span class="math inline">\(f(x,y)\)</span> is the probability density function of the joint distribution. Suppose <span class="math inline">\(f(x,y)\)</span> is defined as <span class="math inline">\(k(2x^2 + y)\)</span> if <span class="math inline">\(0&lt;x&lt;2\)</span> and <span class="math inline">\(0&lt;y&lt;1\)</span> (0 otherwise).</p>
-<p>a) Find <span class="math inline">\(k\)</span>.</p>
-<p>b) Find the marginal distribution of <span class="math inline">\(y\)</span> (<span class="math inline">\(h(y)\)</span>) and <span class="math inline">\(h(y&lt;0.5)\)</span>.</p>
-<p>c) Find the conditional distribution of <span class="math inline">\(f(y|x)\)</span>.</p>
-<p>Solution:</p>
-<p>a) <span class="math inline">\(\int^1_0 \int^2_0 k(2x^2 + y) dx dy = \int^1_0 k((2/3)*x^3 + xy)dy|^2_0 = \int^1_0 k(16/3+2y) dy\)</span>. (This is also <span class="math inline">\(h(y)\)</span> if <span class="math inline">\(k\)</span> is known.) <span class="math inline">\(k(16y/3+y^2)|^1_0 = k(19/3)\)</span>. In order to be a distribution it should be equal to 1. So <span class="math inline">\(k = 3/19\)</span>.</p>
-<p>b) As given in (a) <span class="math inline">\(h(y) = 3/19(16/3+2y)\)</span>. So <span class="math inline">\(h(y&lt;0.5) = \int^{0.5}_0 3/19(16/3+2y) dy = 3/19(16y/3+y^2)|^{0.5}_0 = 3/19(8/3 + 1/4) = 3/19*33/12 = 0.43\)</span></p>
-<p>c) We need to find <span class="math inline">\(g(x) = \int^1_0 3/19(2x^2 + y)dy = 3/19(2x^2 + 1/2)\)</span>. <span class="math inline">\(f(y|x) = f(x,y)/g(x) = \dfrac{3/19(2x^2+y)}{3/19(2x^2 + 1/2)} = \dfrac{4x^2 + 2y}{4x^2 + 1}\)</span>.</p>
+<div id="appendix-a" class="section level1">
+<h1><span class="header-section-number">A</span> Appendix A</h1>
+<p>Solving normal distribution problems is quite easy if you remember some simple items.</p>
+<div id="item-1-standard-normal-distribution-and-z-table" class="section level2">
+<h2><span class="header-section-number">A.1</span> Item 1: Standard Normal Distribution and z-table</h2>
+<p>Standard normal distribution is special case of normal distribution with mean (<span class="math inline">\(\mu\)</span>) of 0 and standard deviation (<span class="math inline">\(\sigma\)</span>) of 1. The cumulative distribution function (CDF) values (<span class="math inline">\(P(X \le x)\)</span>) of std normal distribution are given in the z-table.</p>
+<p>Note: CDF of the standard normal is also denoted with <span class="math inline">\(\Phi(x) = P(X \le x)\)</span>.
+Note 2: For those of you who did not grasp the concept of CDF; it is basically the probability that the outcome of the event is less than the value specified. For instance <span class="math inline">\(\Phi(0)\)</span></p>
+</div>
+<div id="item-2-convert-and-normal-process-to-standard-normal." class="section level2">
+<h2><span class="header-section-number">A.2</span> Item 2: Convert and normal process to standard normal.</h2>
+<p>Suppose you have a process (say, you pour cream on cakes) with mean 50 and standard deviation 5 and you want to know the probability of getting less than 52. Follow this formula.</p>
+<p><span class="math display">\[\Phi \left(\dfrac{X-\mu}{\sigma}\right)\]</span></p>
+<p>So in our case, <span class="math inline">\(\Phi \left(\dfrac{52-50}{5}\right) = \Phi(0.4)\)</span>.</p>
+</div>
+<div id="item-3-how-to-read-z-table." class="section level2">
+<h2><span class="header-section-number">A.3</span> Item 3: How to read z-table.</h2>
+<p>In the z-table sum of row and column names gives us the value (<span class="math inline">\(x\)</span>) and their corresponding value gives us the probability <span class="math inline">\(\Phi(x)\)</span>. In our example <span class="math inline">\(\Phi(0.4) = \Phi(row + column) = \Phi(0.4 + 0.00) = 0.6554\)</span></p>
 
+<p>The notation for getting the (quantile) value is <span class="math inline">\(\Phi^{-1}(0.6554) = 0.4\)</span>.</p>
+</div>
+<div id="item-4-symmetry" class="section level2">
+<h2><span class="header-section-number">A.4</span> Item 4: Symmetry</h2>
+<p>The standard normal distribution is symmetric around 0. It gives us the following useful property <span class="math inline">\(\Phi(-x) = 1 - \Phi(x)\)</span>. See <span class="math inline">\(\Phi(-0.4) = 1 - 0.6554 = 0.3446\)</span>.</p>
+
+</div>
+<div id="item-5-understand-intervals." class="section level2">
+<h2><span class="header-section-number">A.5</span> Item 5: Understand intervals.</h2>
+<p>Due to the nature of normal distribution events mainly occur around the mean. That’s why central intervals are given with some probability instead of from the bottom to the end. For instance suppose we would like to know the probability around +-9.8 liters around the mean.</p>
+<p><span class="math display">\[P(50 - 9.8 &lt; X &lt; 50 + 9.8) = P(40.2 &lt; X &lt; 59.8) = P(X &lt; 59.8,X &gt; 40,2) = P(X &lt; 59.8) - P(X &lt; 40.2)\]</span></p>
+<p>Convert to standard normal.</p>
+<p><span class="math display">\[P(X &lt; (59.8 - 50)/5) - P(X &lt; (40.2 - 50)/5) = \Phi(1.96) - \Phi(-1.96)\]</span></p>
+<p>We know that <span class="math inline">\(\Phi(-x)= 1 - \Phi(x)\)</span>, so <span class="math inline">\(\Phi(-1.96) = 1 - \Phi(1.96)\)</span>.</p>
+<p><span class="math display">\[\Phi(1.96) - \Phi(-1.96) = \Phi(1.96) - (1 - \Phi(1.96)) = 2*\Phi(1.96) - 1\]</span></p>
+<p>Check the z-table</p>
+
+<p><span class="math inline">\(\Phi(1.96)\)</span> is 0.975. So <span class="math inline">\(2*0.975 - 1 = 0.95\)</span>.</p>
+</div>
+<div id="item-6-moving-the-mean" class="section level2">
+<h2><span class="header-section-number">A.6</span> Item 6: Moving the mean</h2>
+<p>It is possible to desire an increased level of quality. For instance, if we would like to have 90% of the cakes have at least 50 grams of cream instead of 50 grams just being the mean. So <span class="math inline">\(P(X &gt; 50) = 1 - P(X &lt; 50) = 0.9\)</span>, then <span class="math inline">\(P(X &lt; 50) = 0.1\)</span>. You have the same standard deviation of 5 but you need a new mean.</p>
+<p><span class="math display">\[\Phi \left(\dfrac{50 - \mu^*}{5}\right) = 0.1\]</span></p>
+<p>We should invert the standard normal variate <span class="math inline">\(\Phi^{-1}(0.1)\)</span>. Let’s check the z-table for the values corresponding to 0.1.</p>
+
+<p>Well, closest value is 0.1003 so we go with it (usually linear interpolation is done, but we’ll skip that). The corresponding value is -1.28.</p>
+<span class="math display">\[\begin{align*}
+\dfrac{50 - \mu^*}{5} &amp;= -1.28 \\
+50 - \mu^* &amp;= -1.28*5 = -6.4 \\
+\mu^* &amp;= 50 + 6.4 = 56.4 \\
+\end{align*}\]</span>
+<p>So we should align ourself to pour 56.4 grams of cream per cake on average in order to have 90% of the cakes with 50 grams or more cream.</p>
+</div>
+<div id="conclusion" class="section level2">
+<h2><span class="header-section-number">A.7</span> Conclusion</h2>
+<p>By the end of this tutorial you should know your way around the normal distribution problems. It is not hard but you might need some practice till you get adept on the topic.</p>
+
+<div id="refs" class="references">
+<div>
+<p>Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, and Keying Ye. 2012. <em>Probability and Statistics for Engineers and Scientists</em>. 9th ed. Boston, MA: Pearson.</p>
+</div>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="some-discrete-distributions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="some-continuous-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="some-continuous-distributions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

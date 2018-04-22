@@ -30,46 +30,6 @@
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
 \bibliographystyle{apalike}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 \usepackage{graphicx,grffile}
 \makeatletter
@@ -383,27 +343,12 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
   many different number of outcomes are there for this experiment?
 
   Solution: Multiplication rule. \(n_1n_2n_3 = 2.6.52 = 624\).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{n1 <-}\StringTok{ }\DecValTok{2} \CommentTok{#A coin toss has two potential outcomes.}
-\NormalTok{n2 <-}\StringTok{ }\DecValTok{6} \CommentTok{#A die roll has six potential outcomes.}
-\NormalTok{n3 <-}\StringTok{ }\DecValTok{52} \CommentTok{#A card draw has 52 potential outcomes.}
-\end{Highlighting}
-\end{Shaded}
 \item
   In how many ways can I order the Teletubbies? (Tinky-Winky, Dipsy, Laa
   Laa and Po) For instance, (TW - Dipsy - Po - Laa Laa) is an ordering
   and (Dipsy - Po - TW - Laa Laa) is another.
 
   Solution: Permutation rule. \(n! = 4! = 24\)
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{n_tubbies <-}\StringTok{ }\DecValTok{4} \CommentTok{#Number of teletubbies}
-\KeywordTok{factorial}\NormalTok{(n_tubbies) }\CommentTok{#By permtuation it is 4!}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 24
@@ -417,27 +362,11 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
   \(\dfrac{n!}{n_1!n_2!\dots n_k!}\). So the result should be
   \(\dfrac{10!}{2!2!2!1!1!1!1!} = 453600\).
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{the_phrase <-}\StringTok{ "GOODGRADES"}
-\NormalTok{freq_table <-}\StringTok{ }\KeywordTok{table}\NormalTok{(}\KeywordTok{strsplit}\NormalTok{(the_phrase, }\DataTypeTok{split =} \StringTok{""}\NormalTok{)[[}\DecValTok{1}\NormalTok{]])  }\CommentTok{#Let's create a frequency table first}
-\KeywordTok{print}\NormalTok{(freq_table)  }\CommentTok{#Let's show it}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## 
 ## A D E G O R S 
 ## 1 2 1 2 2 1 1
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{the_dividend <-}\StringTok{ }\KeywordTok{factorial}\NormalTok{(}\KeywordTok{nchar}\NormalTok{(the_phrase))  }\CommentTok{#Dividend part is 10 characters so 10!}
-\NormalTok{the_divisor <-}\StringTok{ }\KeywordTok{prod}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(freq_table))  }\CommentTok{#Get multiplication of factorials for the divisor}
-\NormalTok{the_dividend}\OperatorTok{/}\NormalTok{the_divisor}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 453600
@@ -450,15 +379,6 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
   Solution: Permutation of \(r\) items from \(n\) items is
   \(\dfrac{n!}{(n-r)!}\). So the result is \(\dfrac{6!}{4!} = 30\).
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{the_phrase<-}\StringTok{"GRADES"}
-\NormalTok{letter_length <-}\StringTok{ }\DecValTok{2} \CommentTok{#We want two letter words}
-\CommentTok{#Since all letters are different no need for special permutation.}
-\KeywordTok{factorial}\NormalTok{(}\KeywordTok{nchar}\NormalTok{(the_phrase))}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\KeywordTok{nchar}\NormalTok{(the_phrase)}\OperatorTok{-}\NormalTok{letter_length)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 30
 \end{verbatim}
@@ -469,13 +389,6 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
 
   Solution: Since in a hand you do not care for the order, it is the
   combination \(\binom{52}{5} = \dfrac{52!}{(52-5)!5!} = 2598960\).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Combination (a.k.a binomial coefficient) function is choose}
-\KeywordTok{choose}\NormalTok{(}\DecValTok{52}\NormalTok{,}\DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 2598960
@@ -512,35 +425,12 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
     What is the probability of getting four-three (in any order) in dice
     roll and three queens in card draw?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#First roll can either be 3 or 4 and second roll should be the other}
-\CommentTok{# 2/6 * 1/6}
-\CommentTok{#Getting the first Queen has probability of 4/52}
-\CommentTok{#Getting the second Queen has probability of 3/51}
-\CommentTok{#Getting the third Queen has probability of 2/50}
-\DecValTok{2}\OperatorTok{/}\DecValTok{6}\OperatorTok{*}\DecValTok{1}\OperatorTok{/}\DecValTok{6}\OperatorTok{*}\DecValTok{4}\OperatorTok{/}\DecValTok{52}\OperatorTok{*}\DecValTok{3}\OperatorTok{/}\DecValTok{51}\OperatorTok{*}\DecValTok{2}\OperatorTok{/}\DecValTok{50}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 1.00553e-05
 \end{verbatim}
   \item
     How many different outcomes can there be? This time assume ordering
     is important (e.g.~6-1 and 1-6 are different outcomes).
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Six outcomes per die}
-\CommentTok{#52 outcomes for the first card draw}
-\CommentTok{#51 outcomes for the second card draw}
-\CommentTok{#50 outcomes for the second card draw}
-\CommentTok{#Multiplication rule}
-\CommentTok{#You can also use permutation rule for cards}
-\DecValTok{6}\OperatorTok{*}\DecValTok{6}\OperatorTok{*}\DecValTok{52}\OperatorTok{*}\DecValTok{51}\OperatorTok{*}\DecValTok{50}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 4773600
@@ -555,30 +445,11 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
   \item
     Any order.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{the_phrase<-}\StringTok{"HOUSEPARTY"}
-\CommentTok{#No repetitive letters}
-\CommentTok{#Permutation rule}
-\KeywordTok{factorial}\NormalTok{(}\KeywordTok{nchar}\NormalTok{(the_phrase))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 3628800
 \end{verbatim}
   \item
     Vowels together?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#4 vowels, 6 consonants}
-\CommentTok{#Assume all vowels are a single "letter". So 8 characters.}
-\CommentTok{#But vowels permutate within the single "letter".}
-\CommentTok{#Multiplication rule}
-\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{4}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 120960
@@ -586,33 +457,11 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
   \item
     Vowels in alphabetical order?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#We start with all the permutations 10!}
-\CommentTok{#For any permutation there can be only one ordering of vowels.}
-\CommentTok{#For instance HOUSEPARTY is not valid but HAESOPURTY is valid}
-\CommentTok{#So remove invalid permutations with division}
-\KeywordTok{factorial}\NormalTok{(}\DecValTok{10}\NormalTok{)}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\DecValTok{4}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 151200
 \end{verbatim}
   \item
     There should be no consecutive vowels?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#There are 6 consonants, 4 vowels.}
-\CommentTok{# Assume Xs are consonants and .s are potent vowel places.}
-\CommentTok{# .X.X.X.X.X.X.}
-\CommentTok{#Consonants can permutate in any order so 6! there}
-\CommentTok{#7 places for vowels but only 4 vowels.}
-\CommentTok{# So it is a permutation of 4 out of 8 places.}
-\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\NormalTok{)}\OperatorTok{*}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{7}\NormalTok{)}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\DecValTok{7-4}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 604800
@@ -622,27 +471,10 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
   Question 3 In how many ways can you arrange the letters of
   ``CAMARADERIE''?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# 11 characters.}
-\CommentTok{# 6 vowels, 5 consonants}
-\CommentTok{# 3 As, 2 Es, 2 Rs}
-\end{Highlighting}
-\end{Shaded}
-
   \begin{enumerate}
   \def\labelenumi{\alph{enumi})}
   \item
     Any order.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#By the formula of permutation with repetitive letters}
-\CommentTok{#Assign the value to all_perms object}
-\NormalTok{all_perms<-}\KeywordTok{factorial}\NormalTok{(}\DecValTok{11}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{))}
-\NormalTok{all_perms}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 1663200
@@ -650,38 +482,17 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
   \item
     Vowels together?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Assume all vowels are single "character" again. So 6 characters}
-\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{5}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{)))}\OperatorTok{*}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 21600
 \end{verbatim}
   \item
     Vowels in alphabetical order?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Same as the last question. But be careful about identical vowels.}
-\NormalTok{all_perms}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 27720
 \end{verbatim}
   \item
     There should be no consecutive vowels?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Same as the last question. But be careful about identical vowels.}
-\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{5}\NormalTok{)}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{))}\OperatorTok{*}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{6}\NormalTok{)}\OperatorTok{/}\KeywordTok{factorial}\NormalTok{(}\DecValTok{6-6}\NormalTok{))}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 3600
@@ -693,13 +504,6 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
   Suppose you are putting the top 12 basketball teams in 4 groups evenly
   (each group should consist of 3 teams). In how many different ways can
   you arrange the teams?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#It is either a chain of combinations or just grouping combination}
-\KeywordTok{choose}\NormalTok{(}\DecValTok{12}\NormalTok{,}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(}\DecValTok{9}\NormalTok{,}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 369600
@@ -715,27 +519,12 @@ generate? Answer \(\dfrac{10!}{8!2!} = 45\)
     Suppose you want to form a group of 5 people with at least 1 person
     from Izmir and Mugla. In how many ways can you form such a group?
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Calculate as if no rules. It is the combination of 18 to 5.}
-\CommentTok{#Then remove the combinations of all Izmir or all Mugla people}
-\KeywordTok{choose}\NormalTok{(}\DecValTok{18}\NormalTok{,}\DecValTok{5}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{choose}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{5}\NormalTok{) }\OperatorTok{-}\StringTok{ }\KeywordTok{choose}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 8260
 \end{verbatim}
   \item
     In how many ways can you form a group of 3 people from Izmir and 4
     people from Mugla?
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Simply separate combinations with multiplication rule.}
-\KeywordTok{choose}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{4}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 8400
@@ -797,47 +586,17 @@ Let's recall some probability concepts.
   times.
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{231}\NormalTok{)}
-\NormalTok{coin_toss_probability<-}\ControlFlowTok{function}\NormalTok{(repetitions)\{}
-\NormalTok{    experiment<-}\KeywordTok{sample}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"H"}\NormalTok{,}\StringTok{"T"}\NormalTok{),}\DataTypeTok{size=}\NormalTok{repetitions,}\DataTypeTok{replace=}\OtherTok{TRUE}\NormalTok{)}
-    \KeywordTok{return}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{sum}\NormalTok{(experiment}\OperatorTok{==}\StringTok{"H"}\NormalTok{)}\OperatorTok{/}\NormalTok{repetitions,}\DecValTok{4}\NormalTok{))}
-\NormalTok{\}}
-\CommentTok{#Do the experiment with increasing repetitions}
-\KeywordTok{coin_toss_probability}\NormalTok{(}\DataTypeTok{repetitions=}\DecValTok{10}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 0.6
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{coin_toss_probability}\NormalTok{(}\DataTypeTok{repetitions=}\DecValTok{100}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.57
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{coin_toss_probability}\NormalTok{(}\DataTypeTok{repetitions=}\DecValTok{1000}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 0.505
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{coin_toss_probability}\NormalTok{(}\DataTypeTok{repetitions=}\DecValTok{50000}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.4989
@@ -1126,96 +885,36 @@ variance, standard deviation, quantile.
   \(\sigma(X) = \sqrt{\dfrac{\sum_i^N (X_i - \bar{X})^2}{n-1}}\)
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{231}\NormalTok{)}
-\CommentTok{#Let's pick 10 values from the numbers between 1 and 50.}
-\NormalTok{numbers <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{50}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DataTypeTok{replace=}\OtherTok{TRUE}\NormalTok{)}
-\CommentTok{#The sorted version of the numbers}
-\KeywordTok{sort}\NormalTok{(numbers)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##  [1]  1  9 15 16 16 18 26 31 32 35
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#The mean values of the numbers}
-\KeywordTok{sum}\NormalTok{(numbers)}\OperatorTok{/}\DecValTok{10}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 19.9
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#or in R}
-\KeywordTok{mean}\NormalTok{(numbers)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 19.9
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Median of the numbers}
-\KeywordTok{median}\NormalTok{(numbers)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 17
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Quantile 7/9 of the numbers}
-\KeywordTok{quantile}\NormalTok{(numbers,}\DecValTok{7}\OperatorTok{/}\DecValTok{9}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## 77.77778% 
 ##        31
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Quantile 0 of the numbers (also the min)}
-\KeywordTok{quantile}\NormalTok{(numbers,}\DecValTok{0}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## 0% 
 ##  1
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Quantile 1 of the numbers (also the max)}
-\KeywordTok{quantile}\NormalTok{(numbers,}\DecValTok{1}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## 100% 
 ##   35
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#No simple solution for mode in R}
-\NormalTok{freq_table<-}\KeywordTok{table}\NormalTok{(numbers)}
-\NormalTok{freq_table}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## numbers
@@ -1223,56 +922,21 @@ variance, standard deviation, quantile.
 ##  1  1  1  2  1  1  1  1  1
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(freq_table[}\KeywordTok{which.max}\NormalTok{(freq_table)])}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] "16"
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Sample variance of numbers}
-\KeywordTok{sum}\NormalTok{((numbers }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(numbers))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\DecValTok{10-1}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 118.7667
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#For large values you can take n ~ n-1}
-\CommentTok{#in R}
-\KeywordTok{var}\NormalTok{(numbers)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 118.7667
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Sample standard deviation of values}
-\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{((numbers }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(numbers))}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\DecValTok{10-1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 10.89801
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#in R}
-\KeywordTok{sd}\NormalTok{(numbers)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 10.89801
@@ -1572,14 +1236,6 @@ Example: Multiple Coin Tosses (x5 coins, p = 0.5)
   pmf: \(f(x=3;n=5) = \binom{5}{3} (0.5)^3(1-0.5)^{(5-3)} = 0.3125\)
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#R way}
-\CommentTok{#(d)ensity(binom)ial}
-\KeywordTok{dbinom}\NormalTok{(}\DataTypeTok{x=}\DecValTok{3}\NormalTok{,}\DataTypeTok{size=}\DecValTok{5}\NormalTok{,}\DataTypeTok{prob=}\FloatTok{0.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 0.3125
 \end{verbatim}
@@ -1592,13 +1248,6 @@ Example: Multiple Coin Tosses (x5 coins, p = 0.5)
 \item
   cdf: \(F(X \le 3;n=5) = \sum_{i=0}^5 f(i) = 0.8125\)
 \end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#R way}
-\KeywordTok{pbinom}\NormalTok{(}\DataTypeTok{q=}\DecValTok{3}\NormalTok{,}\DataTypeTok{size=}\DecValTok{5}\NormalTok{,}\DataTypeTok{prob=}\FloatTok{0.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.8125
@@ -1626,23 +1275,9 @@ coffee, 5 will prefer espresso and 2 will prefer filter coffee?
 
 \(f(3,5,2;0.4,0.25,0.35;10) = \binom{10}{3,5,2} * 0.4^3 * 0.25^5 * 0.35^10 = 4.3 * 10^{-6} = 0.0193\)
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Explicit form}
-\KeywordTok{factorial}\NormalTok{(}\DecValTok{10}\NormalTok{)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{5}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(}\DecValTok{2}\NormalTok{))}\OperatorTok{*}\FloatTok{0.4}\OperatorTok{^}\DecValTok{3} \OperatorTok{*}\StringTok{ }\FloatTok{0.25}\OperatorTok{^}\DecValTok{5} \OperatorTok{*}\StringTok{ }\FloatTok{0.35}\OperatorTok{^}\DecValTok{2}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 0.01929375
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Density multinomial}
-\KeywordTok{dmultinom}\NormalTok{(}\DataTypeTok{x=}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{),}\DataTypeTok{prob=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.4}\NormalTok{,}\FloatTok{0.25}\NormalTok{,}\FloatTok{0.35}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.01929375
@@ -1676,27 +1311,9 @@ probability that 1 of them is from Ankara and 4 of them from Istanbul.
 
 \(f(1,5;8,20) = \dfrac{\binom{8}{1}\binom{20-8}{5-1}}{\binom{20}{5}} = 0.256\)
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Explicit form}
-\NormalTok{x=}\DecValTok{1}
-\NormalTok{n=}\DecValTok{5}
-\NormalTok{k=}\DecValTok{8}
-\NormalTok{N=}\DecValTok{20}
-\NormalTok{(}\KeywordTok{choose}\NormalTok{(k,x)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(N}\OperatorTok{-}\NormalTok{k,n}\OperatorTok{-}\NormalTok{x))}\OperatorTok{/}\KeywordTok{choose}\NormalTok{(N,n)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 0.255418
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Density hypergeometric, see ?dhyper for explanations}
-\KeywordTok{dhyper}\NormalTok{(}\DataTypeTok{x=}\DecValTok{1}\NormalTok{,}\DataTypeTok{m=}\DecValTok{8}\NormalTok{,}\DataTypeTok{n=}\DecValTok{12}\NormalTok{,}\DataTypeTok{k=}\DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.255418
@@ -1721,34 +1338,13 @@ that 3rd Heads come in the 5th toss?
 
 \(f(3;0.5,5) = \binom{5-1}{3-1} 0.5^30.5^{(5-3)} = 0.1875\)
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Explicit form}
-\KeywordTok{choose}\NormalTok{(}\DecValTok{5-1}\NormalTok{,}\DecValTok{3-1}\NormalTok{)}\OperatorTok{*}\FloatTok{0.5}\OperatorTok{^}\DecValTok{3}\OperatorTok{*}\FloatTok{0.5}\OperatorTok{^}\NormalTok{(}\DecValTok{5-3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 0.1875
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Binomial way}
-\KeywordTok{dbinom}\NormalTok{(}\DecValTok{3-1}\NormalTok{,}\DecValTok{5-1}\NormalTok{,}\FloatTok{0.5}\NormalTok{)}\OperatorTok{*}\FloatTok{0.5}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 0.1875
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#Negative binomial way}
-\KeywordTok{dnbinom}\NormalTok{(}\DataTypeTok{x=}\DecValTok{5-3}\NormalTok{,}\DataTypeTok{size=}\DecValTok{3}\NormalTok{,}\DataTypeTok{prob=}\FloatTok{0.5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.1875
@@ -1832,23 +1428,6 @@ intervals, we should simply rescale, \(\lambda t_{60} = 8\).
 
   \[\binom{10}{2,5,3} 0.15^2 * 0.55^5 * 0.3^3 = 0.0770478\]
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{n_total =}\StringTok{ }\DecValTok{10}
-\CommentTok{# Olive bread}
-\NormalTok{p_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\FloatTok{0.15}
-\NormalTok{n_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\DecValTok{2}
-\CommentTok{# Rye bread}
-\NormalTok{p_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\FloatTok{0.55}
-\NormalTok{n_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\DecValTok{5}
-\CommentTok{# White bread}
-\NormalTok{p_}\DecValTok{3}\NormalTok{ =}\StringTok{ }\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{p_}\DecValTok{2} \OperatorTok{-}\StringTok{ }\NormalTok{p_}\DecValTok{1}
-\NormalTok{n_}\DecValTok{3}\NormalTok{ =}\StringTok{ }\DecValTok{3}
-
-\KeywordTok{factorial}\NormalTok{(n_total)}\OperatorTok{/}\NormalTok{(}\KeywordTok{factorial}\NormalTok{(n_}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(n_}\DecValTok{2}\NormalTok{)}\OperatorTok{*}\KeywordTok{factorial}\NormalTok{(n_}\DecValTok{3}\NormalTok{)) }\OperatorTok{*}\StringTok{ }\NormalTok{p_}\DecValTok{1}\OperatorTok{^}\NormalTok{n_}\DecValTok{1} \OperatorTok{*}\StringTok{ }\NormalTok{p_}\DecValTok{2}\OperatorTok{^}\NormalTok{n_}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{p_}\DecValTok{3}\OperatorTok{^}\NormalTok{n_}\DecValTok{3}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 0.0770478
 \end{verbatim}
@@ -1859,19 +1438,6 @@ intervals, we should simply rescale, \(\lambda t_{60} = 8\).
   \emph{Solution:} Hypergeometric distribution.
 
   \[\dfrac{\binom{18}{4}\binom{14}{4}}{\binom{32}{8}} = 0.2912125\]
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{n_total =}\StringTok{ }\DecValTok{32} \CommentTok{#N}
-\NormalTok{k_total =}\StringTok{ }\DecValTok{8}
-\NormalTok{n_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\DecValTok{18}
-\NormalTok{n_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\DecValTok{14}
-\NormalTok{k_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\DecValTok{4}
-\NormalTok{k_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\DecValTok{4}
-
-\NormalTok{(}\KeywordTok{choose}\NormalTok{(n_}\DecValTok{1}\NormalTok{,k_}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\KeywordTok{choose}\NormalTok{(n_}\DecValTok{2}\NormalTok{,k_}\DecValTok{2}\NormalTok{))}\OperatorTok{/}\KeywordTok{choose}\NormalTok{(n_total,k_total)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.2912125
@@ -1884,12 +1450,6 @@ intervals, we should simply rescale, \(\lambda t_{60} = 8\).
   \emph{Solution:} Geometric distribution.
 
   \[ (0.9)^9 * (0.1) = 0.03874205\]
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(}\FloatTok{0.9}\NormalTok{)}\OperatorTok{^}\DecValTok{9} \OperatorTok{*}\StringTok{ }\NormalTok{(}\FloatTok{0.1}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.03874205
@@ -1942,18 +1502,6 @@ intervals, we should simply rescale, \(\lambda t_{60} = 8\).
     \(-20 * \binom{10}{6} 0.15^6 * 0.85^4 -25 * \binom{10}{5} 0.15^5 * 0.85^5 - 30 * \binom{10}{4} 0.15^4 * 0.85^6 - 35 * \binom{10}{3} 0.15^3 * 0.85^7 - 40 * \binom{10}{2} 0.15^2 * 0.85^8 - 45 * \binom{10}{1} 0.15^1 * 0.85^9 - 50 * 0.85^10 = -42.5TL\).
   \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{rewards <-}\StringTok{ }\NormalTok{(}\DecValTok{7}\OperatorTok{:}\DecValTok{10}\NormalTok{)}\OperatorTok{^}\DecValTok{2}
-\NormalTok{probs_rewards <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(}\DecValTok{7}\OperatorTok{:}\DecValTok{10}\NormalTok{,}\DecValTok{10}\NormalTok{,}\FloatTok{0.15}\NormalTok{)}
-\NormalTok{losses <-}\StringTok{ }\DecValTok{-5}\OperatorTok{*}\NormalTok{(}\DecValTok{10}\OperatorTok{-}\NormalTok{(}\DecValTok{6}\OperatorTok{:}\DecValTok{0}\NormalTok{))}
-\NormalTok{probs_losses <-}\StringTok{ }\KeywordTok{dbinom}\NormalTok{(}\DecValTok{6}\OperatorTok{:}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\FloatTok{0.15}\NormalTok{)}
-
-\NormalTok{expectation <-}\StringTok{ }\KeywordTok{sum}\NormalTok{(rewards}\OperatorTok{*}\NormalTok{probs_rewards) }\OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(losses}\OperatorTok{*}\NormalTok{probs_losses)}
-\NormalTok{expectation}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] -42.4913
 \end{verbatim}
@@ -1967,13 +1515,6 @@ intervals, we should simply rescale, \(\lambda t_{60} = 8\).
     \((E[X])^2 = 1805.51\). Also \(E[X^2] = 1838.434\) and
     \(V(X) = 32.92\).
   \end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ex2<-}\KeywordTok{sum}\NormalTok{(rewards}\OperatorTok{^}\DecValTok{2}\OperatorTok{*}\NormalTok{probs_rewards) }\OperatorTok{+}\StringTok{ }\KeywordTok{sum}\NormalTok{(losses}\OperatorTok{^}\DecValTok{2}\OperatorTok{*}\NormalTok{probs_losses)}
-\NormalTok{ex2 }\OperatorTok{-}\StringTok{ }\NormalTok{expectation}\OperatorTok{^}\DecValTok{2}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 32.92423
@@ -1990,13 +1531,6 @@ intervals, we should simply rescale, \(\lambda t_{60} = 8\).
    &= 0.3233236
    \end{align*}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#R version}
-\DecValTok{1}\OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dbinom}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{2}\NormalTok{,}\DecValTok{2000}\NormalTok{,}\FloatTok{0.001}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [1] 0.3233236
 \end{verbatim}
@@ -2008,14 +1542,6 @@ intervals, we should simply rescale, \(\lambda t_{60} = 8\).
    P\{X \ge 3\} &= 1 - \dfrac{e^{-2}2^0}{0!} - \dfrac{e^{-2}2^1}{1!} - \dfrac{e^{-2}2^2}{2!} \\
        &= 0.3233236
    \end{align*}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#R version}
-\NormalTok{lambda=}\DecValTok{2000}\OperatorTok{*}\FloatTok{0.001}
-\DecValTok{1}\OperatorTok{-}\StringTok{ }\KeywordTok{sum}\NormalTok{(}\KeywordTok{dpois}\NormalTok{(}\DecValTok{0}\OperatorTok{:}\DecValTok{2}\NormalTok{,lambda))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.3233236
@@ -2029,12 +1555,6 @@ intervals, we should simply rescale, \(\lambda t_{60} = 8\).
   \[\lambda^\prime = \lambda t_{30} = 15 \]
 
   \[P\{X = 10, t=30\} = \dfrac{e^{-15}15^{10}}{10!} =  0.049\]
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{dpois}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{15}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.04861075
@@ -2053,20 +1573,6 @@ intervals, we should simply rescale, \(\lambda t_{60} = 8\).
    P\{X = 3\} &= P\{Works and X = 3\} + P\{Doesn't\ Work and X = 3\} = 0.5 * \dfrac{e^{-3}3^3}{3!} + 0.5 * \dfrac{e^{-10}10^3}{3!} \\
    &= 0.96733
    \end{align*}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{#R codes}
-\CommentTok{#Probability that it works}
-\NormalTok{pw =}\StringTok{ }\FloatTok{0.5}
-\CommentTok{#Probability of 3 fails if lambda is 10}
-\NormalTok{ppois10 =}\StringTok{ }\KeywordTok{dpois}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{10}\NormalTok{)}
-\CommentTok{#Probability of 3 fails if lambda is 3}
-\NormalTok{ppois3 =}\StringTok{ }\KeywordTok{dpois}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\CommentTok{#P(Works | X = 3)}
-\NormalTok{(pw}\OperatorTok{*}\NormalTok{ppois3)}\OperatorTok{/}\NormalTok{(pw}\OperatorTok{*}\NormalTok{ppois3 }\OperatorTok{+}\StringTok{ }\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{pw)}\OperatorTok{*}\NormalTok{ppois10)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## [1] 0.96733
@@ -2542,15 +2048,6 @@ probability in uniform distribution.
   \(V(X) = 1/12(b-a)^2\)
 \end{itemize}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{the_seq <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DataTypeTok{length.out=}\DecValTok{1000}\NormalTok{)}
-
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\KeywordTok{data.frame}\NormalTok{(the_seq),}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{the_seq)) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dunif,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{min=}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DataTypeTok{max=}\DecValTok{5}\NormalTok{),}\DataTypeTok{color=}\StringTok{"blue"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \includegraphics{book-of-prob_files/figure-latex/unif-1.pdf}
 
 Example: Suppose there is a lecture that can end anytime between 11:00
@@ -2592,17 +2089,6 @@ property in exponential distribution might seem a bit off as it kind of
 assumes replenished starting point and no ``wear and tear effect''.
 Don't forget these are mathematical questions and applications might
 differ.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{the_seq <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DataTypeTok{length.out=}\DecValTok{1000}\NormalTok{)}
-
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\NormalTok{the_seq),}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x)) }\OperatorTok{+}
-\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dexp,}\DataTypeTok{color=}\StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
-\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dexp,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{rate=}\FloatTok{0.5}\NormalTok{),}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}
-\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dexp,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{rate=}\DecValTok{2}\NormalTok{),}\DataTypeTok{color=}\StringTok{"purple"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \includegraphics{book-of-prob_files/figure-latex/exp-1.pdf}
 
@@ -2647,17 +2133,6 @@ has two main parameters mean (location) \(\mu\) and standard deviation
 \end{itemize}
 
 If \(X \sim N(0,1)\), it is called standard normal distribution.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{the_seq <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DataTypeTok{length.out=}\DecValTok{1000}\NormalTok{)}
-
-\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x=}\NormalTok{the_seq),}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x)) }\OperatorTok{+}
-\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dnorm,}\DataTypeTok{color=}\StringTok{"blue"}\NormalTok{) }\OperatorTok{+}
-\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dnorm,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{sd=}\DecValTok{2}\NormalTok{),}\DataTypeTok{color=}\StringTok{"red"}\NormalTok{) }\OperatorTok{+}
-\KeywordTok{stat_function}\NormalTok{(}\DataTypeTok{fun=}\NormalTok{dnorm,}\DataTypeTok{args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{mean=}\OperatorTok{-}\DecValTok{2}\NormalTok{),}\DataTypeTok{color=}\StringTok{"purple"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \includegraphics{book-of-prob_files/figure-latex/norm-1.pdf}
 
@@ -2736,20 +2211,6 @@ modelling wind speed.
 R has predefined functions for virtually all distributions. Just write
 \texttt{?Distributions} to the console.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dunif }\CommentTok{#density of uniform distribution}
-\NormalTok{punif }\CommentTok{#cdf of uniform distribution}
-\NormalTok{qunif }\CommentTok{#quantile of uniform distribution}
-\NormalTok{runif }\CommentTok{#uniform distributed random variate}
-
-\NormalTok{dnorm }\CommentTok{#normal distribution}
-\NormalTok{dgamma }\CommentTok{#gamma distribution}
-\NormalTok{dweibull }\CommentTok{#weibull distribution}
-\NormalTok{dexp }\CommentTok{#exponential distribution}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{mini-in-class-exercises}{%
 \section{Mini In-Class Exercises}\label{mini-in-class-exercises}}
 
@@ -2781,6 +2242,143 @@ graded, you will not turn in any submission.}
     If \(P(|Z| < k) = 0.95\) what is \(k\)?
   \end{enumerate}
 \end{enumerate}
+
+\hypertarget{appendix-appendix}{%
+\appendix}
+
+
+\hypertarget{appendix-a}{%
+\chapter{Appendix A}\label{appendix-a}}
+
+Solving normal distribution problems is quite easy if you remember some
+simple items.
+
+\hypertarget{item-1-standard-normal-distribution-and-z-table}{%
+\section{Item 1: Standard Normal Distribution and
+z-table}\label{item-1-standard-normal-distribution-and-z-table}}
+
+Standard normal distribution is special case of normal distribution with
+mean (\(\mu\)) of 0 and standard deviation (\(\sigma\)) of 1. The
+cumulative distribution function (CDF) values (\(P(X \le x)\)) of std
+normal distribution are given in the z-table.
+
+Note: CDF of the standard normal is also denoted with
+\(\Phi(x) = P(X \le x)\). Note 2: For those of you who did not grasp the
+concept of CDF; it is basically the probability that the outcome of the
+event is less than the value specified. For instance \(\Phi(0)\)
+
+\hypertarget{item-2-convert-and-normal-process-to-standard-normal.}{%
+\section{Item 2: Convert and normal process to standard
+normal.}\label{item-2-convert-and-normal-process-to-standard-normal.}}
+
+Suppose you have a process (say, you pour cream on cakes) with mean 50
+and standard deviation 5 and you want to know the probability of getting
+less than 52. Follow this formula.
+
+\[\Phi \left(\dfrac{X-\mu}{\sigma}\right)\]
+
+So in our case, \(\Phi \left(\dfrac{52-50}{5}\right) = \Phi(0.4)\).
+
+\hypertarget{item-3-how-to-read-z-table.}{%
+\section{Item 3: How to read
+z-table.}\label{item-3-how-to-read-z-table.}}
+
+In the z-table sum of row and column names gives us the value (\(x\))
+and their corresponding value gives us the probability \(\Phi(x)\). In
+our example
+\(\Phi(0.4) = \Phi(row + column) = \Phi(0.4 + 0.00) = 0.6554\)
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{img/ss1}
+\end{center}
+\end{figure}
+
+The notation for getting the (quantile) value is
+\(\Phi^{-1}(0.6554) = 0.4\).
+
+\hypertarget{item-4-symmetry}{%
+\section{Item 4: Symmetry}\label{item-4-symmetry}}
+
+The standard normal distribution is symmetric around 0. It gives us the
+following useful property \(\Phi(-x) = 1 - \Phi(x)\). See
+\(\Phi(-0.4) = 1 - 0.6554 = 0.3446\).
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{img/ss2}
+\end{center}
+\end{figure}
+
+\hypertarget{item-5-understand-intervals.}{%
+\section{Item 5: Understand
+intervals.}\label{item-5-understand-intervals.}}
+
+Due to the nature of normal distribution events mainly occur around the
+mean. That's why central intervals are given with some probability
+instead of from the bottom to the end. For instance suppose we would
+like to know the probability around +-9.8 liters around the mean.
+
+\[P(50 - 9.8 < X < 50 + 9.8) = P(40.2 < X < 59.8) = P(X < 59.8,X > 40,2) = P(X < 59.8) - P(X < 40.2)\]
+
+Convert to standard normal.
+
+\[P(X < (59.8 - 50)/5) - P(X < (40.2 - 50)/5) = \Phi(1.96) - \Phi(-1.96)\]
+
+We know that \(\Phi(-x)= 1 - \Phi(x)\), so
+\(\Phi(-1.96) = 1 - \Phi(1.96)\).
+
+\[\Phi(1.96) - \Phi(-1.96) = \Phi(1.96) - (1 - \Phi(1.96)) = 2*\Phi(1.96) - 1\]
+
+Check the z-table
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{img/ss3}
+\end{center}
+\end{figure}
+
+\(\Phi(1.96)\) is 0.975. So \(2*0.975 - 1 = 0.95\).
+
+\hypertarget{item-6-moving-the-mean}{%
+\section{Item 6: Moving the mean}\label{item-6-moving-the-mean}}
+
+It is possible to desire an increased level of quality. For instance, if
+we would like to have 90\% of the cakes have at least 50 grams of cream
+instead of 50 grams just being the mean. So
+\(P(X > 50) = 1 - P(X < 50) = 0.9\), then \(P(X < 50) = 0.1\). You have
+the same standard deviation of 5 but you need a new mean.
+
+\[\Phi \left(\dfrac{50 - \mu^*}{5}\right) = 0.1\]
+
+We should invert the standard normal variate \(\Phi^{-1}(0.1)\). Let's
+check the z-table for the values corresponding to 0.1.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{img/ss4}
+\end{center}
+\end{figure}
+
+Well, closest value is 0.1003 so we go with it (usually linear
+interpolation is done, but we'll skip that). The corresponding value is
+-1.28.
+
+\begin{align*}
+\dfrac{50 - \mu^*}{5} &= -1.28 \\
+50 - \mu^* &= -1.28*5 = -6.4 \\
+\mu^* &= 50 + 6.4 = 56.4 \\
+\end{align*}
+
+So we should align ourself to pour 56.4 grams of cream per cake on
+average in order to have 90\% of the cakes with 50 grams or more cream.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+By the end of this tutorial you should know your way around the normal
+distribution problems. It is not hard but you might need some practice
+till you get adept on the topic.
 
 \bibliography{book.bib,packages.bib}
 

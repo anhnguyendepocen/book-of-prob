@@ -1,0 +1,94 @@
+# (APPENDIX) Appendix {-}
+
+# Appendix A
+
+Solving normal distribution problems is quite easy if you remember some simple items.
+
+## Item 1: Standard Normal Distribution and z-table
+
+Standard normal distribution is special case of normal distribution with mean ($\mu$) of 0 and standard deviation ($\sigma$) of 1. The cumulative distribution function (CDF) values ($P(X \le x)$) of std normal distribution are given in the z-table.
+
+Note: CDF of the standard normal is also denoted with $\Phi(x) = P(X \le x)$.
+Note 2: For those of you who did not grasp the concept of CDF; it is basically the probability that the outcome of the event is less than the value specified. For instance $\Phi(0)$
+
+## Item 2: Convert and normal process to standard normal.
+
+Suppose you have a process (say, you pour cream on cakes) with mean 50 and standard deviation 5 and you want to know the probability of getting less than 52. Follow this formula.
+
+$$\Phi \left(\dfrac{X-\mu}{\sigma}\right)$$
+
+So in our case, $\Phi \left(\dfrac{52-50}{5}\right) = \Phi(0.4)$.
+
+## Item 3: How to read z-table.
+
+In the z-table sum of row and column names gives us the value ($x$) and their corresponding value gives us the probability $\Phi(x)$. In our example $\Phi(0.4) = \Phi(row + column) = \Phi(0.4 + 0.00) = 0.6554$
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{img/ss1}
+\end{center}
+\end{figure}
+
+The notation for getting the (quantile) value is $\Phi^{-1}(0.6554) = 0.4$.
+
+## Item 4: Symmetry
+
+The standard normal distribution is symmetric around 0. It gives us the following useful property $\Phi(-x) = 1 - \Phi(x)$. See $\Phi(-0.4) = 1 - 0.6554 = 0.3446$.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{img/ss2}
+\end{center}
+\end{figure}
+
+## Item 5: Understand intervals.
+
+Due to the nature of normal distribution events mainly occur around the mean. That's why central intervals are given with some probability instead of from the bottom to the end. For instance suppose we would like to know the probability around +-9.8 liters around the mean.
+
+$$P(50 - 9.8 < X < 50 + 9.8) = P(40.2 < X < 59.8) = P(X < 59.8,X > 40,2) = P(X < 59.8) - P(X < 40.2)$$
+
+Convert to standard normal.
+
+$$P(X < (59.8 - 50)/5) - P(X < (40.2 - 50)/5) = \Phi(1.96) - \Phi(-1.96)$$
+
+We know that $\Phi(-x)= 1 - \Phi(x)$, so $\Phi(-1.96) = 1 - \Phi(1.96)$.
+
+$$\Phi(1.96) - \Phi(-1.96) = \Phi(1.96) - (1 - \Phi(1.96)) = 2*\Phi(1.96) - 1$$
+
+Check the z-table
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{img/ss3}
+\end{center}
+\end{figure}
+
+$\Phi(1.96)$ is 0.975. So $2*0.975 - 1 = 0.95$.
+
+## Item 6: Moving the mean
+
+It is possible to desire an increased level of quality. For instance, if we would like to have 90% of the cakes have at least 50 grams of cream instead of 50 grams just being the mean. So $P(X > 50) = 1 - P(X < 50) = 0.9$, then $P(X < 50) = 0.1$. You have the same standard deviation of 5 but you need a new mean.
+
+$$\Phi \left(\dfrac{50 - \mu^*}{5}\right) = 0.1$$
+
+We should invert the standard normal variate $\Phi^{-1}(0.1)$. Let's check the z-table for the values corresponding to 0.1.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.95\columnwidth]{img/ss4}
+\end{center}
+\end{figure}
+
+Well, closest value is 0.1003 so we go with it (usually linear interpolation is done, but we'll skip that). The corresponding value is -1.28.
+
+\begin{align*}
+\dfrac{50 - \mu^*}{5} &= -1.28 \\
+50 - \mu^* &= -1.28*5 = -6.4 \\
+\mu^* &= 50 + 6.4 = 56.4 \\
+\end{align*}
+
+So we should align ourself to pour 56.4 grams of cream per cake on average in order to have 90% of the cakes with 50 grams or more cream.
+
+## Conclusion
+
+By the end of this tutorial you should know your way around the normal distribution problems. It is not hard but you might need some practice till you get adept on the topic.
