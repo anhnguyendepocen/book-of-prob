@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="random-variables-and-distributions.html">
-<link rel="next" href="some-discrete-distributions.html">
+<link rel="prev" href="joint-distributions.html">
+<link rel="next" href="further-topics.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -238,27 +238,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="expectation-and-variance" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Expectation and Variance</h1>
-<p><em>This chapter will be improved</em></p>
-<div id="mathematical-expectation" class="section level2">
-<h2><span class="header-section-number">4.1</span> Mathematical Expectation</h2>
-<p><span class="math display">\[E[X] = \sum x f(x)\]</span>
-<span class="math display">\[E[X] = \int x f(x) dx\]</span></p>
-</div>
-<div id="variance" class="section level2">
-<h2><span class="header-section-number">4.2</span> Variance</h2>
-<p><span class="math display">\[V(X) = E[X^2] - E[X]^2 \]</span></p>
-
-</div>
+<div id="conditional-expectation" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Conditional Expectation</h1>
+<p>We learned about conditional distributions, but what about expectations? (<span class="math inline">\(E[X|Y=y]\)</span>)</p>
+<p><span class="math display">\[
+E[X|Y=y] = \sum_x x P(X=x|Y=y)
+E[X|Y=y] = \int_x x f(x|y) dx
+E[E[X|Y]] = \sum_y E[X|Y=y]P(Y=y) = E[X]
+\]</span></p>
+<p><strong>Example:</strong> A mouse is put into a labyrinth with 3 passages, at the end of the labyrinth there is cheese. First passage leads to the cheese in 3 mins. Second passage delays the mouse for 5 minutes and returns the mouse to the starting point. Third is the same as the second but the travel time is 10 minutes. It is equally likely that the mouse chooses any of those passages. What is the expected amount of time that the mouse will get to cheese?</p>
+<p>Say <span class="math inline">\(T\)</span> is time and <span class="math inline">\(Y\)</span> is the passage chosen.</p>
+<p><span class="math display">\[E[T] = E[E[T|Y]] = 1/3 E[T|Y=1] + 1/3 E[T|Y=3] + 1/3 E[T|Y=3]\]</span></p>
+<p><span class="math display">\[E[T|Y=1] = 3\]</span>
+<span class="math display">\[E[T|Y=2] = 5 + E[T]\]</span>
+<span class="math display">\[E[T|Y=3] = 10 + E[T]\]</span></p>
+<p><span class="math display">\[E[T] = 1/3 (3 + 5 + E[T] + 10 + E[T]) = 18\]</span></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="random-variables-and-distributions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="some-discrete-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="joint-distributions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="further-topics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

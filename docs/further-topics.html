@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="random-variables-and-distributions.html">
-<link rel="next" href="some-discrete-distributions.html">
+<link rel="prev" href="conditional-expectation.html">
+<link rel="next" href="appendix-a.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -238,27 +238,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="expectation-and-variance" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Expectation and Variance</h1>
-<p><em>This chapter will be improved</em></p>
-<div id="mathematical-expectation" class="section level2">
-<h2><span class="header-section-number">4.1</span> Mathematical Expectation</h2>
-<p><span class="math display">\[E[X] = \sum x f(x)\]</span>
-<span class="math display">\[E[X] = \int x f(x) dx\]</span></p>
+<div id="further-topics" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Further Topics</h1>
+<p><em>(not included)</em></p>
+<div id="moment-generating-function-mgf" class="section level2">
+<h2><span class="header-section-number">10.1</span> Moment Generating Function (MGF)</h2>
+<p>If we define a function <span class="math inline">\(g(X)=X^r\)</span> of r.v. X, the expected value <span class="math inline">\(E[g(X)]\)</span> is called the rth moment about the origin.</p>
+<p><span class="math display">\[E[X^r] = \sum_x x^r f(x)\]</span></p>
+<p><span class="math display">\[E[X^r] = \int_x x^r f(x) dx\]</span></p>
+<p>The first moment gives us the expectation <span class="math inline">\(E[X^1]\)</span>. With the second moment <span class="math inline">\(E[X^2]\)</span> we can calculate the variance <span class="math inline">\(V(X) = E[X^2] - E[X]^2\)</span>.</p>
+<p>The moment generating functon <span class="math inline">\(M_X(t)\)</span> is defined as follows.</p>
+<p><span class="math display">\[M_X(t) = E[e^{tX}] = \sum_x e^{tx} f(x)\]</span></p>
+<p><span class="math display">\[M_X(t) = E[e^{tX}] = \int_x e^{tx} f(x) dx\]</span></p>
+<p>If the sum or interval above converges, then MGF exists. If MGF exists then all moments can be calculated using the following derivative.</p>
+<p><span class="math display">\[\dfrac{d^rM_X(t)}{dt^r} = E[X^r], at\ t=0\]</span></p>
+<p>For instance, the MGF of binomial distribution is <span class="math inline">\(M_X(t) = \sum_0^n e^{tx} \binom{n}{x}p^xq^{n-x}\)</span>.</p>
 </div>
-<div id="variance" class="section level2">
-<h2><span class="header-section-number">4.2</span> Variance</h2>
-<p><span class="math display">\[V(X) = E[X^2] - E[X]^2 \]</span></p>
+<div id="covariance" class="section level2">
+<h2><span class="header-section-number">10.2</span> Covariance</h2>
+<p>We know about the variance (<span class="math inline">\(V(X) = \sigma_x^2\)</span> = E[(X-E[X])^2]). But what about the variance of two random variables? Then we talk about the <strong>covariance</strong> of the joint distribution (<span class="math inline">\(V(X,Y) = E[(X-E[X])(Y-E[Y])]\)</span>) or (<span class="math inline">\(E[XY] - E[X]E[Y]\)</span>).</p>
+</div>
+<div id="correlation" class="section level2">
+<h2><span class="header-section-number">10.3</span> Correlation</h2>
+<p>Simply put, it is the magnitude of (linear) relationship between random processes X and Y. Correlation coefficient can be found by using covariance and variances of the marginal distributions. (<span class="math inline">\(\dfrac{\sigma_{XY}}{\sigma_X\sigma_Y}\)</span>).</p>
+<p>Correlation is frequently used to indicate the similarity between two processes. Though, there is a popular saying that ‘correlation does not imply causation’, meaning seemingly correlated processes might actually be independent. Ask your instructor (or Google) about ‘spurious correlations’.</p>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="random-variables-and-distributions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="some-discrete-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="conditional-expectation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-a.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

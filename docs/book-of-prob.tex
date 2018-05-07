@@ -125,7 +125,7 @@ name suggests, these notes consist of an abbreviated version of the
 course as the objective is to give the essence of very significant parts
 of Probability. The course mainly follows \citep{myers2012}.
 
-This book is periodically updated. Latest update is on 2018-04-22.
+This book is periodically updated. Latest update is on 2018-05-07.
 
 \hypertarget{about-the-author}{%
 \section*{About the Author}\label{about-the-author}}
@@ -2242,6 +2242,300 @@ graded, you will not turn in any submission.}
     If \(P(|Z| < k) = 0.95\) what is \(k\)?
   \end{enumerate}
 \end{enumerate}
+
+\hypertarget{joint-distributions}{%
+\chapter{Joint Distributions}\label{joint-distributions}}
+
+So far, we learned about joint probabilities in Bayesian context such as
+\(P(A|B) = P(A,B)/P(B)\). Now, we are going to expand this concept into
+discrete and continuous distributions. Define \(P(X = x, Y=y) = f(x,y)\)
+as the probability mass function (discrete) or probability density
+function (continuous).
+
+Same probability laws apply to joint distributions as well.
+
+\begin{itemize}
+\tightlist
+\item
+  \(f(x,y) \ge 0\) for all \((x,y)\).
+\item
+  \(\sum_x \sum_y f(x,y) = 1\) or \(\int_x \int_y f(x,y) dx dy = 1\)
+\end{itemize}
+
+\textbf{Example (Discrete)}: Suppose there are 10 balls in a box; 3
+white, 4 black and 3 red. Two balls are randomly selected. Let's say
+random variable X is the number of white balls picked and r.v. Y is the
+number of black balls picked. (a) Find the joint probability function
+and (b) find the probabilities.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Let's first enumerate the alternatives. \((x,y)\) pair can be either
+  of \((0,0),(0,1),(0,2),(1,1),(2,0),(1,0)\). Total number of
+  alternatives are \(\binom{10}{2}\). To calculate, number of ways of
+  getting 1 white and 1 black ball is
+  \(\binom{3}{1}\binom{4}{1}\binom{3}{0}\). So, the probability will be
+  \(\dfrac{\binom{3}{1}\binom{4}{1}\binom{3}{0}}{\binom{10}{2}}\). We
+  can generalize it to a function.
+\end{enumerate}
+
+\[f(x,y) = \dfrac{\binom{3}{x}\binom{4}{y}\binom{3}{2-x-y}}{\binom{10}{2}}\]
+
+Let's also make it into an R function
+
+\begin{verbatim}
+## [1] 0.2666667
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Using the above formula we can calculate all the probabilities within
+  the specified region \(x+y \le 2\).
+\end{enumerate}
+
+\begin{verbatim}
+##      x_0  x_1  x_2
+## y_0 0.07 0.20 0.07
+## y_1 0.27 0.27 0.00
+## y_2 0.13 0.00 0.00
+\end{verbatim}
+
+\textbf{Example (continuous)}: \emph{(This is from the textbook, Example
+3.15)} A privately owned business operates both a drive-in facility and
+a walk-in facility. On a randomly selected day, let X and Y,
+respectively, be the proportions of time that the drive-in and the
+walk-in facilities are in use and suppose that the joint density
+function of these random variables is
+
+\[
+f(x,y) = \dfrac{2}{5}(2x + 3y), 0 \le x \le 1, 0 \le y \le 1
+\]
+
+and 0 for other values of x and y.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  Verify \(\int_x \int_y f(x,y) dx dy = 1\)
+\item
+  Find \(P[(X,Y) \in A]\), where
+  \(A = \{(x,y)|0 < x < 1/2, 1/4 < y < 1/2\}\)
+\item
+  (see the book for the full calculations)
+\end{enumerate}
+
+\[
+\int_x \int_y f(x,y) dx dy = \int_0^1 \int_0^1 \dfrac{2}{5}(2x+3y) dx dy = 1
+\]
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  (see the book for the full calculations)
+\end{enumerate}
+
+\[
+\int_x \int_y f(x,y) dx dy = \int_{1/4}^{1/2} \int_0^{1/2} \dfrac{2}{5}(2x+3y) dx dy = 13/160
+\]
+
+Example (with special distributions)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Patients arrive at the doctor's office according to Poisson
+  distribution with \(\lambda = 2\)/hour.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \tightlist
+  \item
+    What is the probability of getting less than or equal to 2 patients
+    within 2 hours?
+  \item
+    Suppose each arriving patient has 50\% chance to bring a person to
+    accompany. There are 10 seats in the waiting room. At least many
+    hours should pass that there is at least 50\% probability that the
+    waiting room is filled with patients and their relatives?
+  \end{enumerate}
+\end{enumerate}
+
+\textbf{Solution}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  \(P(X\le 2|\lambda t = 2)= \sum_{i=0}^2 \dfrac{e^{-\lambda t}(\lambda t)^i}{i!}\)
+\end{enumerate}
+
+\begin{verbatim}
+## [1] 0.2381033
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\item
+  First let's define the problem. Define \(n_p\) as the number of
+  patients and \(n_c\) is the number of company. We want
+  \(n_p + n_c \ge 10\) with probability 50\% or higher for a given
+  \(t^*\). Or to paraphrase, we want \(n_p + n_c \le 9\) w.p. 50\% or
+  lower.
+
+  What is \(n_c\) affected by? \(n_p\). It is actually a binomial
+  distribution problem.
+  \(P(n_c = i|n_p) = \binom{n_p}{i} (0.5)^i*(0.5)^{n_p-i}\). It is even
+  better if we use cdf
+  \(P(n_c \le k|n_p) = \sum_{i=0}^{k} \binom{n_p}{i} (0.5)^i*(0.5)^{n_p-i}\).
+
+  We know the arrival of the patients is distributed with poisson. So,
+  \(P(n_p = j|\lambda t^*) = \dfrac{e^{-\lambda t}(\lambda t)^j}{j!}\).
+  So
+  \(P(j + k \le N) = \sum_{a=0}^j P(n_p = a|\lambda t^*)*P(n_c \le N-a | n_p = a)\).
+  Remember it is always \(n_c \le n_p\).
+\end{enumerate}
+
+\begin{verbatim}
+## [1] 0.8631867
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 0.5810261
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 0.4905249
+\end{verbatim}
+
+\hypertarget{marginal-distributions}{%
+\subsection{Marginal Distributions}\label{marginal-distributions}}
+
+You can get the marginal distributions by just summing up or integrating
+the other random variable such as \(P(Y=y) = \sum_x f(x,y)\) or
+\(f(y) = \int_x f(x,y) dx\). Let's calculate the marginal distribution
+of black balls (rv Y) in the above example.
+
+\begin{verbatim}
+##      x_0  x_1  x_2
+## y_0 0.07 0.20 0.07
+## y_1 0.27 0.27 0.00
+## y_2 0.13 0.00 0.00
+\end{verbatim}
+
+\begin{verbatim}
+##       y_0       y_1       y_2 
+## 0.3333333 0.5333333 0.1333333
+\end{verbatim}
+
+Marginal distribution of y in the second example is calculated as
+follows.
+
+\[\int_x \dfrac{2}{5}(2x+3y) dx = \dfrac{2(1+3y)}{5}\]
+
+\hypertarget{conditional-distribution-1}{%
+\subsection{Conditional Distribution}\label{conditional-distribution-1}}
+
+Similar to Bayes' Rule, it is possible to calculate conditional
+probabilities of joint distributions. Let's denote g(x) as the marginal
+distribution of x and h(y) as the marginal distribution of y. The
+formula of conditional distribution of x given y is as follows.
+
+\[f(x|y) = f(x,y)/h(y)\]
+
+Note that conditional distribution function is useless if x and y are
+independent. (\(f(x|y)=f(x)\))
+
+\hypertarget{conditional-expectation}{%
+\chapter{Conditional Expectation}\label{conditional-expectation}}
+
+We learned about conditional distributions, but what about expectations?
+(\(E[X|Y=y]\))
+
+\[
+E[X|Y=y] = \sum_x x P(X=x|Y=y)
+E[X|Y=y] = \int_x x f(x|y) dx
+E[E[X|Y]] = \sum_y E[X|Y=y]P(Y=y) = E[X]
+\]
+
+\textbf{Example:} A mouse is put into a labyrinth with 3 passages, at
+the end of the labyrinth there is cheese. First passage leads to the
+cheese in 3 mins. Second passage delays the mouse for 5 minutes and
+returns the mouse to the starting point. Third is the same as the second
+but the travel time is 10 minutes. It is equally likely that the mouse
+chooses any of those passages. What is the expected amount of time that
+the mouse will get to cheese?
+
+Say \(T\) is time and \(Y\) is the passage chosen.
+
+\[E[T] = E[E[T|Y]] = 1/3 E[T|Y=1] + 1/3 E[T|Y=3] + 1/3 E[T|Y=3]\]
+
+\[E[T|Y=1] = 3\] \[E[T|Y=2] = 5 + E[T]\] \[E[T|Y=3] = 10 + E[T]\]
+
+\[E[T] = 1/3 (3 + 5 + E[T] + 10 + E[T]) = 18\]
+
+\hypertarget{further-topics}{%
+\chapter{Further Topics}\label{further-topics}}
+
+\emph{(not included)}
+
+\hypertarget{moment-generating-function-mgf}{%
+\section{Moment Generating Function
+(MGF)}\label{moment-generating-function-mgf}}
+
+If we define a function \(g(X)=X^r\) of r.v. X, the expected value
+\(E[g(X)]\) is called the rth moment about the origin.
+
+\[E[X^r] = \sum_x x^r f(x)\]
+
+\[E[X^r] = \int_x x^r f(x) dx\]
+
+The first moment gives us the expectation \(E[X^1]\). With the second
+moment \(E[X^2]\) we can calculate the variance
+\(V(X) = E[X^2] - E[X]^2\).
+
+The moment generating functon \(M_X(t)\) is defined as follows.
+
+\[M_X(t) = E[e^{tX}] = \sum_x e^{tx} f(x)\]
+
+\[M_X(t) = E[e^{tX}] = \int_x e^{tx} f(x) dx\]
+
+If the sum or interval above converges, then MGF exists. If MGF exists
+then all moments can be calculated using the following derivative.
+
+\[\dfrac{d^rM_X(t)}{dt^r} = E[X^r], at\ t=0\]
+
+For instance, the MGF of binomial distribution is
+\(M_X(t) = \sum_0^n e^{tx} \binom{n}{x}p^xq^{n-x}\).
+
+\hypertarget{covariance}{%
+\section{Covariance}\label{covariance}}
+
+We know about the variance (\(V(X) = \sigma_x^2\) =
+E{[}(X-E{[}X{]})\^{}2{]}). But what about the variance of two random
+variables? Then we talk about the \textbf{covariance} of the joint
+distribution (\(V(X,Y) = E[(X-E[X])(Y-E[Y])]\)) or
+(\(E[XY] - E[X]E[Y]\)).
+
+\hypertarget{correlation}{%
+\section{Correlation}\label{correlation}}
+
+Simply put, it is the magnitude of (linear) relationship between random
+processes X and Y. Correlation coefficient can be found by using
+covariance and variances of the marginal distributions.
+(\(\dfrac{\sigma_{XY}}{\sigma_X\sigma_Y}\)).
+
+Correlation is frequently used to indicate the similarity between two
+processes. Though, there is a popular saying that `correlation does not
+imply causation', meaning seemingly correlated processes might actually
+be independent. Ask your instructor (or Google) about `spurious
+correlations'.
 
 \hypertarget{appendix-appendix}{%
 \appendix}
