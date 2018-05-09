@@ -168,3 +168,94 @@ _These exercises are at will attempt questions. They will not be graded, you wil
     a. $P(-0.2 \le Z \le 0.4) = ?$
     b. If $P(Z < k) = 0.0987$ what is $k$?
     c. If $P(|Z| < k) = 0.95$ what is $k$?
+
+## Chapter Exercises
+
+
+<!-- Uniform Distribution Example -->
+
+1. Two friends (A and B) agree to meet on 4:00 PM. A usually arrives between 5 minutes early and 5 minutes late. B usually arrives between 5 minutes early and 15 minutes late. Their times of arrival are independent from each other.
+
+    a) What is the probability that B arrives definitely later than A?
+    b) In terms of expected values, for how many minutes does A come earlier than B?
+    c) What is the probability that both meet early?
+
+    a\) $P(B > 5) = \dfrac{5 - (-5)}{15 - (-5)} = 1/2$
+
+    b\) $E[B] - E[A] = 5 - 0 = 5$
+
+    c\) $P(B < 0, A < 0) = P(B < 0) P(A < 0) = 5/20 * 5/10 = 1/8$
+
+
+<!-- Exponential Distribution Example -->
+
+2. There are three computers, which provide answers to questions with speed according to exponential distribution with means ($1/\lambda$) 6, 4 and 3 per hour, respectively. What is the probability that at least one machine provides an answer within the first hour?
+
+$$P(X < x) = 1 - e^{-\lambda x}$$
+
+$$P(X > x) = e^{-\lambda x}$$
+
+The solution is 1 - no machine provides an answer within the hour $1 - P(X_1 > 1, X_2 > 1, X_3 > 1)$.
+
+$$1 - P(X_1 > 1, X_2 > 1, X_3 > 1) = 1 - e^{-\lambda_1 - \lambda_2 - \lambda_3}$$
+
+```{r}
+    1 - pexp(1,rate=3+4+6)
+```
+
+
+3. Time between customer arrivals in a cafe is exponential with the mean value of 6 minutes.
+
+a) What is the probability that no customers arrive in 15 minutes?
+
+$P(X>15) = 1 - P(X < 15) = 1 - (1 - e^{-\lambda x}) = e^{-15/6} = 0.08$
+
+b) What is the inter-arrival time if the probability of a customer to arrive is 0.9?
+
+$P(X > t) = e^{-t/6} = 0.1$, then $t = 13.81$.
+
+c) What is the probability that 10 customers arrive in the first hour?
+
+$\lambda * t = 1/6 * 60 = 10$
+
+$P(X=10) = \dfrac{e^{-\lambda *t}(\lambda t)^10}{10!} = 0.125$.
+
+d) What is the probability of getting the first customer in 15 minutes if no customer arrived in the first 10 minutes?
+
+$P(X < 15 | X > 10) = 1 - P(X > 15 | X > 10) = 1 - P(X > 5) = 1 - e^{-5/6} = 0.565$ (memoryless property)
+
+Hint: Check the relationship between Poisson and Exponential distributions.
+
+<!-- Normal Distribution Example -->
+
+4. A pack of flour contains 1 kg of flour. Though a flour pouring machine has a standard deviation of 50 gr.
+
+    a) What is the probability that a randomly selected package contains between 925-1075 grams of flour?
+    b) If a proper flour package should contain between 1000-x and 1000+x grams of flour, what should x be that 80% of the packages are deemed proper?
+    c) Your customer strictly declared that 95% of the packages should contain at least 1000 grams of flour, so you should adjust the mean value. What should be the new mean value?
+
+
+We have $\mu = 1000,\ \sigma = 50$. Define $\Phi(.)$ as the cdf of the standard normal distribution.
+
+a) $\Phi(\dfrac{1075-1000}{50})-\Phi(\dfrac{925-1000}{50})$
+b) Find an x that $\Phi(\dfrac{1075-1000}{50})-\Phi(\dfrac{925-1000}{50}) = 0.8$ approximately. The answer is more like how many standard deviations. We can find it by searching for a quantile of $\alpha=(1-0.8)/2 = 0.1$. Then find the $y$ $\Phi(y)=1-\alpha$. $y = 1.282$ so reverse the procedure from standard normal to N($\mu = 1000,\ \sigma = 50$) by $y * \sigma$ to find $x$.
+c) Your $\Phi(\dfrac{1000 - \mu}{50}) = 0.05$. The quantile value for 0.05 is -1.645. So, 1000 - 50*(-1.645) = 1082.25.
+
+```{r}
+#a
+pnorm(1075,mean=1000,sd=50)-pnorm(925,mean=1000,sd=50)
+#b
+qnorm(0.9,sd=50)
+#c
+1000-qnorm(0.05,sd=50)
+```
+
+5. There are two different roads to get to Sarıyer. Road A takes 35 minutes on average with standard deviation 5 minutes. Road B takes 32 minutes on average with standard deviation 8 minutes.
+
+    a) Which road has the higher advantage if one wants to reach Sarıyer in 42 minutes?
+    b) What is the maximum time of arrival with 90% probability? Calculate for each road.
+
+a\) For Road A it will take 42 minutes or less with probability $\Phi(\dfrac{42-35}{5}) = \Phi(1.4) = 0.92$. For Road B, $\Phi(\dfrac{42-32}{8}) = \Phi(1.4) = 0.89$. Take Road A.
+b\) It is the quantile value of $\alpha = 0.9$. Then we need to find $\Phi^{-1}(\alpha) = 1.28 = \dfrac{x-\mu}{\sigma}$. For Road A $1.28*5 + 35 = 41.4$, B $1.28*8 + 32 = 42.2$.
+
+Note: b is phrased weakly. It is also possible to understand it as a probability interval as the probability of an event occurring in normal distribution happens in intervals (i.e. originates from mu). In that case the quantile max value is $\Phi^{-1}(0.95)=1.64$ as there should be 5% slack at each side of the distribution.

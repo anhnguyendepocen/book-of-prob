@@ -196,6 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="some-continuous-distributions.html"><a href="some-continuous-distributions.html#weibull-distribution"><i class="fa fa-check"></i><b>7.5</b> Weibull Distribution</a></li>
 <li class="chapter" data-level="7.6" data-path="some-continuous-distributions.html"><a href="some-continuous-distributions.html#r-functions"><i class="fa fa-check"></i><b>7.6</b> R Functions</a></li>
 <li class="chapter" data-level="7.7" data-path="some-continuous-distributions.html"><a href="some-continuous-distributions.html#mini-in-class-exercises"><i class="fa fa-check"></i><b>7.7</b> Mini In-Class Exercises</a></li>
+<li class="chapter" data-level="7.8" data-path="some-continuous-distributions.html"><a href="some-continuous-distributions.html#chapter-exercises"><i class="fa fa-check"></i><b>7.8</b> Chapter Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="joint-distributions.html"><a href="joint-distributions.html"><i class="fa fa-check"></i><b>8</b> Joint Distributions</a><ul>
 <li class="chapter" data-level="8.0.1" data-path="joint-distributions.html"><a href="joint-distributions.html#marginal-distributions"><i class="fa fa-check"></i><b>8.0.1</b> Marginal Distributions</a></li>
@@ -363,6 +364,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If <span class="math inline">\(P(|Z| &lt; k) = 0.95\)</span> what is <span class="math inline">\(k\)</span>?</li>
 </ol></li>
 </ol>
+</div>
+<div id="chapter-exercises" class="section level2">
+<h2><span class="header-section-number">7.8</span> Chapter Exercises</h2>
+<!-- Uniform Distribution Example -->
+<ol style="list-style-type: decimal">
+<li><p>Two friends (A and B) agree to meet on 4:00 PM. A usually arrives between 5 minutes early and 5 minutes late. B usually arrives between 5 minutes early and 15 minutes late. Their times of arrival are independent from each other.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that B arrives definitely later than A?</li>
+<li>In terms of expected values, for how many minutes does A come earlier than B?</li>
+<li>What is the probability that both meet early?</li>
+</ol>
+<p>a) <span class="math inline">\(P(B &gt; 5) = \dfrac{5 - (-5)}{15 - (-5)} = 1/2\)</span></p>
+<p>b) <span class="math inline">\(E[B] - E[A] = 5 - 0 = 5\)</span></p>
+<p>c) <span class="math inline">\(P(B &lt; 0, A &lt; 0) = P(B &lt; 0) P(A &lt; 0) = 5/20 * 5/10 = 1/8\)</span></p></li>
+</ol>
+<!-- Exponential Distribution Example -->
+<ol start="2" style="list-style-type: decimal">
+<li>There are three computers, which provide answers to questions with speed according to exponential distribution with means (<span class="math inline">\(1/\lambda\)</span>) 6, 4 and 3 per hour, respectively. What is the probability that at least one machine provides an answer within the first hour?</li>
+</ol>
+<p><span class="math display">\[P(X &lt; x) = 1 - e^{-\lambda x}\]</span></p>
+<p><span class="math display">\[P(X &gt; x) = e^{-\lambda x}\]</span></p>
+<p>The solution is 1 - no machine provides an answer within the hour <span class="math inline">\(1 - P(X_1 &gt; 1, X_2 &gt; 1, X_3 &gt; 1)\)</span>.</p>
+<p><span class="math display">\[1 - P(X_1 &gt; 1, X_2 &gt; 1, X_3 &gt; 1) = 1 - e^{-\lambda_1 - \lambda_2 - \lambda_3}\]</span></p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">    <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pexp</span>(<span class="dv">1</span>,<span class="dt">rate=</span><span class="dv">3</span><span class="op">+</span><span class="dv">4</span><span class="op">+</span><span class="dv">6</span>)</a></code></pre></div>
+<pre><code>## [1] 2.260329e-06</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Time between customer arrivals in a cafe is exponential with the mean value of 6 minutes.</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that no customers arrive in 15 minutes?</li>
+</ol>
+<p><span class="math inline">\(P(X&gt;15) = 1 - P(X &lt; 15) = 1 - (1 - e^{-\lambda x}) = e^{-15/6} = 0.08\)</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is the inter-arrival time if the probability of a customer to arrive is 0.9?</li>
+</ol>
+<p><span class="math inline">\(P(X &gt; t) = e^{-t/6} = 0.1\)</span>, then <span class="math inline">\(t = 13.81\)</span>.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>What is the probability that 10 customers arrive in the first hour?</li>
+</ol>
+<p><span class="math inline">\(\lambda * t = 1/6 * 60 = 10\)</span></p>
+<p><span class="math inline">\(P(X=10) = \dfrac{e^{-\lambda *t}(\lambda t)^10}{10!} = 0.125\)</span>.</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>What is the probability of getting the first customer in 15 minutes if no customer arrived in the first 10 minutes?</li>
+</ol>
+<p><span class="math inline">\(P(X &lt; 15 | X &gt; 10) = 1 - P(X &gt; 15 | X &gt; 10) = 1 - P(X &gt; 5) = 1 - e^{-5/6} = 0.565\)</span> (memoryless property)</p>
+<p>Hint: Check the relationship between Poisson and Exponential distributions.</p>
+<!-- Normal Distribution Example -->
+<ol start="4" style="list-style-type: decimal">
+<li><p>A pack of flour contains 1 kg of flour. Though a flour pouring machine has a standard deviation of 50 gr.</p>
+<ol style="list-style-type: lower-alpha">
+<li>What is the probability that a randomly selected package contains between 925-1075 grams of flour?</li>
+<li>If a proper flour package should contain between 1000-x and 1000+x grams of flour, what should x be that 80% of the packages are deemed proper?</li>
+<li>Your customer strictly declared that 95% of the packages should contain at least 1000 grams of flour, so you should adjust the mean value. What should be the new mean value?</li>
+</ol></li>
+</ol>
+<p>We have <span class="math inline">\(\mu = 1000,\ \sigma = 50\)</span>. Define <span class="math inline">\(\Phi(.)\)</span> as the cdf of the standard normal distribution.</p>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\Phi(\dfrac{1075-1000}{50})-\Phi(\dfrac{925-1000}{50})\)</span></li>
+<li>Find an x that <span class="math inline">\(\Phi(\dfrac{1075-1000}{50})-\Phi(\dfrac{925-1000}{50}) = 0.8\)</span> approximately. The answer is more like how many standard deviations. We can find it by searching for a quantile of <span class="math inline">\(\alpha=(1-0.8)/2 = 0.1\)</span>. Then find the <span class="math inline">\(y\)</span> <span class="math inline">\(\Phi(y)=1-\alpha\)</span>. <span class="math inline">\(y = 1.282\)</span> so reverse the procedure from standard normal to N(<span class="math inline">\(\mu = 1000,\ \sigma = 50\)</span>) by <span class="math inline">\(y * \sigma\)</span> to find <span class="math inline">\(x\)</span>.</li>
+<li>Your <span class="math inline">\(\Phi(\dfrac{1000 - \mu}{50}) = 0.05\)</span>. The quantile value for 0.05 is -1.645. So, 1000 - 50*(-1.645) = 1082.25.</li>
+</ol>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1"><span class="co">#a</span></a>
+<a class="sourceLine" id="cb116-2" data-line-number="2"><span class="kw">pnorm</span>(<span class="dv">1075</span>,<span class="dt">mean=</span><span class="dv">1000</span>,<span class="dt">sd=</span><span class="dv">50</span>)<span class="op">-</span><span class="kw">pnorm</span>(<span class="dv">925</span>,<span class="dt">mean=</span><span class="dv">1000</span>,<span class="dt">sd=</span><span class="dv">50</span>)</a></code></pre></div>
+<pre><code>## [1] 0.8663856</code></pre>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1"><span class="co">#b</span></a>
+<a class="sourceLine" id="cb118-2" data-line-number="2"><span class="kw">qnorm</span>(<span class="fl">0.9</span>,<span class="dt">sd=</span><span class="dv">50</span>)</a></code></pre></div>
+<pre><code>## [1] 64.07758</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="co">#c</span></a>
+<a class="sourceLine" id="cb120-2" data-line-number="2"><span class="dv">1000</span><span class="op">-</span><span class="kw">qnorm</span>(<span class="fl">0.05</span>,<span class="dt">sd=</span><span class="dv">50</span>)</a></code></pre></div>
+<pre><code>## [1] 1082.243</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><p>There are two different roads to get to Sarıyer. Road A takes 35 minutes on average with standard deviation 5 minutes. Road B takes 32 minutes on average with standard deviation 8 minutes.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Which road has the higher advantage if one wants to reach Sarıyer in 42 minutes?</li>
+<li>What is the maximum time of arrival with 90% probability? Calculate for each road.</li>
+</ol></li>
+</ol>
+<p>a) For Road A it will take 42 minutes or less with probability <span class="math inline">\(\Phi(\dfrac{42-35}{5}) = \Phi(1.4) = 0.92\)</span>. For Road B, <span class="math inline">\(\Phi(\dfrac{42-32}{8}) = \Phi(1.4) = 0.89\)</span>. Take Road A.
+b) It is the quantile value of <span class="math inline">\(\alpha = 0.9\)</span>. Then we need to find <span class="math inline">\(\Phi^{-1}(\alpha) = 1.28 = \dfrac{x-\mu}{\sigma}\)</span>. For Road A <span class="math inline">\(1.28*5 + 35 = 41.4\)</span>, B <span class="math inline">\(1.28*8 + 32 = 42.2\)</span>.</p>
+<p>Note: b is phrased weakly. It is also possible to understand it as a probability interval as the probability of an event occurring in normal distribution happens in intervals (i.e. originates from mu). In that case the quantile max value is <span class="math inline">\(\Phi^{-1}(0.95)=1.64\)</span> as there should be 5% slack at each side of the distribution.</p>
 
 </div>
 </div>
